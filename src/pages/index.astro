@@ -110,10 +110,15 @@ const structuredData = {
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="relative bg-[#050607]">
-    <div class="aurora-layer fixed inset-0 z-0 pointer-events-none opacity-0">
+    <div class="aurora-layer fixed inset-[-10%] z-0 pointer-events-none opacity-0">
       <Aurora
         client:only="react"
-        colorStops={[ "#4338ca", "#111827", "#8b5cf6" ]}
+        colorStops={[
+          "#312e81",
+          "#6d28d9",
+          "#8b5cf6",
+          "#38bdf8"
+        ]}
         blend={0.5}
         amplitude={1.0}
         speed={1}
@@ -189,6 +194,7 @@ const structuredData = {
     import { gsap } from 'gsap';
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const aurora = document.querySelector('.aurora-layer');
 
     tl.fromTo(
       '.reveal',
@@ -203,10 +209,27 @@ const structuredData = {
       '-=0.4'
     );
 
-    gsap.to('.aurora-layer', {
+    gsap.set(aurora, {
+      opacity: 0,
+      scale: 1.15,
+      filter: 'blur(40px)',
+    });
+
+    gsap.to(aurora, {
       opacity: 1,
-      duration: 1.2,
-      ease: 'power2.out',
+      scale: 1,
+      filter: 'blur(0px)',
+      duration: 2.4,
+      ease: 'power3.out',
+    });
+
+    gsap.to(aurora, {
+      x: 40,
+      y: -30,
+      duration: 8,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
     });
   </script>
 </html>

@@ -2,7 +2,70 @@
 import '../styles/global.css';
 import Aurora from '@/components/Aurora';
 
-const title = 'Coming Soon';
+const siteUrl = 'https://www.virtexlabs.com';
+const siteName = 'Virtex Labs';
+const title = 'Virtex Labs | Coming Soon';
+const description =
+  'Thriving Creativity...';
+const canonicalUrl = `${siteUrl}/`;
+const imageUrl = `${siteUrl}/og-image.svg`;
+const keywords = [
+  'Virtex Labs',
+  'decision software',
+  'workflow systems',
+  'team productivity',
+  'startup software',
+  'operating systems for teams',
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
+      name: siteName,
+      url: siteUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/favicon.svg`,
+      },
+      description,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: siteName,
+      description,
+      publisher: {
+        '@id': `${siteUrl}/#organization`,
+      },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: title,
+      description,
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+      about: {
+        '@id': `${siteUrl}/#organization`,
+      },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+      },
+      dateModified: '2026-05-20',
+      inLanguage: 'en-US',
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -10,7 +73,41 @@ const title = 'Coming Soon';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(', ')} />
+    <meta name="author" content={siteName} />
+    <meta name="publisher" content={siteName} />
+    <meta name="application-name" content={siteName} />
+    <meta name="theme-color" content="#050607" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" href={canonicalUrl} hreflang="en" />
+    <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap.xml" type="application/xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Virtex Labs coming soon" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content="Virtex Labs coming soon" />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="relative bg-[#050607]">
     <div class="aurora-layer fixed inset-0 z-0 pointer-events-none opacity-0">

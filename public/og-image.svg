@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Virtex Labs coming soon</title>
+  <desc id="desc">Dark Virtex Labs social preview image with coming soon messaging.</desc>
+  <defs>
+    <radialGradient id="aurora-a" cx="18%" cy="18%" r="74%">
+      <stop offset="0%" stop-color="#4338ca" stop-opacity="0.75" />
+      <stop offset="50%" stop-color="#111827" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#050607" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="aurora-b" cx="84%" cy="10%" r="62%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.64" />
+      <stop offset="54%" stop-color="#0f172a" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#050607" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="line" x1="160" y1="512" x2="1040" y2="512">
+      <stop offset="0%" stop-color="#4338ca" />
+      <stop offset="50%" stop-color="#f7f2e9" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#050607" />
+  <rect width="1200" height="630" fill="url(#aurora-a)" />
+  <rect width="1200" height="630" fill="url(#aurora-b)" />
+  <g fill="#f7f2e9" font-family="Figtree, Inter, Arial, sans-serif">
+    <text x="160" y="235" font-size="92" font-weight="700">Virtex Labs</text>
+    <text x="164" y="315" font-size="38" font-weight="500" fill="#f7f2e9" opacity="0.78">Coming Soon</text>
+    <text x="164" y="392" font-size="28" font-weight="400" fill="#f7f2e9" opacity="0.72">Sharper decisions. Calmer workflows. Momentum without noise.</text>
+  </g>
+  <rect x="160" y="506" width="880" height="3" fill="url(#line)" opacity="0.86" />
+</svg>

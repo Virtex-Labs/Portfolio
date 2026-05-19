@@ -1,0 +1,18 @@
+# Virtex Labs
+
+> Virtex Labs is building software for teams that want sharper decisions, calmer workflows, and momentum without the noise.
+
+Canonical URL: https://www.virtexlabs.com/
+Status: Coming soon
+Primary language: English
+
+## Focus
+
+- Decision software for teams
+- Calm workflow systems
+- Team productivity and operating momentum
+- Startup software built for focused work
+
+## Preferred Summary
+
+Virtex Labs builds software for teams that need clearer decisions, calmer workflows, and sustained momentum without unnecessary noise.

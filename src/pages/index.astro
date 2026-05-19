@@ -15,8 +15,8 @@ const title = 'Coming Soon';
   <body class="relative bg-[#050607]">
     <div class="aurora-layer fixed inset-0 z-0 pointer-events-none opacity-0">
       <Aurora
-        client:load
-        colorStops={[ "#1A05A2", "#8F0177", "#DE1A58", "#F67D31" ]}
+        client:only="react"
+        colorStops={[ "#4338ca", "#111827", "#8b5cf6" ]}
         blend={0.5}
         amplitude={1.0}
         speed={1}
@@ -41,49 +41,49 @@ const title = 'Coming Soon';
     <div class="flex items-baseline justify-center">
       <div
         id="brand-svg-slot"
-        class="fixed bottom-0 w-[70%] z-10 pointer-events-none opacity-80"
+        class="fixed bottom-0 w-[70%] z-10 pointer-events-none opacity-0"
         style="
           user-select: none;
           -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgb(159, 157, 157) 25%);
           mask-image: linear-gradient(to bottom, transparent 0%, black 30%);
         "
       >
-        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1722.97 527.08">
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1698.54 527.08">
           <defs>
             <style>
-              .cls-1, .cls-2 {
-                fill: rgba(35, 31, 32, 0.45);
+              .cls-1 {
+                letter-spacing: .45em;
+              }
+
+              .cls-2, .cls-3 {
+                fill: rgba(35, 31, 32, 0.45)
               }
 
               .cls-3 {
-                letter-spacing: .6em;
-              }
-
-              .cls-2 {
                 font-family: EurostileExt-Med, 'Eurostile Extd';
                 font-size: 173.19px;
               }
 
               .cls-4 {
-                letter-spacing: .66em;
+                letter-spacing: .45em;
               }
 
               .cls-5 {
-                letter-spacing: .63em;
+                letter-spacing: .48em;
               }
 
               .cls-6 {
-                letter-spacing: .6em;
+                letter-spacing: .51em;
               }
             </style>
           </defs>
-          <path class="cls-1" d="M130.85,277.13L0,0h80.16l92.64,205.11L262.45,0h78.41l-131.1,277.13h-78.91Z"/>
-          <path class="cls-1" d="M368.83,49.15V0h70.17v49.15h-70.17ZM368.83,277.13V116.89h70.17v160.25h-70.17Z"/>
-          <path class="cls-1" d="M471.16,0,471.16,117.21h54.69c35.46,0,57.6-1.13,66.42-3.4,8.82-2.27,15.73-6.17,20.73-11.72,4.99-5.54,7.49-12.48,7.49-20.79,0-9.32-3.29-16.85-9.86-22.59-6.58-5.73-15.86-9.36-27.84-10.87-5.99-.63-23.97-.95-53.94-.95h-57.68V0s81.66,0,81.66,0c39.12,0,67.55,2.49,85.28,7.47,17.73,4.98,31.92,13.83,42.58,26.56,10.65,12.73,15.98,27.29,15.98,43.67,0,20.79-8.08,37.97-24.22,51.51-16.15,13.55-40.29,22.09-72.42,25.62,15.98,7.06,29.17,14.81,39.58,23.25,10.4,8.45,24.43,23.44,42.08,44.99l44.7,54.07h-88.4l-53.44-60.3c-18.98-21.55-31.96-35.13-38.96-40.74-6.99-5.61-14.4-9.45-22.22-11.53-7.83-2.08-20.23-3.12-37.21-3.12h-14.98v-44.24Z"/>
-          <path class="cls-1" d="M848.73,277.13V46.88h-108.63V0h290.92v46.88h-108.38v230.25h-73.92Z"/>
-          <path class="cls-1" d="M1078.71,0h254.99v46.88h-254.99l.39-46.88M1078.71,112.76h254.99v46.69h-254.99v-46.69M1078.71,230.44h254.99v46.69h-254.99v-46.69"/>
-          <path class="cls-1" d="M1301.11,483.78h-91.84l298.19-352.12L1394.08,0h88.44l122.45,131.67-303.85,352.12ZM1609.75,148.13l113.23,129h-89.15l-67.94-80.24,43.87-48.76ZM1567.8,72.17L1626.08,0h85.65l-101.28,119.71-42.66-47.55Z"/>
-          <text class="cls-2" transform="translate(228.18 483.79)"><tspan class="cls-4" x="0" y="0">L</tspan><tspan class="cls-5" x="244.88" y="0">A</tspan><tspan class="cls-3" x="519.73" y="0">B</tspan><tspan class="cls-6" x="794.23" y="0">S</tspan></text>
+          <path class="cls-2" d="M344.39,49.15V0h70.17v49.15h-70.17ZM344.39,277.13V116.89h70.17v160.25h-70.17Z"/>
+          <path class="cls-2" d="M446.73,0,446.73,117.21h54.69c35.46,0,57.6-1.13,66.42-3.4,8.82-2.27,15.73-6.17,20.73-11.72,4.99-5.54,7.49-12.48,7.49-20.79,0-9.32-3.29-16.85-9.86-22.59-6.58-5.73-15.86-9.36-27.84-10.87-5.99-.63-23.97-.95-53.94-.95h-57.68V0s81.66,0,81.66,0c39.12,0,67.55,2.49,85.28,7.47,17.73,4.98,31.92,13.83,42.58,26.56,10.65,12.73,15.98,27.29,15.98,43.67,0,20.79-8.08,37.97-24.22,51.51-16.15,13.55-40.29,22.09-72.42,25.62,15.98,7.06,29.17,14.81,39.58,23.25,10.4,8.45,24.43,23.44,42.08,44.99l44.7,54.07h-88.4l-53.44-60.3c-18.98-21.55-31.96-35.13-38.96-40.74-6.99-5.61-14.4-9.45-22.22-11.53-7.83-2.08-20.23-3.12-37.21-3.12h-14.98v-44.24Z"/>
+          <path class="cls-2" d="M824.29,277.13V46.88h-108.63V0h290.92v46.88h-108.38v230.25h-73.92Z"/>
+          <path class="cls-2" d="M1054.28,0h254.99v46.88h-254.99l.39-46.88M1054.28,112.76h254.99v46.69h-254.99v-46.69M1054.28,230.44h254.99v46.69h-254.99v-46.69"/>
+          <path class="cls-2" d="M1276.67,483.78h-91.84l298.19-352.12L1369.64,0h88.44l122.45,131.67-303.85,352.12ZM1585.31,148.13l113.23,129h-89.15l-67.94-80.24,43.87-48.76ZM1543.36,72.17L1601.65,0h85.65l-101.28,119.71-42.66-47.55Z"/>
+          <text class="cls-3" transform="translate(281.68 483.79)"><tspan class="cls-6" x="0" y="0">L</tspan><tspan class="cls-5" x="218.91" y="0">A</tspan><tspan class="cls-1" x="467.77" y="0">B</tspan><tspan class="cls-4" x="716.29" y="0">S</tspan></text>
+          <path class="cls-2" d="M103.84,276.6L0,34.53h62.54l72.93,170.32L224.42.53h87.8l-130.09,276.06h-78.3Z"/>
         </svg>
       </div>
     </div>

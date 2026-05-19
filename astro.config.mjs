@@ -4,9 +4,10 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   vite: {
+    resolve: {
+      tsconfigPaths: true,
+    },
     plugins: [tailwindcss()],
   },
   integrations: [react()],
-  adapter: cloudflare(),
-  output: 'server',
 });

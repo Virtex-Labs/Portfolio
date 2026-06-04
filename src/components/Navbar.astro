@@ -1,0 +1,340 @@
+---
+import { site } from "../data/site";
+
+const allNavItems = [...site.nav_left, ...site.nav_right];
+---
+
+<header
+  id="site-nav"
+  aria-label="Site navigation"
+  class="fixed inset-x-0 top-0 z-[100] h-[10vh] transition-colors duration-500 bg-transparent"
+>
+  <nav class="mx-auto flex lg:grid h-full w-full lg:grid-cols-3 items-center justify-between px-6 lg:px-20 relative z-20">
+    
+    <ul class="hidden lg:flex h-full w-full items-center justify-between gap-1 list-none p-0 m-0">
+      {
+        site.nav_left.map((item) => (
+          <li class="nav-item nav-left-item flex h-full">
+            <a
+              href={item.href}
+              class="group relative flex h-full items-center px-4 text-lg font-[450] tracking-wide no-underline overflow-hidden"
+            >
+              <span class="relative block h-[1.3em] overflow-hidden">
+                <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-black">
+                  {item.label}
+                </span>
+                <span class="absolute top-full left-0 block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
+                  {item.label}
+                </span>
+              </span>
+              <span class="absolute top-0 left-0 h-[3px] w-full origin-center scale-x-0 bg-gradient-to-r from-[#9f3794] via-[#e22472] to-[#9f3794] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-x-100" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div
+      class="nav-brand flex h-full items-center justify-start lg:justify-center"
+      aria-label="Home"
+    >
+      <a href="/" class="flex items-center no-underline relative z-50">
+        <slot name="brand">
+          <img
+            src="/wordmark.svg"
+            alt={site.name}
+            class="h-20 lg:h-24 w-auto object-contain transition-transform duration-300"
+            id="nav-logo-img"
+          />
+        </slot>
+      </a>
+    </div>
+
+    <div class="hidden lg:flex h-full items-center justify-end gap-1">
+      <ul class="flex h-full w-full items-center justify-between gap-1 list-none p-0 m-0">
+        {
+          site.nav_right.map((item) => (
+            <li class="nav-item nav-right-item flex h-full">
+              <a
+                href={item.href}
+                class="group relative flex h-full items-center px-4 text-lg font-[450] tracking-wide no-underline overflow-hidden"
+              >
+                <span class="relative block h-[1.3em] overflow-hidden">
+                  <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-black">
+                    {item.label}
+                  </span>
+                  <span class="absolute top-full left-0 block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
+                    {item.label}
+                  </span>
+                </span>
+                <span class="absolute top-0 left-0 h-[3px] w-full origin-center scale-x-0 bg-gradient-to-r from-[#9f3794] via-[#e22472] to-[#9f3794] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-x-100" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <button 
+      id="mobile-menu-toggle" 
+      class="lg:hidden relative z-50 flex flex-col justify-center items-center w-12 h-12 gap-1.5 focus:outline-none"
+      aria-label="Toggle Menu"
+    >
+      <span class="hamburger-line w-8 h-[2px] bg-black block transition-all duration-300 origin-center"></span>
+      <span class="hamburger-line w-8 h-[2px] bg-black block transition-all duration-300 origin-center"></span>
+    </button>
+  </nav>
+
+  <div 
+    id="mobile-overlay" 
+    class="fixed inset-0 bg-[#050508] z-10 flex flex-col items-center justify-center opacity-0 pointer-events-none"
+  >
+    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+      <div class="absolute bottom-[-10%] right-[-20%] w-[80vw] h-[80vw] rounded-full opacity-30 filter blur-[100px] bg-gradient-radial from-[#e22472] to-transparent"></div>
+    </div>
+
+    <ul class="flex flex-col items-center gap-8 z-10 w-full px-6 text-center">
+      {
+        allNavItems.map((item) => (
+          <li class="mobile-nav-link-wrap overflow-hidden w-full">
+            <a 
+              href={item.href} 
+              class="mobile-nav-link block text-4xl sm:text-5xl font-black uppercase tracking-widest text-white hover:text-[#e22472] transition-colors translate-y-[120%] will-change-transform"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    
+    <div class="mobile-nav-footer absolute bottom-10 w-full text-center opacity-0">
+      <p class="text-white/40 text-xs tracking-[0.2em] font-medium uppercase">
+        Virtex Labs &copy; {new Date().getFullYear()}
+      </p>
+    </div>
+  </div>
+</header>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    #site-nav,
+    .nav-item,
+    .mobile-nav-link,
+    #mobile-overlay {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  /* Hamburger Active States */
+  #mobile-menu-toggle.is-open .hamburger-line:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+    background-color: white; /* Contrast against dark overlay */
+  }
+  #mobile-menu-toggle.is-open .hamburger-line:nth-child(2) {
+    transform: translateY(-4px) rotate(-45deg);
+    background-color: white;
+  }
+  
+  /* Invert Logo color on mobile when menu opens (if it's an SVG) */
+  .logo-inverted {
+    filter: invert(1) brightness(2);
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import { isMobile } from "get-browser";
+
+  const header = document.getElementById("site-nav");
+  const leftItems = Array.from(document.querySelectorAll(".nav-left-item"));
+  const rightItems = Array.from(document.querySelectorAll(".nav-right-item"));
+  const brand = document.querySelector(".nav-brand");
+  
+  // Mobile Menu Elements
+  const menuToggle = document.getElementById("mobile-menu-toggle");
+  const mobileOverlay = document.getElementById("mobile-overlay");
+  const mobileLinks = gsap.utils.toArray(".mobile-nav-link");
+  const mobileFooter = document.querySelector(".mobile-nav-footer");
+  const logoImg = document.getElementById("nav-logo-img");
+
+  const LOGO_EVENT = "vl-logo-complete";
+  const userAgent = navigator.userAgent || "";
+  const mobileDevice = isMobile({ userAgent });
+
+  if (!header) throw new Error("Site navigation element not found.");
+
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  // ─── INITIAL DESKTOP NAV REVEAL ───
+  function startNavAnimation() {
+    const tl = gsap.timeline({
+      delay: mobileDevice ? 0.9 : 0.85,
+      defaults: { ease: "power3.out" },
+    });
+    tl.to(header, { opacity: 1, y: 0, duration: 0.55 })
+      .to(brand, { opacity: 1, duration: 0.4 }, "-=0.25")
+      .to(leftItems, { opacity: 1, x: 0, duration: 0.5, stagger: 0.08 }, "-=0.3")
+      .to(rightItems, { opacity: 1, x: 0, duration: 0.5, stagger: { each: 0.08, from: "end" } }, "<");
+  }
+
+  if (!prefersReduced) {
+    gsap.set(header, { opacity: 0, y: -24 });
+    gsap.set(leftItems, { opacity: 0, x: -22 });
+    gsap.set(rightItems, { opacity: 0, x: 22 });
+    if (brand) gsap.set(brand, { opacity: 0 });
+
+    if (window.__vlLogoDone === true) {
+      startNavAnimation();
+    } else {
+      window.addEventListener(
+        LOGO_EVENT,
+        () => {
+          if (window.__vlLogoDone === true) startNavAnimation();
+        },
+        { once: true },
+      );
+
+      setTimeout(() => {
+        if (window.__vlLogoDone !== true) startNavAnimation();
+      }, 2200);
+    }
+  }
+
+  // ─── MOBILE MENU LOGIC ───
+  let isMenuOpen = false;
+  let menuAnimation: gsap.core.Timeline;
+
+  if (menuToggle && mobileOverlay) {
+    // Setup Mobile GSAP Timeline (Paused by default)
+    menuAnimation = gsap.timeline({ paused: true, defaults: { ease: "power3.inOut" } })
+      .to(mobileOverlay, { opacity: 1, pointerEvents: "auto", duration: 0.4 })
+      .to(mobileLinks, { y: 0, duration: 0.6, stagger: 0.08, ease: "power4.out" }, "-=0.1")
+      .to(mobileFooter, { opacity: 1, duration: 0.4 }, "-=0.3");
+
+    menuToggle.addEventListener("click", () => {
+      isMenuOpen = !isMenuOpen;
+      
+      if (isMenuOpen) {
+        // OPEN MENU
+        menuToggle.classList.add("is-open");
+        document.body.style.overflow = "hidden"; // Lock scrolling
+        if (logoImg) logoImg.classList.add("logo-inverted"); // Make logo visible on dark bg
+        
+        // Force header background to transparent so it doesn't conflict with overlay
+        header.classList.remove("bg-white");
+        header.classList.add("bg-transparent");
+        
+        menuAnimation.timeScale(1).play();
+      } else {
+        // CLOSE MENU
+        menuToggle.classList.remove("is-open");
+        document.body.style.overflow = ""; // Unlock scrolling
+        if (logoImg) logoImg.classList.remove("logo-inverted");
+        
+        // Restore header background state based on scroll
+        if (window.scrollY >= window.innerHeight - header.offsetHeight) {
+          header.classList.add("bg-white");
+          header.classList.remove("bg-transparent");
+        }
+        
+        menuAnimation.timeScale(1.5).reverse(); // Reverse faster
+      }
+    });
+
+    // Close menu if a link is clicked
+    mobileLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        if (isMenuOpen) menuToggle.click();
+      });
+    });
+  }
+
+
+  // ─── SCROLL HIDE / REVEAL LOGIC ───
+  let lastY = window.scrollY;
+  let isHidden = false;
+  let rafPending = false;
+  const THRESHOLD = 80;
+  const DIRECTION_EPSILON = 4;
+
+  function handleScroll() {
+    rafPending = false;
+    
+    // ABORT scroll hiding if mobile menu is actively open
+    if (isMenuOpen) return;
+
+    const currentY = window.scrollY;
+    const deltaY = currentY - lastY;
+    const headerHeight = header.offsetHeight;
+
+    // 1. Dynamic Hero Transparency
+    if (currentY < window.innerHeight - headerHeight) {
+      header.classList.add("bg-transparent");
+      header.classList.remove("bg-white");
+    } else {
+      header.classList.add("bg-white");
+      header.classList.remove("bg-transparent");
+    }
+
+    // 2. Scalable "Hide Nav" Logic
+    const hideSections = document.querySelectorAll("[data-hide-nav]");
+    let forceHide = false;
+
+    for (let i = 0; i < hideSections.length; i++) {
+      const rect = hideSections[i].getBoundingClientRect();
+      if (rect.top <= headerHeight && rect.bottom >= 0) {
+        forceHide = true;
+        break;
+      }
+    }
+
+    if (forceHide) {
+      if (!isHidden) {
+        gsap.to(header, { yPercent: -100, duration: 0.38, ease: "power2.inOut", overwrite: "auto" });
+        isHidden = true;
+      }
+      lastY = currentY;
+      return;
+    }
+
+    // 3. Normal Scroll Hide/Reveal Logic
+    if (currentY <= THRESHOLD) {
+      if (isHidden) {
+        gsap.to(header, { yPercent: 0, duration: 0.3, ease: "power3.out", overwrite: "auto" });
+        isHidden = false;
+      }
+      lastY = currentY;
+      return;
+    }
+
+    if (Math.abs(deltaY) < DIRECTION_EPSILON) {
+      lastY = currentY;
+      return;
+    }
+
+    if (deltaY > 0 && !isHidden) {
+      gsap.to(header, { yPercent: -100, duration: 0.38, ease: "power2.inOut", overwrite: "auto" });
+      isHidden = true;
+    } else if (deltaY < 0 && isHidden) {
+      gsap.to(header, { yPercent: 0, duration: 0.38, ease: "power3.out", overwrite: "auto" });
+      isHidden = false;
+    }
+
+    lastY = currentY;
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(handleScroll);
+      }
+    },
+    { passive: true },
+  );
+</script>

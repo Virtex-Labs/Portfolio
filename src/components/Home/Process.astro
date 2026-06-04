@@ -1,0 +1,395 @@
+---
+const steps = [
+  {
+    number: "01",
+    title: "Discover",
+    description:
+      "We dive deep into your goals, your users, and the competitive landscape. Before a single line is written, we map every assumption, constraint, and opportunity, so the direction we move in is the right one from the start.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>`,
+  },
+  {
+    number: "02",
+    title: "Plan & Design",
+    description:
+      "We translate strategy into structure, wireframes, user flows, and high-fidelity designs that feel intuitive before development begins. Every interaction is deliberate, every layout earns its place.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>`,
+  },
+  {
+    number: "03",
+    title: "Build",
+    description:
+      "Clean code. Rigorous standards. We develop with performance and maintainability baked in, not bolted on. Every component is tested, every integration considered, so what ships is something you're proud to put your name on.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+  },
+  {
+    number: "04",
+    title: "Test & Refine",
+    description:
+      "We stress-test every edge case, optimise every bottleneck, and refine every detail until it's genuinely excellent. Real-device testing, performance audits, accessibility checks, nothing launches until it's ready.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+  },
+  {
+    number: "05",
+    title: "Launch",
+    description:
+      "Go-live is just the beginning. We handle deployment, monitor stability, and stay in your corner through every post-launch iteration. Your growth is the metric we care about long after the handoff.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`,
+  },
+];
+
+const introLines = [
+  "Great digital products don't happen by accident, ",
+  "they are the result of deliberate strategy,",
+  "relentless refinement, and flawless execution.",
+  "We strip away the guesswork and replace it",
+  "with a transparent, highly collaborative workflow.",
+  "From foundational architecture and wireframing",
+  "down to final deployment and ongoing optimization,",
+  "every single phase is meticulously mapped out.",
+];
+---
+
+<section
+  id="process-section"
+  aria-label="Our Process"
+  class="relative overflow-hidden bg-[#050508] text-white"
+>
+  <div 
+    class="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+    style="-webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);"
+  >
+    <img
+      src="/galaxy.png"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      class="absolute w-full h-[120%] -top-[10%] object-cover object-center opacity-30 will-change-transform"
+      id="process-galaxy-bg"
+    />
+    <div
+      class="absolute inset-0"
+      style="background: radial-gradient(ellipse at center, transparent 30%, rgba(5,5,8,0.9) 100%);"
+    >
+    </div>
+  </div>
+
+  <div
+    id="intro-stage"
+    class="relative z-20 h-screen w-full flex flex-col items-center justify-center overflow-hidden"
+  >
+    <div
+      id="process-title-wrap"
+      class="absolute inset-0 flex flex-col items-center justify-center will-change-transform"
+    >
+      <h2
+        class="font-black leading-[1.05] tracking-tight text-center text-4xl md:text-6xl lg:text-7xl"
+      >
+        A clear process.<br />
+        <em
+          class="not-italic text-transparent bg-clip-text bg-gradient-to-r from-[#e22472] via-[#9f3794] to-[#7e4199]"
+        >
+          Outstanding results.
+        </em>
+      </h2>
+    </div>
+
+    <div
+      id="process-paragraph-wrap"
+      class="absolute inset-0 flex flex-col items-center justify-center px-6 will-change-transform opacity-0 translate-y-20"
+    >
+      {
+        introLines.map((line) => (
+          <p
+            class="intro-line text-center font-medium leading-relaxed tracking-wide text-lg md:text-2xl lg:text-3xl mb-1 md:mb-2 will-change-[filter,color]"
+            style="color: rgba(255,255,255,0.15); filter: blur(12px);"
+          >
+            {line}
+          </p>
+        ))
+      }
+    </div>
+  </div>
+
+  <div
+    id="process-scroll-stage"
+    class="relative z-10 w-full max-w-7xl mx-auto -mt-[30vh]"
+  >
+    <div
+      id="process-track"
+      class="absolute left-1/2 -translate-x-1/2 top-[30vh] bottom-[30vh] w-[2px] bg-white/10 z-0"
+    >
+      <div
+        id="process-path-fill"
+        class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#e22472] via-[#9f3794] to-[#7e4199] origin-top scale-y-0 will-change-transform z-10"
+      >
+      </div>
+    </div>
+
+    {
+      steps.map((step, i) => (
+        <div class="process-step relative w-full z-10 h-[60vh] flex items-center justify-center">
+          <div class="process-left absolute right-[55%] md:right-1/2 w-[45%] md:w-1/2 pr-6 md:pr-24 flex flex-col items-end text-right opacity-0 will-change-transform">
+            <div class="process-icon-wrap flex items-center justify-center rounded-full border border-[#e22472]/30 bg-[#e22472]/10 mb-4 w-12 h-12 md:w-16 md:h-16 shadow-[0_0_20px_rgba(226,36,114,0.15)] transition-colors duration-300">
+              <div class="process-icon text-white/50 w-5 h-5 md:w-7 md:h-7 transition-colors duration-300">
+                <Fragment set:html={step.icon} />
+              </div>
+            </div>
+            <h3 class="text-white font-bold tracking-tight text-xl md:text-4xl leading-tight">
+              {step.title}
+            </h3>
+          </div>
+
+          <div class="process-node relative w-10 h-10 md:w-14 md:h-14 rounded-full border-2 border-white/20 bg-[#050508] flex items-center justify-center z-20 transition-all duration-500 ease-out">
+            <span class="process-num font-black text-white/40 text-[10px] md:text-sm tracking-widest transition-colors duration-300">
+              {step.number}
+            </span>
+          </div>
+
+          <div class="process-right absolute left-[55%] md:left-1/2 w-[45%] md:w-1/2 pl-6 md:pl-24 flex flex-col items-start text-left opacity-0 will-change-transform">
+            <p class="text-white/60 leading-relaxed font-light text-xs md:text-lg lg:text-xl max-w-sm">
+              {step.description}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div
+    id="process-end-panel"
+    class="relative w-full h-[200vh] overflow-hidden bg-transparent flex items-end justify-center"
+    style="
+      mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+    "
+  >
+    <div
+      class="absolute top-0 left-0 w-full h-[35vh] bg-gradient-to-b from-[#050508] via-[#050508]/60 to-transparent z-40 pointer-events-none backdrop-blur-[1px]"
+    >
+    </div>
+
+    <img
+      id="px-mountain"
+      src="/mountain.png"
+      alt="Mountain"
+      class="absolute bottom-[-1%] w-full h-[120%] object-cover object-bottom z-10 will-change-transform"
+    />
+
+    <img
+      id="px-v"
+      src="/V.svg"
+      alt="V"
+      class="absolute bottom-[-15%] w-full h-[110%] left-22 object-contain object-bottom z-20 will-change-transform"
+    />
+
+    <img
+      id="px-man"
+      src="/mountain_man.png"
+      alt="Man on Mountain"
+      class="absolute bottom-[-25%] w-full h-[120%] object-cover object-bottom z-30 will-change-transform"
+    />
+  </div>
+</section>
+
+<style>
+  .process-node.is-active {
+    background: #fff;
+    border-color: #fff;
+    transform: scale(1.15);
+    box-shadow:
+      0 0 20px 4px rgba(255, 255, 255, 0.6),
+      0 0 50px 15px rgba(226, 36, 114, 0.5);
+  }
+
+  .process-node.is-active .process-num {
+    color: #050508 !important;
+  }
+
+  .process-step.is-active .process-icon-wrap {
+    border-color: rgba(226, 36, 114, 0.8);
+    background: rgba(226, 36, 114, 0.25);
+  }
+
+  .process-step.is-active .process-icon {
+    color: #e22472;
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let ctx: gsap.Context | undefined;
+
+  function initProcess() {
+    ctx?.revert();
+
+    const section = document.getElementById("process-section");
+    const introStage = document.getElementById("intro-stage");
+    const track = document.getElementById("process-track");
+    const pathFill = document.getElementById("process-path-fill");
+    const steps = gsap.utils.toArray<HTMLElement>(".process-step");
+    const mainBg = document.getElementById("process-galaxy-bg");
+
+    if (!section || !introStage || !track || !pathFill || steps.length === 0)
+      return;
+
+    ctx = gsap.context(() => {
+      if (mainBg) {
+        gsap.to(mainBg, {
+          yPercent: 12,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+
+      const introTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: introStage,
+          start: "top top",
+          end: "+=200%",
+          scrub: 1,
+          pin: true,
+        },
+      });
+
+      introTl.to("#process-title-wrap", {
+        y: "-25vh",
+        opacity: 0,
+        duration: 2,
+        ease: "power2.inOut",
+      });
+
+      introTl.to(
+        "#process-paragraph-wrap",
+        { y: "0", opacity: 1, duration: 2, ease: "power2.out" },
+        "-=1.5",
+      );
+
+      const lines = gsap.utils.toArray(".intro-line");
+      lines.forEach((line) => {
+        introTl.to(
+          line,
+          {
+            color: "rgba(255,255,255,1)",
+            filter: "blur(0px)",
+            duration: 1.5,
+            ease: "power1.inOut",
+          },
+          "-=1.1",
+        );
+      });
+
+      introTl.to({}, { duration: 1.5 });
+      introTl.to("#process-paragraph-wrap", {
+        y: "-15vh",
+        opacity: 0,
+        duration: 2,
+        ease: "power2.in",
+      });
+
+      gsap.fromTo(
+        pathFill,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: track,
+            start: "top center",
+            end: "bottom center",
+            scrub: true,
+          },
+        },
+      );
+
+      steps.forEach((step) => {
+        const node = step.querySelector(".process-node");
+        const left = step.querySelector(".process-left");
+        const right = step.querySelector(".process-right");
+
+        ScrollTrigger.create({
+          trigger: step,
+          start: "center center+=5%",
+          onEnter: () => {
+            node?.classList.add("is-active");
+            step.classList.add("is-active");
+          },
+          onLeaveBack: () => {
+            node?.classList.remove("is-active");
+            step.classList.remove("is-active");
+          },
+        });
+
+        gsap.fromTo(
+          left,
+          { x: 40, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: step,
+              start: "center 65%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+
+        gsap.fromTo(
+          right,
+          { x: -40, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: step,
+              start: "center 65%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+      });
+
+      const endPanel = document.getElementById("process-end-panel");
+      const pxMountain = document.getElementById("px-mountain");
+      const pxV = document.getElementById("px-v");
+      const pxMan = document.getElementById("px-man");
+
+      if (endPanel) {
+        const parallaxTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: endPanel,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        if (pxMountain)
+          parallaxTl.to(pxMountain, { yPercent: 10, ease: "none" }, 0);
+
+        if (pxV) parallaxTl.to(pxV, { yPercent: -5, ease: "none" }, 0);
+
+        if (pxMan) parallaxTl.to(pxMan, { yPercent: -20, ease: "none" }, 0);
+      }
+    }, section);
+  }
+
+  document.addEventListener("astro:page-load", initProcess);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProcess);
+  } else {
+    initProcess();
+  }
+</script>

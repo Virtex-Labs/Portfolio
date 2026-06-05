@@ -1,50 +1,12 @@
 ---
-import { FiLayout, FiZap, FiLayers, FiLifeBuoy } from "react-icons/fi";
-
-const reasons = [
-  {
-    title: "Fluid & Responsive",
-    description:
-      "We don't just build websites; we engineer digital ecosystems. Every interface is meticulously crafted with pixel-perfect precision, ensuring that whether your users are on a massive desktop monitor or a compact mobile screen, the experience remains flawless, immersive, and uncompromisingly intuitive.",
-    Icon: FiLayout,
-  },
-  {
-    title: "Uncompromising Performance",
-    description:
-      "Speed isn't a luxury; it's the baseline. We build incredibly fast, lean architectures with rigorous SEO optimization and efficient asset delivery. This means drastically reduced bounce rates, maximized user retention, and top-tier search engine visibility that keeps you ahead of the competition.",
-    Icon: FiZap,
-  },
-  {
-    title: "Future-Proof Architecture",
-    description:
-      "Your business isn't static, and your software shouldn't be either. We architect solutions using pristine, maintainable code and industry-leading frameworks. This modular approach guarantees that as your user base grows and your needs evolve, your platform scales seamlessly without accumulating technical debt.",
-    Icon: FiLayers,
-  },
-  {
-    title: "Dedicated Partnership",
-    description:
-      "Launch day is just the beginning. We embed ourselves as an extension of your team, providing round-the-clock technical support, continuous security monitoring, and strategic guidance. We are deeply committed to ensuring your digital presence not only survives but thrives in a dynamic market.",
-    Icon: FiLifeBuoy,
-  },
-];
-
-const blurLines = [
-  "At Virtex Labs, we don't just",
-  "write code, we build robust,",
-  "scalable digital ecosystems.",
-  "Every interface we craft bridges",
-  "the gap between bold vision",
-  "and flawless technical execution.",
-  "We obsess over performance,",
-  "ensuring your users experience",
-  "nothing but seamless perfection.",
-];
+import { site } from "../../data/site";
+const { reasons, blurLines, mobileHeroText } = site.whyUs;
 ---
 
 <section
-  id="why-us-section"
-  aria-label="Why Choose Us"
-  class="relative h-[800vh]"
+  id="desktop-why-us"
+  aria-label="Why Choose Us Desktop"
+  class="relative h-[800vh] hidden lg:block"
 >
   <div class="absolute inset-0 -z-10 bg-white/80 opacity-40">
     <div class="absolute inset-0 bg-[#e22472] opacity-30"></div>
@@ -57,7 +19,7 @@ const blurLines = [
     >
       <img
         id="wu-image"
-        src="/carousel_img_2.webp"
+        src="/images/collage_1.webp"
         alt="Why choose Virtex"
         class="h-full w-full object-cover origin-center"
       />
@@ -112,7 +74,6 @@ const blurLines = [
                     class="absolute inset-x-0 bottom-0 h-[65%] pointer-events-none z-0"
                     style="background: radial-gradient(circle at bottom center, rgba(226,36,114,0.4) 0%, rgba(159,55,148,0.15) 55%, transparent 85%); filter: blur(35px);"
                   />
-
                   <div class="card-depth-overlay absolute inset-0 bg-black z-10 pointer-events-none opacity-0 rounded-3xl" />
 
                   <div class="relative z-20 flex items-center justify-between mb-8 md:mb-10 w-full">
@@ -147,7 +108,82 @@ const blurLines = [
   </div>
 </section>
 
+<div class="block lg:hidden bg-[#050508]">
+  <section id="mobile-hero" class="relative h-[200vh]">
+    <div
+      class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden"
+    >
+      <div class="absolute inset-0 z-0">
+        <img
+          src="/images/collage_1.webp"
+          alt="Why choose Virtex"
+          class="h-full w-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/75 z-10"></div>
+      </div>
+
+      <div
+        id="mobile-hero-content"
+        class="relative z-20 flex flex-col items-center w-full"
+      >
+        <h2 class="text-6xl font-black uppercase tracking-tighter text-white">
+          Why <em class="not-italic text-[#e22472]">Us?</em>
+        </h2>
+
+        <p
+          id="mobile-wu-desc"
+          class="mt-8 px-6 text-center text-lg font-medium text-zinc-300 leading-relaxed max-w-sm"
+        >
+          {mobileHeroText}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="relative z-20">
+    <div
+      class="w-full h-40 bg-gradient-to-b from-transparent to-[#050508] pointer-events-none -mb-1"
+    >
+    </div>
+
+    <section
+      id="mobile-reasons-list"
+      class="bg-[#050508] pb-24 pt-4 px-6 border-none"
+    >
+      <div class="flex flex-col gap-12">
+        {
+          reasons.map(({ title, mobileDescription, Icon }, index) => (
+            <div class="mobile-reason-item opacity-0 translate-y-10 flex flex-col gap-4">
+              <div class="flex items-center gap-4">
+                <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 border border-white/20 shadow-lg">
+                  <Icon size={24} color="#e22472" />
+                </div>
+                <span class="text-3xl font-black text-white/10 tracking-tighter ml-auto">
+                  0{index + 1}
+                </span>
+              </div>
+
+              <h3 class="text-2xl font-bold text-white tracking-tight">
+                {title}
+              </h3>
+
+              <p class="text-base text-zinc-400 leading-relaxed font-light">
+                {mobileDescription}
+              </p>
+
+              {index !== reasons.length - 1 && (
+                <div class="w-full h-px bg-gradient-to-r from-white/10 to-transparent mt-6" />
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</div>
+
 <style>
+  /* Desktop Styles */
   #wu-image-wrapper,
   #wu-image,
   #wu-title,
@@ -155,19 +191,22 @@ const blurLines = [
     will-change: transform, opacity, width, filter;
     transform: translateZ(0);
   }
-
   .card-inner {
     will-change: transform, filter;
     transform: translateZ(0);
     backface-visibility: hidden;
-    /* Apply Glass effect */
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
   }
-
   .wu-blur-line {
     will-change: filter, opacity;
     line-height: 1.3;
+  }
+
+  /* Mobile Styles */
+  .m-char {
+    display: inline-block;
+    will-change: opacity;
   }
 </style>
 
@@ -182,179 +221,235 @@ const blurLines = [
   function initWhyUs() {
     ctx?.revert();
 
-    const section = document.getElementById("why-us-section");
-    const imageWrapper = document.getElementById("wu-image-wrapper");
-    const image = document.getElementById("wu-image");
-    const overlay = document.getElementById("wu-overlay");
-    const title = document.getElementById("wu-title");
-    const blurStage = document.getElementById("wu-blur-stage");
-    const blurLinesBlock = document.getElementById("wu-blur-lines");
-    const blurLines = gsap.utils.toArray<HTMLElement>(".wu-blur-line");
-    const reasonsContainer = document.getElementById("wu-reasons-container");
-    const cards = gsap.utils.toArray<HTMLElement>(".card-wrapper");
-
-    if (!section || !imageWrapper || !image || !blurStage) return;
+    let mm = gsap.matchMedia();
 
     ctx = gsap.context(() => {
-      gsap.set(".cards", { height: "40vh" });
-
-      cards.forEach((card, index) => {
-        gsap.set(card, {
-          position: "absolute",
-          top: 0,
-          left: 0,
-          margin: 0,
-          zIndex: index,
-        });
-        gsap.set(card.querySelector(".card-inner"), { filter: "blur(0px)" });
-      });
-      gsap.set(image, { filter: "blur(0px)" });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      tl.to(
-        imageWrapper,
-        { width: "100vw", duration: 300, ease: "power1.inOut" },
-        0,
-      )
-        .to(
-          image,
-          {
-            scale: 1.15,
-            filter: "blur(10px)",
-            duration: 300,
-            ease: "power1.inOut",
-          },
-          0,
-        )
-        .to(title, { y: "20vw", duration: 315, ease: "power1.inOut" }, 0)
-        .to(overlay, { opacity: 1, duration: 310 }, 10);
-
-      tl.to(blurStage, { opacity: 1, duration: 30 }, 200);
-
-      const totalLines = blurLines.length;
-      const lineGap = 45;
-      const lineScrollWindow = 60;
-      const lineHold = 15;
-
-      tl.fromTo(
-        blurLinesBlock,
-        { y: "20vh" },
-        {
-          y: "-20vh",
-          duration: totalLines * lineGap + lineScrollWindow * 2,
-          ease: "none",
-        },
-        220,
-      );
-
-      blurLines.forEach((line, i) => {
-        const startReveal = 220 + i * lineGap;
-
-        tl.fromTo(
-          line,
-          { opacity: 0, filter: "blur(16px)" },
-          {
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: lineScrollWindow,
-            ease: "power2.out",
-          },
-          startReveal,
+      // ==============================================
+      // 💻 DESKTOP TIMELINE (Displays at 1024px+)
+      // ==============================================
+      mm.add("(min-width: 1024px)", () => {
+        const section = document.getElementById("desktop-why-us");
+        const imageWrapper = document.getElementById("wu-image-wrapper");
+        const image = document.getElementById("wu-image");
+        const overlay = document.getElementById("wu-overlay");
+        const title = document.getElementById("wu-title");
+        const blurStage = document.getElementById("wu-blur-stage");
+        const blurLinesBlock = document.getElementById("wu-blur-lines");
+        const blurLines = gsap.utils.toArray<HTMLElement>(".wu-blur-line");
+        const reasonsContainer = document.getElementById(
+          "wu-reasons-container",
         );
+        const cards = gsap.utils.toArray<HTMLElement>(".card-wrapper");
+
+        if (!section) return;
+
+        gsap.set(".cards", { height: "40vh" });
+
+        cards.forEach((card, index) => {
+          gsap.set(card, {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            margin: 0,
+            zIndex: index,
+          });
+          gsap.set(card.querySelector(".card-inner"), { filter: "blur(0px)" });
+        });
+        gsap.set(image, { filter: "blur(0px)" });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top 90%",
+            end: "bottom bottom",
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
 
         tl.to(
-          line,
+          imageWrapper,
+          { width: "100vw", duration: 300, ease: "power1.inOut" },
+          0,
+        )
+          .to(
+            image,
+            {
+              scale: 1.15,
+              filter: "blur(10px)",
+              duration: 300,
+              ease: "power1.inOut",
+            },
+            0,
+          )
+          .to(title, { y: "20vw", duration: 315, ease: "power1.inOut" }, 0)
+          .to(overlay, { opacity: 1, duration: 310 }, 10);
+
+        tl.to(blurStage, { opacity: 1, duration: 30 }, 200);
+
+        const totalLines = blurLines.length;
+        const lineGap = 45;
+        const lineScrollWindow = 60;
+        const lineHold = 15;
+
+        tl.fromTo(
+          blurLinesBlock,
+          { y: "20vh" },
           {
-            opacity: 0,
-            filter: "blur(16px)",
-            duration: lineScrollWindow,
+            y: "-20vh",
+            duration: totalLines * lineGap + lineScrollWindow * 2,
+            ease: "none",
+          },
+          220,
+        );
+
+        blurLines.forEach((line, i) => {
+          const startReveal = 220 + i * lineGap;
+          tl.fromTo(
+            line,
+            { opacity: 0, filter: "blur(16px)" },
+            {
+              opacity: 1,
+              filter: "blur(0px)",
+              duration: lineScrollWindow,
+              ease: "power2.out",
+            },
+            startReveal,
+          );
+          tl.to(
+            line,
+            {
+              opacity: 0,
+              filter: "blur(16px)",
+              duration: lineScrollWindow,
+              ease: "power2.in",
+            },
+            startReveal + lineScrollWindow + lineHold,
+          );
+        });
+
+        const blurEnd =
+          220 + totalLines * lineGap + lineScrollWindow * 2 + lineHold;
+        tl.to(blurStage, { opacity: 0, duration: 30 }, blurEnd - 20);
+
+        const cardsStart = blurEnd + 20;
+        tl.to(reasonsContainer, { opacity: 1, duration: 40 }, cardsStart);
+
+        let timelineOffset = cardsStart + 30;
+
+        cards.forEach((card, index) => {
+          tl.fromTo(
+            card,
+            { y: () => window.innerHeight },
+            { y: 0, duration: 200, ease: "power2.out" },
+            timelineOffset,
+          );
+
+          if (index > 0) {
+            for (let j = 0; j < index; j++) {
+              const inner = cards[j].querySelector(".card-inner");
+              const shadow = cards[j].querySelector(".card-depth-overlay");
+              const distance = index - j;
+
+              tl.to(
+                inner,
+                {
+                  scale: 1 - distance * 0.05,
+                  y: -(distance * 35),
+                  filter: `blur(${distance * 4}px)`,
+                  duration: 200,
+                  ease: "power2.out",
+                },
+                timelineOffset,
+              );
+              tl.to(
+                shadow,
+                { opacity: distance * 0.35, duration: 115, ease: "power2.out" },
+                timelineOffset,
+              );
+            }
+          }
+          timelineOffset += 140;
+        });
+
+        const exitStart = timelineOffset + 20;
+        const exitDuration = 120;
+
+        tl.to(
+          image,
+          {
+            filter: "blur(60px)",
+            scale: 1.25,
+            duration: exitDuration,
             ease: "power2.in",
           },
-          startReveal + lineScrollWindow + lineHold,
-        );
-      });
-
-      const blurEnd =
-        220 + totalLines * lineGap + lineScrollWindow * 2 + lineHold;
-      tl.to(blurStage, { opacity: 0, duration: 30 }, blurEnd - 20);
-
-      const cardsStart = blurEnd + 20;
-      tl.to(reasonsContainer, { opacity: 1, duration: 40 }, cardsStart);
-
-      let timelineOffset = cardsStart + 30;
-
-      cards.forEach((card, index) => {
-        tl.fromTo(
-          card,
-          { y: () => window.innerHeight },
-          { y: 0, duration: 200, ease: "power2.out" },
-          timelineOffset,
-        );
-
-        if (index > 0) {
-          for (let j = 0; j < index; j++) {
-            const inner = cards[j].querySelector(".card-inner");
-            const shadow = cards[j].querySelector(".card-depth-overlay");
-            const distance = index - j;
-
-            tl.to(
-              inner,
-              {
-                scale: 1 - distance * 0.05,
-                y: -(distance * 35),
-                filter: `blur(${distance * 4}px)`,
-                duration: 200,
-                ease: "power2.out",
-              },
-              timelineOffset,
-            );
-
-            tl.to(
-              shadow,
-              {
-                opacity: distance * 0.35,
-                duration: 115,
-                ease: "power2.out",
-              },
-              timelineOffset,
-            );
-          }
-        }
-        timelineOffset += 140;
-      });
-
-      const exitStart = timelineOffset + 20;
-      const exitDuration = 120;
-
-      tl.to(
-        image,
-        {
-          filter: "blur(60px)",
-          scale: 1.25,
-          duration: exitDuration,
-          ease: "power2.in",
-        },
-        exitStart,
-      )
-        .to(
-          overlay,
-          { opacity: 0.92, duration: exitDuration, ease: "power2.in" },
           exitStart,
         )
-        .to(
-          reasonsContainer,
-          { opacity: 0, duration: exitDuration * 0.6, ease: "power2.in" },
-          exitStart + exitDuration * 0.4,
+          .to(
+            overlay,
+            { opacity: 0.92, duration: exitDuration, ease: "power2.in" },
+            exitStart,
+          )
+          .to(
+            reasonsContainer,
+            { opacity: 0, duration: exitDuration * 0.6, ease: "power2.in" },
+            exitStart + exitDuration * 0.4,
+          );
+      });
+
+      // ==============================================
+      // 📱 MOBILE TIMELINE (Displays Below 1024px)
+      // ==============================================
+      mm.add("(max-width: 1023px)", () => {
+        // 1. Manually Split Text (Keeping Native Spaces!)
+        const descEl = document.getElementById("mobile-wu-desc");
+        if (descEl) {
+          const originalText = descEl.innerText;
+
+          descEl.innerHTML = originalText
+            .split("")
+            .map((char) => {
+              // If it's a space, render a native space outside the span so it wraps naturally
+              if (char === " ") return " ";
+              return `<span class="m-char opacity-0">${char}</span>`;
+            })
+            .join("");
+        }
+
+        // 2. Scrubbed Timeline for Hero Title & Text Reveal
+        const heroTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#mobile-hero",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1,
+          },
+        });
+
+        heroTl
+          // Move the entire content block (Title + Desc) up dramatically
+          .to("#mobile-hero-content", { y: -50, duration: 1.5 })
+          // Fade characters in one by one right after movement starts
+          .to(".m-char", { opacity: 1, duration: 1.5, stagger: 0.05 }, "<0.2");
+
+        // 3. Simple In-View Timeline for the List Items
+        const listItems = gsap.utils.toArray<HTMLElement>(
+          ".mobile-reason-item",
         );
+
+        listItems.forEach((item) => {
+          gsap.to(item, {
+            scrollTrigger: {
+              trigger: item,
+              start: "top 85%",
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+          });
+        });
+      });
     });
   }
 

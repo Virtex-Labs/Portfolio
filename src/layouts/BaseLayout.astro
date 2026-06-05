@@ -1,5 +1,6 @@
 ---
 import Navbar from "../components/Navbar.astro";
+import LandscapeWarning from "../components/LandscapeWarning.astro";
 import PageLayout from "./PageLayout.astro";
 import "../styles/global.css";
 
@@ -19,6 +20,7 @@ const { title, description } = Astro.props;
     </script>
   </Fragment>
 
+  <LandscapeWarning />
   <Navbar />
 
   <main>

@@ -15,12 +15,10 @@
   --color-brand-indigo: #4f5db8;
   --color-brand-purple: #8b3faf;
   --color-brand-pink: #e11d74;
-  --gradient-brand: linear-gradient(
-    90deg,
-    var(--color-brand-indigo) 0%,
-    var(--color-brand-purple) 50%,
-    var(--color-brand-pink) 100%
-  );
+  --gradient-brand: linear-gradient(90deg,
+      var(--color-brand-indigo) 0%,
+      var(--color-brand-purple) 50%,
+      var(--color-brand-pink) 100%);
 
   /* Dark section tokens */
   --color-dark-bg: #0a0a0a;
@@ -30,12 +28,10 @@
   --color-dark-border: rgba(255, 255, 255, 0.08);
 
   --cursor-size: 56px;
-  --cursor-gradient: linear-gradient(
-    90deg,
-    #e22472 0%,
-    #9f3794 50%,
-    #7e4199 100%
-  );
+  --cursor-gradient: linear-gradient(90deg,
+      #e22472 0%,
+      #9f3794 50%,
+      #7e4199 100%);
 
   --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.06);
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);

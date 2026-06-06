@@ -1,6 +1,3 @@
----
----
-
 <div
   id="service-modal"
   class="fixed inset-0 z-[200] bg-black opacity-0 pointer-events-none invisible"
@@ -15,10 +12,12 @@
 
   <div
     class="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-transparent via-black/80 to-[#050505] z-10 pointer-events-none"
-  ></div>
+  >
+  </div>
   <div
     class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 pointer-events-none"
-  ></div>
+  >
+  </div>
 
   <button
     id="close-modal"
@@ -36,8 +35,7 @@
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"
-        d="M6 18L18 6M6 6l12 12"
-      ></path>
+        d="M6 18L18 6M6 6l12 12"></path>
     </svg>
   </button>
 
@@ -61,13 +59,15 @@
       <p
         id="modal-desc"
         class="text-gray-300 text-lg lg:text-xl leading-relaxed max-w-xl opacity-0 translate-y-8 drop-shadow-lg"
-      ></p>
+      >
+      </p>
     </div>
 
     <div
       class="w-full lg:w-1/2 h-[55vh] lg:h-full p-8 lg:p-12 lg:pt-24 overflow-y-auto scrollbar-hide overscroll-contain relative"
     >
-      <div id="modal-gallery" class="grid grid-cols-2 gap-4 auto-rows-max"></div>
+      <div id="modal-gallery" class="grid grid-cols-2 gap-4 auto-rows-max">
+      </div>
     </div>
   </div>
 </div>
@@ -119,7 +119,8 @@
     const modalDesc = document.getElementById("modal-desc");
     const modalGallery = document.getElementById("modal-gallery");
 
-    const allServiceTriggers = gsap.utils.toArray<HTMLElement>(".service-trigger");
+    const allServiceTriggers =
+      gsap.utils.toArray<HTMLElement>(".service-trigger");
 
     if (
       !modal ||
@@ -229,7 +230,7 @@
               duration: 0.7,
               ease: "power2.out",
             },
-            "<"
+            "<",
           )
           .to(
             modalTitleText,
@@ -239,7 +240,7 @@
               duration: 0.45,
               ease: "power2.out",
             },
-            "-=0.3"
+            "-=0.3",
           )
           .to(
             modalUnderline,
@@ -248,7 +249,7 @@
               duration: 0.45,
               ease: "power2.out",
             },
-            "-=0.25"
+            "-=0.25",
           )
           .to(
             modalDesc,
@@ -258,7 +259,7 @@
               duration: 0.45,
               ease: "power2.out",
             },
-            "-=0.25"
+            "-=0.25",
           )
           .to(
             modalGallery.children,
@@ -270,7 +271,7 @@
               ease: "power2.out",
               clearProps: "transform",
             },
-            "-=0.2"
+            "-=0.2",
           );
       };
     };

@@ -35,9 +35,6 @@ if (!window.__vlLogoDone) {
   });
 }
 
-/* -----------------------------
-   Custom outline cursor
------------------------------- */
 function initCursor() {
   const finePointer = window.matchMedia("(pointer: fine)").matches;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

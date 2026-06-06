@@ -10,7 +10,6 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
   aria-label="Why Choose Us Desktop"
   class="relative h-[800vh] hidden lg:block bg-gradient-to-b from-[#fbe5ee] to-[#fcf2f6]"
 >
-
   <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center">
     <div
       id="wu-image-wrapper"
@@ -63,7 +62,9 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
       id="wu-reasons-container"
       class="absolute left-0 top-0 w-1/2 h-screen z-20 opacity-0 overflow-hidden pointer-events-none"
     >
-      <div class="desktop-reasons-track w-full flex flex-col pt-[100vh] pb-[50vh]">
+      <div
+        class="desktop-reasons-track w-full flex flex-col pt-[100vh] pb-[50vh]"
+      >
         {
           reasons.map(({ title, description }, index) => (
             <div class="desktop-reason px-12 xl:px-24 mb-[35vh] flex flex-col">
@@ -104,7 +105,8 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
         <div class="absolute inset-0 bg-black/65"></div>
         <div
           class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/45 to-black/80"
-        ></div>
+        >
+        </div>
       </div>
 
       <div
@@ -196,23 +198,21 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
     let mm = gsap.matchMedia();
 
     ctx = gsap.context(() => {
-      // ==============================================
-      // 💻 DESKTOP TIMELINE (Displays at 1024px+)
-      // ==============================================
       mm.add("(min-width: 1024px)", () => {
         const section = document.getElementById("desktop-why-us");
         const imageWrapper = document.getElementById("wu-image-wrapper");
         const image = document.getElementById("wu-image");
         const overlay = document.getElementById("wu-overlay");
-        
-        // Grab the title wrapper to fade the whole block out properly
+
         const title = document.getElementById("wu-title");
-        const titleWrap = document.getElementById("wu-title-wrap") || title; 
-        
+        const titleWrap = document.getElementById("wu-title-wrap") || title;
+
         const blurStage = document.getElementById("wu-blur-stage");
         const blurLinesBlock = document.getElementById("wu-blur-lines");
         const blurLines = gsap.utils.toArray<HTMLElement>(".wu-blur-line");
-        const reasonsContainer = document.getElementById("wu-reasons-container");
+        const reasonsContainer = document.getElementById(
+          "wu-reasons-container",
+        );
         const reasonsTrack = document.querySelector(".desktop-reasons-track");
 
         if (!section || !reasonsTrack) return;
@@ -220,20 +220,22 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
-            start: "top 90%", // Note: "top top" is recommended here if you want it to pin flush with the screen
+            start: "top 90%",
             end: "bottom 20%",
             scrub: 1,
             invalidateOnRefresh: true,
           },
         });
 
-        // 1. Image Expands & Title Moves
-        tl.to(imageWrapper, { width: "100vw", duration: 300, ease: "power1.inOut" }, 0)
+        tl.to(
+          imageWrapper,
+          { width: "100vw", duration: 300, ease: "power1.inOut" },
+          0,
+        )
           .to(image, { scale: 1.15, duration: 300, ease: "power1.inOut" }, 0)
           .to(titleWrap, { y: "20vw", duration: 315, ease: "power1.inOut" }, 0)
           .to(overlay, { opacity: 1, duration: 310 }, 10);
 
-        // 2. Blur Lines Sequence
         tl.to(blurStage, { opacity: 1, duration: 30 }, 200);
 
         const totalLines = blurLines.length;
@@ -244,8 +246,12 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
         tl.fromTo(
           blurLinesBlock,
           { y: "20vh" },
-          { y: "-20vh", duration: totalLines * lineGap + lineScrollWindow * 2, ease: "none" },
-          220
+          {
+            y: "-20vh",
+            duration: totalLines * lineGap + lineScrollWindow * 2,
+            ease: "none",
+          },
+          220,
         );
 
         blurLines.forEach((line, i) => {
@@ -253,38 +259,53 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
           tl.fromTo(
             line,
             { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: lineScrollWindow, ease: "power2.out" },
-            startReveal
+            {
+              opacity: 1,
+              y: 0,
+              duration: lineScrollWindow,
+              ease: "power2.out",
+            },
+            startReveal,
           );
           tl.to(
             line,
-            { opacity: 0, y: -20, duration: lineScrollWindow, ease: "power2.in" },
-            startReveal + lineScrollWindow + lineHold
+            {
+              opacity: 0,
+              y: -20,
+              duration: lineScrollWindow,
+              ease: "power2.in",
+            },
+            startReveal + lineScrollWindow + lineHold,
           );
         });
 
-        const blurEnd = 220 + totalLines * lineGap + lineScrollWindow * 2 + lineHold;
+        const blurEnd =
+          220 + totalLines * lineGap + lineScrollWindow * 2 + lineHold;
         tl.to(blurStage, { opacity: 0, duration: 30 }, blurEnd - 20);
 
-        // 3. The Split Transition
         const splitStart = blurEnd + 20;
 
         tl.to(
           imageWrapper,
           { width: "50vw", x: "50vw", duration: 250, ease: "power3.inOut" },
-          splitStart
+          splitStart,
         );
         tl.to(image, { scale: 1.05, duration: 250 }, splitStart);
-        tl.to(overlay, { opacity: 0.2, duration: 200 }, splitStart); 
-        
-        // FIX: Explicitly fade out and move the title left so it disappears completely
-        tl.to(titleWrap, { opacity: 0, x: -100, duration: 150, ease: "power2.inOut" }, splitStart);
+        tl.to(overlay, { opacity: 0.2, duration: 200 }, splitStart);
 
-        // 4. Scrub the Typographic Reasons
-        tl.to(reasonsContainer, { opacity: 1, duration: 100 }, splitStart + 100);
+        tl.to(
+          titleWrap,
+          { opacity: 0, x: -100, duration: 150, ease: "power2.inOut" },
+          splitStart,
+        );
 
-        // Set a dedicated duration for the vertical scroll of the track
-        const scrollDuration = 800; 
+        tl.to(
+          reasonsContainer,
+          { opacity: 1, duration: 100 },
+          splitStart + 100,
+        );
+
+        const scrollDuration = 800;
 
         tl.to(
           reasonsTrack,
@@ -293,33 +314,26 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
             duration: scrollDuration,
             ease: "none",
           },
-          splitStart + 150
+          splitStart + 150,
         );
 
-        // FIX: Distribute the left-to-right fade mathematically based on the scroll duration
         const desktopReasons = gsap.utils.toArray(".desktop-reason");
         const numReasons = desktopReasons.length;
-        
+
         desktopReasons.forEach((reason: any, i) => {
-          // Calculate a progress ratio (0.0 for first item, 1.0 for last item)
           const progress = numReasons > 1 ? i / (numReasons - 1) : 0;
-          
-          // Multiply progress by 75% of the scrollDuration. 
-          // This ensures the last item finishes animating BEFORE the track stops scrolling.
-          const itemStartTime = (splitStart + 150) + (progress * scrollDuration * 0.75);
+          const itemStartTime =
+            splitStart + 150 + progress * scrollDuration * 0.75;
 
           tl.fromTo(
             reason,
-            { opacity: 0, x: -100 }, // Start further left for a clearer slide effect
+            { opacity: 0, x: -100 },
             { opacity: 1, x: 0, duration: 150, ease: "power3.out" },
-            itemStartTime
+            itemStartTime,
           );
         });
       });
 
-      // ==============================================
-      // 📱 MOBILE TIMELINE (Displays Below 1024px)
-      // ==============================================
       mm.add("(max-width: 1023px)", () => {
         const hero = document.getElementById("mobile-hero");
         const heroContent = document.getElementById("mobile-hero-content");
@@ -330,12 +344,9 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
 
         if (!hero || !heroContent || !title || !media || !sheet) return;
 
-        // Set Initial States
         gsap.set(title, { opacity: 0, y: 24 });
         gsap.set(sheet, { yPercent: 100 });
         gsap.set(items, { opacity: 0, x: -50 });
-
-        // 2. Initial Fade In & Character Reveal at 50%
         ScrollTrigger.create({
           trigger: hero,
           start: "top 50%",
@@ -344,10 +355,8 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
           },
           onLeaveBack: () => {
             gsap.to([title], { opacity: 0, y: 24, duration: 0.4 });
-          }
+          },
         });
-
-        // 3. Scrubbed Timeline (Shrink image & move content)
         const shrinkTl = gsap.timeline({
           scrollTrigger: {
             trigger: hero,
@@ -363,7 +372,6 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
           .to(heroContent, { y: "-20vh", ease: "power2.inOut", duration: 1 }, 0)
           .to(sheet, { yPercent: 0, ease: "power2.inOut", duration: 1 }, 0);
 
-        // 4. Staggered Reason Items
         items.forEach((item) => {
           gsap.to(item, {
             opacity: 1,

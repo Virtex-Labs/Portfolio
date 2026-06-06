@@ -11,13 +11,17 @@ const services = site.services;
 >
   <div class="w-full max-w-screen-2xl mx-auto px-10">
     <div class="flex items-start justify-between mb-24">
-      <h2 class="text-[#050505] text-7xl xl:text-[5.5rem] font-black tracking-tighter leading-[0.95] max-w-2xl">
-        Find the service <br/> 
+      <h2
+        class="text-[#050505] text-7xl xl:text-[5.5rem] font-black tracking-tighter leading-[0.95] max-w-2xl"
+      >
+        Find the service <br />
         <span class="text-gradient">you need</span>
       </h2>
     </div>
 
-    <div class="flex flex-col items-center justify-center w-full relative space-y-[-1vw]">
+    <div
+      class="flex flex-col items-center justify-center w-full relative space-y-[-1vw]"
+    >
       {
         services.map((service, index) => (
           <div
@@ -25,7 +29,6 @@ const services = site.services;
             data-service={JSON.stringify(service)}
           >
             <div class="relative w-full flex justify-center items-center">
-              
               <span class="absolute -left-[5%] top-4 text-sm font-bold text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 0{index + 1}.
               </span>
@@ -42,7 +45,6 @@ const services = site.services;
                   <span class="mr-2">↳</span> More Info
                 </span>
               </div>
-              
             </div>
           </div>
         ))
@@ -57,7 +59,9 @@ const services = site.services;
   class="block lg:hidden relative w-full bg-[#fcf2f6] py-24 px-4 overflow-hidden z-10"
 >
   <div class="relative mb-16 px-2">
-    <h2 class="text-[#050505] text-[3.5rem] font-black tracking-tighter leading-[0.95]">
+    <h2
+      class="text-[#050505] text-[3.5rem] font-black tracking-tighter leading-[0.95]"
+    >
       Find the service<br />
       <span class="text-gradient">you need</span>
     </h2>
@@ -103,7 +107,6 @@ const services = site.services;
     if (mm) mm.revert();
     mm = gsap.matchMedia();
 
-    // 💻 DESKTOP TIMELINE
     mm.add("(min-width: 1024px)", () => {
       const titles = gsap.utils.toArray(".desktop-service-title");
 
@@ -121,12 +124,11 @@ const services = site.services;
               start: "top 90%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
     });
 
-    // 📱 MOBILE TIMELINE
     mm.add("(max-width: 1023px)", () => {
       const cards = gsap.utils.toArray(".mobile-card");
 
@@ -139,13 +141,13 @@ const services = site.services;
             opacity: 1,
             duration: 0.8,
             ease: "power2.out",
-            delay: (i % 2) * 0.1, // Slight stagger between left and right columns
+            delay: (i % 2) * 0.1,
             scrollTrigger: {
               trigger: card,
               start: "top 85%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
     });
@@ -153,7 +155,6 @@ const services = site.services;
     ScrollTrigger.refresh();
   }
 
-  // Handle Astro specific lifecycle
   document.addEventListener("astro:after-swap", () => {
     if (mm) mm.revert();
   });

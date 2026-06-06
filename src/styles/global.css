@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --breakpoint-xs: 30rem; /* 480px */
+  --breakpoint-xs: 30rem;
 }
 
 :root {
@@ -24,7 +24,6 @@
       var(--color-brand-purple) 50%,
       var(--color-brand-pink) 100%);
 
-  /* Dark section tokens */
   --color-dark-bg: #0a0a0a;
   --color-dark-surface: #141414;
   --color-dark-text: #f0f0f0;
@@ -126,7 +125,6 @@ select {
   transform: translate3d(0, 0, 0);
 }
 
-/* ── Gradient text utility ───────────────────────────────────── */
 .text-gradient {
   background: linear-gradient(135deg, #e22472 0%, #9f3794 50%, #7e4199 100%);
   -webkit-background-clip: text;
@@ -136,7 +134,6 @@ select {
 }
 
 
-/* ── Section label (consistent across all sections) ──────────── */
 .section-label {
   font-size: 0.7rem;
   font-weight: 600;
@@ -152,7 +149,6 @@ select {
   opacity: 0.2;
 }
 
-/* ── Form styles ─────────────────────────────────────────────── */
 .vl-input,
 .vl-textarea {
   width: 100%;
@@ -183,7 +179,6 @@ select {
   min-height: 100px;
 }
 
-/* ── Pill badge ──────────────────────────────────────────────── */
 .tech-pill {
   display: inline-flex;
   align-items: center;
@@ -212,7 +207,6 @@ select {
   flex-shrink: 0;
 }
 
-/* ── CTA Button ──────────────────────────────────────────────── */
 .vl-btn {
   display: inline-flex;
   align-items: center;

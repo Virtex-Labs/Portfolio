@@ -180,9 +180,9 @@
       if (serviceData.gallery?.length) {
         const fragment = document.createDocumentFragment();
 
-        serviceData.gallery.forEach((imgSrc: string) => {
+        serviceData.gallery.forEach((imgObj: any) => {
           const img = document.createElement("img");
-          img.src = imgSrc;
+          img.src = imgObj.src || imgObj;
           img.decoding = "async";
           img.loading = "lazy";
           img.className = "w-full h-auto object-cover rounded-md shadow-sm";
@@ -194,11 +194,12 @@
         modalGallery.appendChild(fragment);
       }
 
+      const mainImgSrc = serviceData.image?.src || serviceData.image;
       const preloadImg = new Image();
-      preloadImg.src = serviceData.image;
+      preloadImg.src = mainImgSrc;
 
       preloadImg.onload = () => {
-        modalMainImg.src = serviceData.image;
+        modalMainImg.src = mainImgSrc;
 
         gsap.set(modal, {
           opacity: 0,

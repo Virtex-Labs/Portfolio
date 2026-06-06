@@ -1,6 +1,10 @@
 ---
 import { site } from "../../data/site";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
+import galaxyBg from "../../assets/images/galaxy.png";
+import mountainImg from "../../assets/images/mountain.png";
+import vImg from "../../assets/images/V.svg";
+import mountainManImg from "../../assets/images/mountain_man.png";
 const { steps, introLines } = site.process;
 ---
 
@@ -13,9 +17,9 @@ const { steps, introLines } = site.process;
     class="absolute inset-0 z-0 pointer-events-none overflow-hidden"
     style="-webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);"
   >
-    <img
-      src="/images/galaxy.png"
-      alt=""
+    <Image
+      src={galaxyBg}
+      alt="Deep space galaxy background visualizing the infinite possibilities of web development"
       aria-hidden="true"
       decoding="async"
       loading="eager"
@@ -54,7 +58,7 @@ const { steps, introLines } = site.process;
     >
       <p
         id="intro-text"
-        class="text-center font-medium leading-relaxed tracking-wide text-lg md:text-2xl lg:text-3xl max-w-4xl text-white"
+        class="text-center font-medium leading-relaxed tracking-wide text-xl md:text-3xl lg:text-4xl max-w-4xl text-white"
       >
         {introLines.join(" ")}
       </p>
@@ -155,28 +159,28 @@ const { steps, introLines } = site.process;
       class="absolute top-0 left-0 w-full h-[35vh] bg-gradient-to-b from-[#050508] via-[#050508]/60 to-transparent z-40 pointer-events-none"
     ></div>
 
-    <img
+    <Image
       id="px-mountain"
-      src="/images/mountain.png"
-      alt="Mountain"
+      src={mountainImg}
+      alt="Majestic mountain peak representing the summit of digital success and high-performance websites"
       decoding="async"
       loading="eager"
       class="absolute sm:bottom-[-1%] w-full h-[120%] object-cover object-bottom z-10"
     />
 
-    <img
+    <Image
       id="px-v"
-      src="/images/V.svg"
-      alt="V"
+      src={vImg}
+      alt="Large glowing letter V representing the Virtex Labs brand logo"
       decoding="async"
       loading="eager"
       class="absolute bottom-[20%] sm:bottom-[-15%] w-full h-[170%] sm:h-[110%] left-5 sm:left-22 object-contain object-bottom z-20 will-change-transform"
     />
 
-    <img
+    <Image
       id="px-man"
-      src="/images/mountain_man.png"
-      alt="Man on Mountain"
+      src={mountainManImg}
+      alt="Silhouette of an explorer standing on a mountain peak, symbolizing visionary leadership in tech"
       decoding="async"
       loading="eager"
       class="absolute sm:bottom-[-30%] sm:bottom-[-20%] lg:bottom-[-25%] w-full h-[120%] object-cover object-bottom z-30"

@@ -1,8 +1,14 @@
 import { FiLayout, FiZap, FiLayers, FiLifeBuoy } from "react-icons/fi";
 
+import collage2 from "../assets/images/collage_2.webp";
+import collage3 from "../assets/images/collage_3.webp";
+import collage4 from "../assets/images/collage_4.webp";
+import collage5 from "../assets/images/collage_5.webp";
+import collage6 from "../assets/images/collage_6.webp";
+
 export const site = {
-  name: "Virtex Labs",
-  description: "We build fast, clean, conversion-focused startup websites.",
+  name: "VIRTEX LABS | Premium Digital Design & Web Agency",
+  description: "We architect digital presence. Virtex Labs fuses high-end web design with rigorous engineering to create scalable platforms that drive measurable growth.",
   url: "https://virtexlabs.com/",
   ogImage: "favicon.svg",
   nav_left: [
@@ -10,8 +16,8 @@ export const site = {
     { label: "Portfolio", href: "#work" },
   ],
   nav_right: [
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" }
+    { label: "About", href: "#about" },
+    { label: "Contact", href: "#contact" }
   ],
   features: [
     "Astro-first performance",
@@ -29,53 +35,53 @@ export const site = {
     {
       title: "Web Designing",
       description_short: "Stunning, responsive websites built to engage and convert visitors.",
-      image: "/images/collage_2.webp",
+      image: collage2,
       description:
         "We craft visually stunning, highly responsive websites tailored to your brand. From wireframes to launch, we ensure every pixel serves a purpose in engaging your audience.",
       gallery: [
-        "/images/collage_2.webp",
-        "/images/collage_3.webp",
-        "/images/collage_4.webp",
-        "/images/collage_5.webp",
-        "/images/collage_6.webp",
+        collage2,
+        collage3,
+        collage4,
+        collage5,
+        collage6,
       ],
     },
     {
       title: "UI/UX Designing",
       description_short: "Intuitive, user-focused interfaces designed for seamless digital experiences.",
-      image: "/images/collage_3.webp",
+      image: collage3,
       description:
         "User-centric design that feels as good as it looks. We map out intuitive user journeys and create interfaces that reduce friction and maximize conversion rates.",
       gallery: [
-        "/images/collage_2.webp",
-        "/images/collage_4.webp",
-        "/images/collage_3.webp",
+        collage2,
+        collage4,
+        collage3,
       ],
     },
     {
-      title: "Web Based Solutions",
+      title: "Web Applications",
       description_short: "Scalable web applications engineered for performance, reliability, and growth.",
-      image: "/images/collage_4.webp",
+      image: collage4,
       description:
         "Powerful, scalable web applications built for complex business needs. We handle robust backend architecture seamlessly integrated with blazing-fast frontends.",
       gallery: [
-        "/images/collage_4.webp",
-        "/images/collage_6.webp",
-        "/images/collage_2.webp",
-        "/images/collage_3.webp",
+        collage4,
+        collage6,
+        collage2,
+        collage3,
       ],
     },
     {
       title: "Mobile Applications",
       description_short: "Fast, intuitive mobile apps that deliver exceptional user experiences.",
-      image: "/images/collage_5.webp",
+      image: collage5,
       description:
         "Native and cross-platform mobile experiences that put your business right in your customers' pockets. Fast, secure, and incredibly intuitive.",
       gallery: [
-        "/images/collage_5.webp",
-        "/images/collage_3.webp",
-        "/images/collage_2.webp",
-        "/images/collage_6.webp",
+        collage5,
+        collage3,
+        collage2,
+        collage6,
       ],
     },
   ],

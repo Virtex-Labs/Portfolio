@@ -298,7 +298,7 @@
     class="relative z-10 flex min-h-[clamp(11rem,22vw,18rem)] w-full max-w-5xl items-center justify-center"
   >
     <h2
-      class="phrase-1 absolute inset-0 m-0 flex w-full flex-wrap items-center justify-center gap-x-[0.25em] text-center font-sans text-[clamp(2.2rem,4.5vw,4.8rem)] font-black lowercase leading-[1.1] text-zinc-900"
+      class="phrase-1 absolute inset-0 m-0 flex w-full flex-wrap items-center justify-center gap-x-[0.25em] text-center font-sans text-[clamp(2.2rem,4.5vw,4.8rem)] font-black leading-[1.1] text-zinc-900"
     >
       <span class="overflow-hidden pb-[0.1em]"
         ><span class="a-word-1 inline-block will-change-transform">We</span
@@ -518,10 +518,13 @@
       });
 
       tl.to({}, { duration: 0.5 }) 
-        .fromTo(words1, 
-          { yPercent: 0 }, 
-          { yPercent: -110, duration: 1.2, stagger: 0.1, ease: "power3.in", immediateRender: false }
-        )
+        .to(words1, { 
+          y: -120, 
+          opacity: 0, 
+          duration: 1.2, 
+          stagger: 0.1, 
+          ease: "power3.in" 
+        })
         .to({}, { duration: 0.2 })
         .to(words2, { yPercent: 0, duration: 1.2, stagger: 0.1, ease: "power3.out" })
         .to({}, { duration: 1.5 });

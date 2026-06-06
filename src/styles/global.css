@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-xs: 30rem; /* 480px */
+}
+
 :root {
   color-scheme: light;
 
@@ -41,6 +45,15 @@
   --radius-full: 9999px;
 }
 
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
 html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
@@ -61,27 +74,6 @@ body {
   background: var(--color-surface);
   color: var(--color-text);
   line-height: 1.5;
-}
-
-@media (pointer: fine) {
-  /* body {
-    cursor: none;
-  } */
-
-  /* .vl-custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: var(--cursor-size);
-    height: var(--cursor-size);
-    border-radius: 999px;
-    background: var(--cursor-gradient);
-    mix-blend-mode: difference;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: opacity 120ms ease-out;
-  } */
 }
 
 *,
@@ -118,6 +110,20 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 9999px;
+  background: transparent;
+  mix-blend-mode: difference;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
 }
 
 /* ── Gradient text utility ───────────────────────────────────── */
@@ -259,4 +265,9 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
 }

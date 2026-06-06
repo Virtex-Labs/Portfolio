@@ -315,7 +315,7 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
         if (!isNavHidden) {
           gsap.to(header, {
             yPercent: -100,
-            duration: 0.4,
+            duration: 1,
             ease: "power2.inOut",
             overwrite: "auto",
           });
@@ -327,7 +327,7 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
           // Hide on scroll down
           gsap.to(header, {
             yPercent: -100,
-            duration: 0.4,
+            duration: 1,
             ease: "power2.inOut",
             overwrite: "auto",
           });
@@ -336,7 +336,7 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
           // Show on scroll up
           gsap.to(header, {
             yPercent: 0,
-            duration: 0.4,
+            duration: 1,
             ease: "power3.out",
             overwrite: "auto",
           });

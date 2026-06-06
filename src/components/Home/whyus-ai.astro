@@ -1,0 +1,530 @@
+---
+// WhyUs.astro
+import { site } from "../../data/site";
+const { reasons, blurLines, mobileHeroText } = site.whyUs;
+---
+
+<!-- ═══════════════════════════════════════════════
+     DESKTOP (1024px+)
+     ═══════════════════════════════════════════════ -->
+<section
+  id="desktop-why-us"
+  aria-label="Why Choose Us Desktop"
+  class="relative h-[900vh] hidden lg:block"
+>
+  <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center">
+
+    <!-- Image panel (starts at 0 width, expands to full, then shrinks to right half) -->
+    <div
+      id="wu-image-wrapper"
+      class="absolute top-0 left-0 h-full w-0 z-0 overflow-hidden"
+    >
+      <img
+        id="wu-image"
+        src="/images/collage_1.webp"
+        alt="Why choose Virtex"
+        class="absolute inset-0 w-full h-full object-cover origin-center"
+      />
+      <div id="wu-overlay" class="absolute inset-0 bg-black/70 opacity-0 z-10"></div>
+    </div>
+
+    <!-- "Why Us?" title — starts visible left, slides out as image expands -->
+    <div id="wu-title-wrap" class="absolute left-12 lg:left-24 z-10">
+      <h2
+        id="wu-title"
+        class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-black whitespace-nowrap"
+      >
+        Why <em class="not-italic text-gradient">Us?</em>
+      </h2>
+    </div>
+
+    <!-- Blur lines stage (full-screen overlay, z-30) -->
+    <div
+      id="wu-blur-stage"
+      class="absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none opacity-0 overflow-hidden"
+    >
+      <div
+        id="wu-blur-lines"
+        class="relative flex flex-col items-center max-w-5xl mx-auto px-6"
+      >
+        {
+          blurLines.map((line, i) => (
+            <p
+              class="wu-blur-line text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight text-center my-3 opacity-0"
+              data-index={i}
+            >
+              {line}
+            </p>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Desktop reasons — left half, one at a time, slides in from left -->
+    <div
+      id="wu-reasons-container"
+      class="absolute left-0 top-0 w-1/2 h-screen z-20 opacity-0 pointer-events-none overflow-hidden"
+    >
+      <div id="wu-reasons-track" class="absolute inset-0 flex flex-col justify-center">
+        {
+          reasons.map(({ title, description }, index) => (
+            <div
+              class="desktop-reason absolute inset-x-0 px-12 xl:px-24 flex flex-col opacity-0"
+              data-index={index}
+            >
+              <div class="flex items-end gap-6 mb-8 border-b-2 border-black/10 pb-6">
+                <span class="text-5xl font-black text-[#e22472] tracking-tighter leading-none">
+                  0{index + 1}
+                </span>
+                <h3 class="text-4xl lg:text-5xl font-black text-black uppercase tracking-tighter leading-none">
+                  {title}
+                </h3>
+              </div>
+              <p class="text-xl lg:text-2xl text-black/70 font-medium leading-relaxed max-w-lg">
+                {description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     MOBILE (below 1024px)
+     ═══════════════════════════════════════════════ -->
+<div class="block lg:hidden">
+
+  <!--
+    The whole sequence lives inside one tall scrollable section.
+    The sticky viewport clips everything — image shrinks from top,
+    white reasons panel rises from bottom simultaneously.
+    h-[500vh] gives plenty of scroll room for all phases.
+  -->
+  <section id="mobile-why-us" class="relative h-[500vh]">
+    <div
+      id="mobile-sticky"
+      class="sticky top-0 h-screen w-full overflow-hidden"
+    >
+
+      <!-- ── Image: starts full-screen, clips from the bottom as panel rises ── -->
+      <div
+        id="mobile-img-panel"
+        class="absolute top-0 left-0 w-full z-0 overflow-hidden"
+        style="height: 100vh;"
+      >
+        <img
+          id="mobile-img"
+          src="/images/collage_1.webp"
+          alt="Why choose Virtex"
+          class="w-full h-screen object-cover object-center"
+          style="filter: blur(3px);"
+        />
+        <!-- Dark moody overlay — always present -->
+        <div class="absolute inset-0 bg-black/70 z-10"></div>
+      </div>
+
+      <!--
+        "Why Us?" title — fixed to top of the image panel.
+        Starts invisible (opacity-0), fades in on trigger.
+        Stays put as image shrinks — clipping handles the hide.
+      -->
+      <div
+        id="mobile-wu-title-wrap"
+        class="absolute top-0 left-0 right-0 z-20 flex flex-col items-center justify-center opacity-0"
+        style="height: 100vh;"
+      >
+        <h2
+          id="mobile-wu-heading"
+          class="text-6xl font-black uppercase tracking-tighter text-white"
+        >
+          Why <em class="not-italic text-[#e22472]">Us?</em>
+        </h2>
+        <p
+          id="mobile-wu-desc"
+          class="mt-8 px-8 text-center text-lg font-medium text-zinc-300 leading-relaxed max-w-xs opacity-0"
+        >
+          {mobileHeroText}
+        </p>
+      </div>
+
+      <!--
+        White reasons panel — slides up from the very bottom.
+        Starts translated 100vh down (fully hidden below fold).
+        As user scrolls, it rises up, its top edge clipping the image.
+      -->
+      <div
+        id="mobile-reasons-panel"
+        class="absolute left-0 right-0 z-30 bg-white"
+        style="top: 0; transform: translateY(100vh); height: auto; min-height: 100vh;"
+      >
+        <!-- Rounded top edge with pink accent -->
+        <div class="flex flex-col items-center pt-6 pb-2">
+          <div class="w-10 h-1 bg-[#e22472]/40 rounded-full mb-6"></div>
+          <div class="w-16 h-1 bg-[#e22472] rounded-full mb-8"></div>
+        </div>
+
+        <div class="px-6 pb-24 flex flex-col gap-0">
+          {
+            reasons.map(({ title, mobileDescription, Icon }, index) => (
+              <div
+                class="mobile-reason-item opacity-0 flex flex-col gap-4 py-8"
+              >
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-[#e22472]/10 border border-[#e22472]/20 shadow-sm">
+                    <Icon size={24} color="#e22472" />
+                  </div>
+                  <span class="text-3xl font-black text-black/10 tracking-tighter ml-auto">
+                    0{index + 1}
+                  </span>
+                </div>
+
+                <h3 class="text-2xl font-bold text-black tracking-tight">
+                  {title}
+                </h3>
+
+                <p class="text-base text-black/60 leading-relaxed font-light">
+                  {mobileDescription}
+                </p>
+
+                {index !== reasons.length - 1 && (
+                  <div class="w-full h-px bg-gradient-to-r from-black/10 to-transparent mt-2" />
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<style>
+  /* ── Desktop ── */
+  #wu-image-wrapper,
+  #wu-image,
+  #wu-title-wrap,
+  .desktop-reason {
+    will-change: transform, opacity, width, filter;
+    transform: translateZ(0);
+  }
+  .wu-blur-line {
+    will-change: filter, opacity;
+    line-height: 1.3;
+  }
+
+  /* ── Mobile ── */
+  #mobile-img-panel,
+  #mobile-wu-title-wrap,
+  #mobile-reasons-panel,
+  .mobile-reason-item {
+    will-change: transform, opacity, height;
+    transform: translateZ(0);
+  }
+  /* Title stays pinned to top of image; image clipping handles the hide */
+  #mobile-wu-title-wrap {
+    position: absolute;
+    top: 0;
+    pointer-events: none;
+  }
+
+  /* Gradient text utility (keep in sync with rest of site) */
+  .text-gradient {
+    background: linear-gradient(135deg, #e22472, #9f3794);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let ctx: gsap.Context | undefined;
+
+  function initWhyUs() {
+    ctx?.revert();
+
+    const mm = gsap.matchMedia();
+
+    ctx = gsap.context(() => {
+
+      // ══════════════════════════════════════════════
+      // 💻  DESKTOP  (≥ 1024px)
+      // ══════════════════════════════════════════════
+      mm.add("(min-width: 1024px)", () => {
+        const section          = document.getElementById("desktop-why-us");
+        const imageWrapper     = document.getElementById("wu-image-wrapper");
+        const image            = document.getElementById("wu-image");
+        const overlay          = document.getElementById("wu-overlay");
+        const titleWrap        = document.getElementById("wu-title-wrap");
+        const blurStage        = document.getElementById("wu-blur-stage");
+        const blurLinesBlock   = document.getElementById("wu-blur-lines");
+        const blurLines        = gsap.utils.toArray<HTMLElement>(".wu-blur-line");
+        const reasonsContainer = document.getElementById("wu-reasons-container");
+        const desktopReasons   = gsap.utils.toArray<HTMLElement>(".desktop-reason");
+
+        if (!section) return;
+
+        // ── Set initial state for all reason cards ──
+        desktopReasons.forEach((r) => {
+          gsap.set(r, { opacity: 0, x: -80 });
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // ── Phase 1: Image reveal + title slide out (0 → 300) ──
+        tl.to(
+          imageWrapper,
+          { width: "100vw", duration: 300, ease: "power1.inOut" },
+          0
+        )
+          .to(
+            image,
+            { scale: 1.15, filter: "blur(10px)", duration: 300, ease: "power1.inOut" },
+            0
+          )
+          .to(titleWrap, { y: "20vw", duration: 315, ease: "power1.inOut" }, 0)
+          .to(overlay, { opacity: 1, duration: 310 }, 10);
+
+        // ── Phase 2: Blur lines (200 → blurEnd) ──
+        tl.to(blurStage, { opacity: 1, duration: 30 }, 200);
+
+        const totalLines      = blurLines.length;
+        const lineGap         = 45;
+        const lineScrollWindow = 60;
+        const lineHold        = 15;
+
+        tl.fromTo(
+          blurLinesBlock,
+          { y: "20vh" },
+          {
+            y: "-20vh",
+            duration: totalLines * lineGap + lineScrollWindow * 2,
+            ease: "none",
+          },
+          220
+        );
+
+        blurLines.forEach((line, i) => {
+          const startReveal = 220 + i * lineGap;
+          tl.fromTo(
+            line,
+            { opacity: 0, filter: "blur(16px)" },
+            { opacity: 1, filter: "blur(0px)", duration: lineScrollWindow, ease: "power2.out" },
+            startReveal
+          );
+          tl.to(
+            line,
+            { opacity: 0, filter: "blur(16px)", duration: lineScrollWindow, ease: "power2.in" },
+            startReveal + lineScrollWindow + lineHold
+          );
+        });
+
+        const blurEnd =
+          220 + totalLines * lineGap + lineScrollWindow * 2 + lineHold;
+        tl.to(blurStage, { opacity: 0, duration: 30 }, blurEnd - 20);
+
+        // ── Phase 3: Split — image → right half, show white left panel ──
+        const splitStart = blurEnd + 30;
+
+        tl.to(
+          imageWrapper,
+          { width: "50vw", x: "50vw", duration: 200, ease: "power3.inOut" },
+          splitStart
+        );
+        tl.to(
+          titleWrap,
+          { opacity: 0, x: -80, duration: 120, ease: "power2.in" },
+          splitStart
+        );
+        tl.to(image, { filter: "blur(0px)", scale: 1.05, duration: 200 }, splitStart);
+        tl.to(overlay, { opacity: 0.15, duration: 150 }, splitStart);
+
+        // ── Phase 4: Reasons — one-at-a-time, slide from left ──
+        const reasonsStart = splitStart + 160;
+        tl.to(reasonsContainer, { opacity: 1, duration: 80 }, reasonsStart);
+
+        const perReason = 140; // timeline units per reason card
+
+        desktopReasons.forEach((reason, i) => {
+          const enterAt  = reasonsStart + 80 + i * perReason;
+          const exitAt   = enterAt + perReason - 20;
+
+          // Slide in from left
+          tl.fromTo(
+            reason,
+            { opacity: 0, x: -80 },
+            { opacity: 1, x: 0, duration: 70, ease: "power3.out" },
+            enterAt
+          );
+
+          // Slide out to left (unless it's the last card)
+          if (i < desktopReasons.length - 1) {
+            tl.to(
+              reason,
+              { opacity: 0, x: -60, duration: 50, ease: "power2.in" },
+              exitAt
+            );
+          }
+        });
+
+        // ── Phase 5: Exit — fade out everything ──
+        const exitStart =
+          reasonsStart + 80 + desktopReasons.length * perReason + 40;
+
+        tl.to(
+          image,
+          { filter: "blur(60px)", scale: 1.25, duration: 120, ease: "power2.in" },
+          exitStart
+        )
+          .to(overlay, { opacity: 0.9, duration: 120, ease: "power2.in" }, exitStart)
+          .to(
+            reasonsContainer,
+            { opacity: 0, duration: 80, ease: "power2.in" },
+            exitStart + 40
+          );
+      });
+
+      // ══════════════════════════════════════════════
+      // 📱  MOBILE  (< 1024px)
+      // ══════════════════════════════════════════════
+      mm.add("(max-width: 1023px)", () => {
+        const mobileSection  = document.getElementById("mobile-why-us");
+        const imgPanel       = document.getElementById("mobile-img-panel");
+        const titleWrap      = document.getElementById("mobile-wu-title-wrap");
+        const descEl         = document.getElementById("mobile-wu-desc");
+        const reasonsPanel   = document.getElementById("mobile-reasons-panel");
+        const mobileReasons  = gsap.utils.toArray<HTMLElement>(".mobile-reason-item");
+
+        if (!mobileSection || !imgPanel || !titleWrap || !reasonsPanel) return;
+
+        // ── Manual char split for description text animation ──
+        if (descEl) {
+          const originalText = descEl.innerText;
+          descEl.innerHTML = originalText
+            .split("")
+            .map((char) => {
+              if (char === " ") return " ";
+              return `<span class="m-char" style="opacity:0;display:inline-block;">${char}</span>`;
+            })
+            .join("");
+        }
+
+        // ─────────────────────────────────────────────
+        // PHASE 1 (non-scrubbed):
+        // "Why Us?" title + desc fade in when section
+        // top reaches 50% of the viewport.
+        // ─────────────────────────────────────────────
+        const phase1Tl = gsap.timeline({ paused: true });
+        phase1Tl
+          .to(titleWrap, { opacity: 1, duration: 0.6, ease: "power2.out" }, 0)
+          .to(".m-char", {
+            opacity: 1,
+            duration: 0.04,
+            stagger: 0.03,
+            ease: "none",
+          }, 0.5);
+
+        ScrollTrigger.create({
+          trigger: mobileSection,
+          start: "top 50%",       // section top hits 50% of viewport
+          onEnter: () => phase1Tl.play(),
+          onLeaveBack: () => phase1Tl.reverse(),
+        });
+
+        // ─────────────────────────────────────────────
+        // PHASE 2 (scrubbed across the full 500vh):
+        // Divided into three acts on a 0→1 progress:
+        //   0.00 – 0.25 : hold (text visible, nothing moves)
+        //   0.25 – 0.55 : white reasons panel rises from bottom,
+        //                 image panel height shrinks from bottom.
+        //                 Title stays put inside the shrinking image,
+        //                 hidden naturally as the panel covers it.
+        //   0.55 – 1.00 : reasons panel is fully up, list items
+        //                 animate in from the left one-by-one.
+        // ─────────────────────────────────────────────
+
+        // Set initial states
+        // Panel: CSS already sets translateY(100vh), GSAP takes over from there
+        gsap.set(reasonsPanel, { clearProps: "transform" }); // hand off to GSAP
+        gsap.set(reasonsPanel, { y: "100vh" });
+        gsap.set(mobileReasons, { opacity: 0, x: -50 });
+
+        const scrubTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: mobileSection,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // ── Act 1 (0 → 0.25): hold — desc chars stay visible ──
+        scrubTl.to({}, { duration: 0.25 }, 0);
+
+        // ── Act 2 (0.25 → 0.55): panel rises from bottom, image shrinks ──
+        // Panel slides from y=100vh → y=14vh (sits right below the image strip).
+        // Image height shrinks from 100vh → 14vh simultaneously.
+        // The heading lives inside titleWrap which also shrinks — clips naturally.
+        scrubTl.to(
+          reasonsPanel,
+          { y: "14vh", duration: 0.3, ease: "power2.inOut" },
+          0.25
+        );
+
+        scrubTl.to(
+          imgPanel,
+          { height: "14vh", duration: 0.3, ease: "power2.inOut" },
+          0.25
+        );
+
+        scrubTl.to(
+          titleWrap,
+          { height: "14vh", duration: 0.3, ease: "power2.inOut" },
+          0.25
+        );
+
+        // ── Act 3 (0.55 → 1.0): reason items slide in from left ──
+        const perItem  = 0.45 / Math.max(mobileReasons.length, 1);
+        mobileReasons.forEach((item, i) => {
+          const start = 0.55 + i * perItem;
+          scrubTl.to(
+            item,
+            {
+              opacity: 1,
+              x: 0,
+              duration: perItem * 0.7,
+              ease: "power3.out",
+            },
+            start
+          );
+        });
+      });
+    });
+  }
+
+  document.addEventListener("astro:after-swap", () => ctx?.revert());
+  document.addEventListener("astro:page-load", initWhyUs);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initWhyUs);
+  } else {
+    initWhyUs();
+  }
+</script>

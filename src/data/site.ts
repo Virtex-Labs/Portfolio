@@ -28,6 +28,7 @@ export const site = {
   services: [
     {
       title: "Web Designing",
+      description_short: "Stunning, responsive websites built to engage and convert visitors.",
       image: "/images/collage_2.webp",
       description:
         "We craft visually stunning, highly responsive websites tailored to your brand. From wireframes to launch, we ensure every pixel serves a purpose in engaging your audience.",
@@ -41,6 +42,7 @@ export const site = {
     },
     {
       title: "UI/UX Designing",
+      description_short: "Intuitive, user-focused interfaces designed for seamless digital experiences.",
       image: "/images/collage_3.webp",
       description:
         "User-centric design that feels as good as it looks. We map out intuitive user journeys and create interfaces that reduce friction and maximize conversion rates.",
@@ -52,6 +54,7 @@ export const site = {
     },
     {
       title: "Web Based Solutions",
+      description_short: "Scalable web applications engineered for performance, reliability, and growth.",
       image: "/images/collage_4.webp",
       description:
         "Powerful, scalable web applications built for complex business needs. We handle robust backend architecture seamlessly integrated with blazing-fast frontends.",
@@ -64,6 +67,7 @@ export const site = {
     },
     {
       title: "Mobile Applications",
+      description_short: "Fast, intuitive mobile apps that deliver exceptional user experiences.",
       image: "/images/collage_5.webp",
       description:
         "Native and cross-platform mobile experiences that put your business right in your customers' pockets. Fast, secure, and incredibly intuitive.",
@@ -127,14 +131,10 @@ export const site = {
 
   process: {
     introLines: [
-      "Great digital products don't happen by accident, ",
-      "they are the result of deliberate strategy,",
-      "relentless refinement, and flawless execution.",
-      "We strip away the guesswork and replace it",
-      "with a transparent, highly collaborative workflow.",
-      "From foundational architecture and wireframing",
-      "down to final deployment and ongoing optimization,",
-      "every single phase is meticulously mapped out.",
+      "Great digital products don't happen by accident.",
+      "They are the result of deliberate strategy, relentless refinement, and flawless execution.",
+      "We strip away the guesswork and replace it with a transparent, collaborative workflow.",
+      "From architecture and wireframing to deployment and optimization, every phase is meticulously mapped out.",
     ],
     steps: [
       {

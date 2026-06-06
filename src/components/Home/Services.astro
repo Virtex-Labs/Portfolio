@@ -1,111 +1,48 @@
 ---
 import { site } from "../../data/site";
+import ServiceModal from "./ServiceModal.astro";
 const services = site.services;
-
-const infinityPath =
-  "M-39.64,637.69c4.09-17.12,14.93-31.39,28.76-41.97,14.54-11.13,31.71-18.56,49.18-23.7,9.93-2.93,20.08-5.03,30.28-6.79,12.34-2.13,24.77-3.66,37.25-4.66,24.93-2.01,49.99-1.93,74.95-.45,25.12,1.49,50.14,4.39,75.03,8.06,24.94,3.68,49.76,8.11,74.54,12.7s49,9.16,73.52,13.6c24.57,4.45,49.17,8.76,73.81,12.76,24.63,4,49.31,7.69,74.06,10.92,24.69,3.22,49.44,5.98,74.24,8.09s49.24,3.56,73.91,4.21c24.54.65,49.1.49,73.61-.66,24.5-1.14,48.96-3.28,73.27-6.56,24.41-3.29,48.67-7.73,72.63-13.46,21.75-5.2,43.33-11.39,64-19.99s39.48-19.08,56.31-33.13c15.76-13.16,28.91-29.46,37.91-47.94,8.78-18.03,13.68-38.21,12.24-58.33-.67-9.43-2.64-18.8-6.3-27.54-3.45-8.23-8.21-15.85-13.97-22.65-11.35-13.39-26.74-23.72-43.76-28.26-16.41-4.37-34.1-2.84-49.03,5.5-13.16,7.35-23.09,19.45-29.08,33.17s-8.58,30.11-7.31,45.58c1.29,15.64,6.25,31.15,15.3,44.06,10.62,15.16,25.48,27.08,41.96,35.35,17.05,8.56,35.77,13.42,54.69,15.43,19.97,2.12,40.68,1.24,60.29-3.2,10.97-2.48,21.75-6.41,31.2-12.6,8.64-5.66,16.01-12.99,22.52-20.97,6.62-8.11,12.43-16.83,18.28-25.5,5.77-8.57,11.7-17.01,18.15-25.09,12.68-15.87,26.9-30.5,42.24-43.81,15.4-13.36,31.95-25.36,49.28-36.09,17.51-10.83,35.82-20.36,54.66-28.65s38.31-15.37,58.08-21.27c22.65-6.76,45.75-11.98,69.03-16.01,24.47-4.24,49.16-7.13,73.92-9.04,24.74-1.91,49.54-2.85,74.35-3.17,24.83-.32,49.66-.02,74.48.56,20.43.47,40.86,1.22,61.22,3.03,20.05,1.78,40.04,4.56,59.64,9.18s37.72,10.72,55.17,19.59,32.03,19.34,45.18,32.64c1.36,1.38,3.48-.75,2.12-2.12-13.58-13.74-29.53-24.96-46.78-33.62-17.45-8.75-36.09-14.97-55.07-19.43-19.48-4.58-39.36-7.36-59.28-9.16-20.12-1.82-40.32-2.6-60.52-3.07-24.74-.59-49.49-.91-74.24-.62s-49.62,1.18-74.36,3.04c-24.55,1.85-49.05,4.65-73.33,8.73-23.36,3.93-46.54,9.04-69.28,15.67-19.67,5.74-39,12.64-57.83,20.73s-37.1,17.35-54.62,27.92-34.05,22.27-49.61,35.34-29.92,27.35-42.85,42.93c-6.51,7.85-12.62,16.01-18.38,24.42-5.89,8.59-11.53,17.36-17.8,25.68s-13.03,15.96-21.17,22.21c-8.81,6.77-19,11.32-29.67,14.26-10.47,2.88-21.33,4.37-32.15,5.09-9.46.63-18.98.57-28.43-.2-18.81-1.54-37.59-5.95-54.69-14.02s-31.85-19.38-42.83-34.35c-9.19-12.52-14.4-27.72-15.79-43.13s.77-31.13,7.01-45.22,15.8-25.33,28.97-32.32c14.97-7.95,32.55-8.69,48.59-3.7,16.65,5.19,31.52,16.08,42.08,29.91,5.33,6.98,9.64,14.79,12.47,23.12,3.13,9.22,4.52,19.03,4.51,28.75-.02,20.08-6.17,39.81-16.01,57.2-10.24,18.1-24.47,33.5-41.14,45.87-17.52,13-37.24,22.77-57.62,30.39-21.22,7.94-43.22,13.72-65.33,18.61-23.9,5.29-48.06,9.33-72.36,12.23s-48.59,4.67-72.97,5.49c-24.47.83-48.97.71-73.44-.19-24.61-.9-49.19-2.58-73.7-4.86s-49.29-5.2-73.84-8.54c-24.6-3.35-49.13-7.14-73.62-11.21-24.46-4.06-48.88-8.4-73.27-12.86-24.4-4.46-48.77-9.1-73.18-13.56-24.8-4.53-49.66-8.83-74.64-12.28-24.76-3.42-49.65-6.03-74.63-7.14s-49.69-.75-74.39,1.74c-21.81,2.2-43.85,5.61-64.75,12.39-17.25,5.6-34.09,13.52-48.13,25.15-12.84,10.64-22.74,24.64-26.64,40.99-.45,1.88,2.44,2.68,2.89.8h0Z";
 ---
 
 <section
-  id="desktop-build-section"
-  aria-label="What we build desktop"
-  data-hide-nav
-  class="relative hidden lg:block h-[400vh] bg-white z-10"
+  id="desktop-services"
+  aria-label="Find the service you need"
+  class="hidden sm:pt-72 lg:block relative w-full bg-[#fcf2f6] py-32 overflow-hidden z-10"
 >
-  <div
-    class="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center"
-  >
-    <div class="absolute inset-0 -z-10 bg-[#e22472]/[0.12] pointer-events-none">
+  <div class="w-full max-w-screen-2xl mx-auto px-10">
+    <div class="flex items-start justify-between mb-24">
+      <h2 class="text-[#050505] text-7xl xl:text-[5.5rem] font-black tracking-tighter leading-[0.95] max-w-2xl">
+        Find the service <br/> 
+        <span class="text-gradient">you need</span>
+      </h2>
     </div>
 
-    <div
-      id="build-svg-bl"
-      class="pointer-events-none absolute z-0"
-      style="width: min(120vw, 1200px); bottom: -18%; left: -18%; transform: rotate(45deg); opacity: 0;"
-      aria-hidden="true"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1920 1080"
-        style="width:100%;height:auto;fill:none;overflow:visible;shape-rendering:optimizeSpeed;"
-      >
-        <defs>
-          <linearGradient id="build-col-bl" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#e22472"></stop>
-            <stop offset="50%" stop-color="#9f3794"></stop>
-            <stop offset="100%" stop-color="#7e4199"></stop>
-          </linearGradient>
-        </defs>
-        <path
-          id="build-path-bl"
-          pathLength="1"
-          d={infinityPath}
-          stroke="url(#build-col-bl)"
-          stroke-width="100"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-dasharray="1"
-          stroke-dashoffset="1"></path>
-      </svg>
-    </div>
-
-    <div
-      id="build-svg-tr"
-      class="pointer-events-none absolute z-0"
-      style="width: min(120vw, 1200px); top: -18%; right: -18%; transform: rotate(45deg); opacity: 0;"
-      aria-hidden="true"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1920 1080"
-        style="width:100%;height:auto;fill:none;overflow:visible;shape-rendering:optimizeSpeed;"
-      >
-        <defs>
-          <linearGradient id="build-col-tr" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#7e4199"></stop>
-            <stop offset="50%" stop-color="#9f3794"></stop>
-            <stop offset="100%" stop-color="#e22472"></stop>
-          </linearGradient>
-        </defs>
-        <path
-          id="build-path-tr"
-          pathLength="1"
-          d={infinityPath}
-          stroke="url(#build-col-tr)"
-          stroke-width="100"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-dasharray="1"
-          stroke-dashoffset="-1"></path>
-      </svg>
-    </div>
-
-    <h2
-      id="desktop-build-title"
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl md:text-7xl lg:text-8xl uppercase tracking-tighter bg-clip-text text-transparent font-black bg-gradient-to-r from-[#e22472] via-[#9f3794] to-[#7e4199] whitespace-nowrap z-20"
-    >
-      What we build
-    </h2>
-
-    <div
-      class="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-6 lg:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-8 z-50"
-    >
+    <div class="flex flex-col items-center justify-center w-full relative space-y-[-1vw]">
       {
-        services.map((service) => (
+        services.map((service, index) => (
           <div
-            class="service-trigger desktop-card relative w-full h-[65vh] rounded-md overflow-hidden shadow-2xl group opacity-0 cursor-pointer"
+            class="service-trigger group relative cursor-pointer w-full flex flex-col items-center py-6 border-b border-black/5 last:border-none"
             data-service={JSON.stringify(service)}
           >
-            <img
-              src={service.image}
-              alt={service.title}
-              decoding="async"
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-            />
-            <div class="absolute inset-x-0 bottom-0 p-6 pt-16 h-[30%] bg-gradient-to-t from-[#7e4199]/90 via-[#9f3794]/40 to-transparent z-10 flex items-end">
-              <h3 class="text-white text-2xl lg:text-3xl font-black tracking-tight leading-tight">
+            <div class="relative w-full flex justify-center items-center">
+              
+              <span class="absolute -left-[10%] top-4 text-sm font-bold text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                0{index + 1}.
+              </span>
+
+              <h3 class="desktop-service-title text-[7.5vw] font-black leading-none tracking-tighter text-[#eca0be]/60 transition-colors duration-500 group-hover:text-[#050505] text-center w-full m-0">
                 {service.title}
               </h3>
+
+              <div class="absolute -right-[10%] top-1/2 -translate-y-1/2 w-40 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none text-right translate-x-4 group-hover:translate-x-0 z-20">
+                <p class="text-sm font-medium leading-tight text-black mb-4">
+                  {service.description_short}
+                </p>
+                <span class="inline-flex items-center text-sm font-bold text-black">
+                  <span class="mr-2">↳</span> More Info
+                </span>
+              </div>
+              
             </div>
           </div>
         ))
@@ -115,182 +52,44 @@ const infinityPath =
 </section>
 
 <section
-  id="mobile-build-section"
-  aria-label="What we build mobile"
-  data-hide-nav
-  class="relative block lg:hidden h-[200vh] bg-white z-10"
+  id="mobile-services"
+  aria-label="Find the service you need mobile"
+  class="block lg:hidden relative w-full bg-[#fcf2f6] py-24 px-4 overflow-hidden z-10"
 >
-  <div
-    class="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center"
-  >
-    <div class="absolute inset-0 -z-10 bg-[#e22472]/[0.12] pointer-events-none">
-    </div>
-
-    <h2
-      id="mobile-build-title"
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-center uppercase tracking-tighter bg-clip-text text-transparent font-black bg-gradient-to-r from-[#e22472] via-[#9f3794] to-[#7e4199] z-20 w-full px-4 leading-[1.1]"
-    >
-      What we <br /> build
+  <div class="relative mb-16 px-2">
+    <h2 class="text-[#050505] text-[3.5rem] font-black tracking-tighter leading-[0.95]">
+      Find the service<br />
+      <span class="text-gradient">you need</span>
     </h2>
+  </div>
 
-    <div
-      id="mobile-collage"
-      class="absolute top-[20%] left-0 w-full px-4 z-50 opacity-0"
-    >
-      <div class="grid grid-cols-2 gap-3 items-start">
-        {
-          services.map((service, index) => (
-            <div
-              class={`service-trigger relative w-full h-[32vh] rounded-xl overflow-hidden shadow-2xl cursor-pointer ${index % 2 !== 0 ? "mt-8" : ""}`}
-              data-service={JSON.stringify(service)}
-            >
-              <img
-                src={service.image}
-                alt={service.title}
-                decoding="async"
-                class="absolute inset-0 w-full h-full object-cover"
-              />
-              <div class="absolute inset-x-0 bottom-0 p-4 pt-16 bg-gradient-to-t from-[#7e4199]/90 to-transparent flex items-end">
-                <h3 class="text-white text-lg font-black tracking-tight leading-tight">
-                  {service.title}
-                </h3>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
+  <div class="grid grid-cols-2 gap-3 items-start">
+    {
+      services.map((service, index) => (
+        <div
+          class={`service-trigger mobile-card bg-[#f6a9c8] p-5 rounded-md cursor-pointer shadow-sm hover:shadow-md transition-shadow flex flex-col min-h-[32vh] ${
+            index % 2 !== 0 ? "mt-12" : ""
+          }`}
+          data-service={JSON.stringify(service)}
+        >
+          <h3 class="text-white text-xl font-black tracking-tight leading-[1.05] mb-4">
+            {service.title}
+          </h3>
+          <p class="text-white/90 text-[13px] font-medium leading-snug mb-8 line-clamp-4">
+            {service.description}
+          </p>
+          <div class="mt-auto">
+            <span class="inline-flex items-center text-[#050505] text-sm font-bold">
+              <span class="mr-1">↳</span> More Info
+            </span>
+          </div>
+        </div>
+      ))
+    }
   </div>
 </section>
 
-<div
-  id="service-modal"
-  class="fixed inset-0 z-[200] opacity-0 pointer-events-none bg-black"
->
-  <img
-    id="modal-main-img"
-    src=""
-    alt=""
-    decoding="async"
-    class="absolute inset-0 w-full h-full object-cover z-0"
-  />
-  <div
-    class="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-transparent via-black/80 to-[#050505] z-10 pointer-events-none"
-  >
-  </div>
-  <div
-    class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 pointer-events-none"
-  >
-  </div>
-
-  <button
-    id="close-modal"
-    class="absolute top-6 right-8 z-[210] text-white hover:text-[#e22472] transition-colors p-2 cursor-pointer"
-    aria-label="Close"
-  >
-    <svg
-      class="w-8 h-8 drop-shadow-md"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M6 18L18 6M6 6l12 12"></path>
-    </svg>
-  </button>
-
-  <div class="relative z-20 flex flex-col lg:flex-row w-full h-full">
-    <div
-      class="w-full lg:w-1/2 h-[45vh] lg:h-full p-8 lg:p-16 flex flex-col justify-end shrink-0"
-    >
-      <div class="inline-block mb-4">
-        <h3
-          id="modal-title"
-          class="text-4xl lg:text-7xl font-black text-white tracking-tighter relative inline-block pb-3"
-        >
-          <span
-            id="modal-underline"
-            class="absolute bottom-0 left-0 w-full h-[4px] bg-gradient-to-r from-[#e22472] to-[#9f3794] origin-left scale-x-0"
-          ></span>
-        </h3>
-      </div>
-      <p
-        id="modal-desc"
-        class="text-gray-300 text-lg lg:text-xl leading-relaxed max-w-xl opacity-0 translate-y-8 drop-shadow-lg"
-      >
-      </p>
-    </div>
-    <div
-      class="w-full lg:w-1/2 h-[55vh] lg:h-full p-8 lg:p-12 lg:pt-24 overflow-y-auto scrollbar-hide relative"
-    >
-      <div id="modal-gallery" class="columns-2 gap-4 space-y-4"></div>
-    </div>
-  </div>
-</div>
-
-<style>
-  /* SVG draw animations */
-  #build-path-bl {
-    animation: build-draw-fwd 2.4s ease-out forwards;
-    animation-play-state: paused;
-  }
-  #build-path-tr {
-    animation: build-draw-rev 2.4s ease-out forwards;
-    animation-play-state: paused;
-  }
-  @keyframes build-draw-fwd {
-    from {
-      stroke-dashoffset: 1;
-    }
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-  @keyframes build-draw-rev {
-    from {
-      stroke-dashoffset: -1;
-    }
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  .masonry-item {
-    break-inside: avoid;
-    border-radius: 0.375rem;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    display: block;
-    width: 100%;
-    cursor: zoom-in;
-    transition: transform 0.3s ease;
-  }
-  .masonry-item:hover {
-    transform: scale(1.02);
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #build-path-bl,
-    #build-path-tr {
-      animation: none !important;
-      stroke-dashoffset: 0 !important;
-    }
-    #build-svg-bl,
-    #build-svg-tr {
-      opacity: 0.15 !important;
-    }
-  }
-</style>
+<ServiceModal />
 
 <script>
   import gsap from "gsap";
@@ -298,341 +97,72 @@ const infinityPath =
 
   gsap.registerPlugin(ScrollTrigger);
 
-  let ctx: gsap.Context | undefined;
-  let modalAnimation: gsap.core.Timeline;
+  let mm: gsap.MatchMedia;
 
-  function preventScroll(e: Event) {
-    e.preventDefault();
-  }
-  function preventKeyScroll(e: KeyboardEvent) {
-    const keys = [
-      "Space",
-      "ArrowUp",
-      "ArrowDown",
-      "PageUp",
-      "PageDown",
-      "End",
-      "Home",
-    ];
-    if (keys.includes(e.code)) e.preventDefault();
-  }
-  function lockBackgroundScroll() {
-    window.addEventListener("wheel", preventScroll, { passive: false });
-    window.addEventListener("touchmove", preventScroll, { passive: false });
-    window.addEventListener("keydown", preventKeyScroll, { passive: false });
-  }
-  function unlockBackgroundScroll() {
-    window.removeEventListener("wheel", preventScroll);
-    window.removeEventListener("touchmove", preventScroll);
-    window.removeEventListener("keydown", preventKeyScroll);
-  }
+  function initServices() {
+    if (mm) mm.revert();
+    mm = gsap.matchMedia();
 
-  function initBuildSection() {
-    ctx?.revert();
-    let mm = gsap.matchMedia();
+    // 💻 DESKTOP TIMELINE
+    mm.add("(min-width: 1024px)", () => {
+      const titles = gsap.utils.toArray(".desktop-service-title");
 
-    ctx = gsap.context(() => {
-      // ==============================================
-      // 💻 DESKTOP TIMELINE (1024px+)
-      // ==============================================
-      mm.add("(min-width: 1024px)", () => {
-        const section = document.getElementById("desktop-build-section");
-        const title = document.getElementById("desktop-build-title");
-        const cards = gsap.utils.toArray<HTMLElement>(".desktop-card");
-        const svgBL = document.getElementById("build-svg-bl");
-        const svgTR = document.getElementById("build-svg-tr");
-        const pathBL = document.getElementById(
-          "build-path-bl",
-        ) as SVGPathElement | null;
-        const pathTR = document.getElementById(
-          "build-path-tr",
-        ) as SVGPathElement | null;
-
-        if (!section || !title || cards.length === 0) return;
-
-        gsap.set(cards, { y: "100vh" });
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.5,
-            invalidateOnRefresh: true,
-
-            onEnter: () => {
-              gsap.to(svgTR, {
-                opacity: 0.22,
-                duration: 0.6,
-                ease: "power2.out",
-                force3D: true, // Native GSAP HW acceleration
-                onComplete: () => {
-                  if (pathTR) pathTR.style.animationPlayState = "running";
-                },
-              });
-              gsap.to(svgBL, {
-                opacity: 0.22,
-                duration: 0.6,
-                ease: "power2.out",
-                delay: 0.5,
-                force3D: true,
-                onComplete: () => {
-                  if (pathBL) pathBL.style.animationPlayState = "running";
-                },
-              });
-            },
-            onLeaveBack: () => {
-              gsap.to([svgTR, svgBL], { opacity: 0, duration: 0.4 });
-              if (pathBL) {
-                pathBL.style.animationPlayState = "paused";
-                pathBL.style.strokeDashoffset = "1";
-              }
-              if (pathTR) {
-                pathTR.style.animationPlayState = "paused";
-                pathTR.style.strokeDashoffset = "-1";
-              }
-            },
-          },
-        });
-
-        tl.to(
+      titles.forEach((title: any) => {
+        gsap.fromTo(
           title,
-          {
-            yPercent: -400,
-            scale: 0.85,
-            ease: "power1.inOut",
-            duration: 2,
-            force3D: true,
-          },
-          0,
-        );
-        tl.to(
-          cards,
+          { y: 80, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 2,
-            stagger: 0.6,
-            ease: "power2.out",
-            force3D: true,
-          },
-          0.5,
-        );
-        tl.to({}, { duration: 1.5 });
-
-        gsap.to(svgBL, {
-          y: -80,
-          ease: "none",
-          force3D: true,
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 3,
-          },
-        });
-        gsap.to(svgTR, {
-          y: -130,
-          ease: "none",
-          force3D: true,
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 3.5,
-          },
-        });
-      });
-
-      // ==============================================
-      // 📱 MOBILE TIMELINE (Under 1024px)
-      // ==============================================
-      mm.add("(max-width: 1023px)", () => {
-        const section = document.getElementById("mobile-build-section");
-        const title = document.getElementById("mobile-build-title");
-        const collage = document.getElementById("mobile-collage");
-
-        if (!section || !title || !collage) return;
-
-        gsap.set(collage, { y: "60vh", opacity: 0 });
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.5,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        tl.to(
-          title,
-          {
-            yPercent: -300,
-            scale: 0.8,
-            ease: "power1.inOut",
             duration: 1,
-            force3D: true,
-          },
-          0,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: title,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+          }
         );
-        tl.to(
-          collage,
+      });
+    });
+
+    // 📱 MOBILE TIMELINE
+    mm.add("(max-width: 1023px)", () => {
+      const cards = gsap.utils.toArray(".mobile-card");
+
+      cards.forEach((card: any, i) => {
+        gsap.fromTo(
+          card,
+          { y: 60, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1.5,
+            duration: 0.8,
             ease: "power2.out",
-            force3D: true,
-          },
-          0.2,
+            delay: (i % 2) * 0.1, // Slight stagger between left and right columns
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
         );
-        tl.to({}, { duration: 0.5 });
-      });
-
-      ScrollTrigger.refresh();
-    });
-
-    // ==============================================
-    // 🛠️ UNIVERSAL MODAL LOGIC
-    // ==============================================
-    const modal = document.getElementById("service-modal");
-    const closeBtn = document.getElementById("close-modal");
-    const modalMainImg = document.getElementById(
-      "modal-main-img",
-    ) as HTMLImageElement;
-    const modalTitle = document.getElementById("modal-title");
-    const modalUnderline = document.getElementById("modal-underline");
-    const modalDesc = document.getElementById("modal-desc");
-    const modalGallery = document.getElementById("modal-gallery");
-
-    const allServiceTriggers =
-      gsap.utils.toArray<HTMLElement>(".service-trigger");
-
-    const closeModal = () => {
-      unlockBackgroundScroll();
-      if (modalAnimation) modalAnimation.timeScale(1.5).reverse();
-    };
-
-    if (
-      !modal ||
-      !closeBtn ||
-      !modalMainImg ||
-      !modalTitle ||
-      !modalUnderline ||
-      !modalDesc ||
-      !modalGallery
-    )
-      return;
-
-    allServiceTriggers.forEach((card) => {
-      card.addEventListener("click", () => {
-        if (modalAnimation && modalAnimation.isActive()) return;
-
-        const serviceData = JSON.parse(card.dataset.service || "{}");
-
-        modalMainImg.src = serviceData.image;
-        modalTitle.childNodes[0].textContent = serviceData.title + " ";
-        modalDesc.textContent = serviceData.description;
-
-        modalGallery.innerHTML = "";
-        if (serviceData.gallery?.length) {
-          serviceData.gallery.forEach((imgSrc: string) => {
-            const img = document.createElement("img");
-            img.src = imgSrc;
-            img.decoding = "async"; // Apply async decoding to dynamic images
-            img.className = "masonry-item";
-            modalGallery.appendChild(img);
-          });
-        }
-
-        lockBackgroundScroll();
-
-        gsap.set(modal, { opacity: 0 });
-        gsap.set(modalMainImg, { scale: 1.1 });
-        gsap.set(modalTitle, { opacity: 0, y: 20 });
-        gsap.set(modalUnderline, { scaleX: 0 });
-        gsap.set(modalDesc, { opacity: 0, y: 20 });
-        gsap.set(".masonry-item", { opacity: 0, y: 30 });
-
-        modalAnimation = gsap.timeline({
-          onReverseComplete: () => {
-            gsap.set(modal, { pointerEvents: "none" });
-            modalGallery.innerHTML = "";
-          },
-        });
-
-        modalAnimation
-          .to(modal, {
-            opacity: 1,
-            pointerEvents: "auto",
-            duration: 0.6,
-            ease: "power2.inOut",
-            force3D: true,
-          })
-          .to(
-            modalMainImg,
-            { scale: 1, duration: 1.5, ease: "power3.out", force3D: true },
-            "<",
-          )
-          .to(
-            modalTitle,
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              ease: "power3.out",
-              force3D: true,
-            },
-            "-=1.1",
-          )
-          .to(
-            modalUnderline,
-            { scaleX: 1, duration: 0.8, ease: "expo.out", force3D: true },
-            "-=0.4",
-          )
-          .to(
-            modalDesc,
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              ease: "power3.out",
-              force3D: true,
-            },
-            "-=0.6",
-          )
-          .to(
-            ".masonry-item",
-            {
-              opacity: 1,
-              y: 0,
-              stagger: 0.08,
-              duration: 0.8,
-              ease: "expo.out",
-              force3D: true,
-            },
-            "-=1.0",
-          );
       });
     });
 
-    closeBtn.addEventListener("click", closeModal);
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.style.pointerEvents === "auto") {
-        closeModal();
-      }
-    });
+    ScrollTrigger.refresh();
   }
 
-  document.addEventListener("astro:after-swap", () => ctx?.revert());
-  document.addEventListener("astro:page-load", initBuildSection);
+  // Handle Astro specific lifecycle
+  document.addEventListener("astro:after-swap", () => {
+    if (mm) mm.revert();
+  });
+
+  document.addEventListener("astro:page-load", initServices);
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initBuildSection);
+    document.addEventListener("DOMContentLoaded", initServices);
   } else {
-    initBuildSection();
+    initServices();
   }
 </script>

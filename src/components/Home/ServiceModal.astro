@@ -1,0 +1,316 @@
+---
+---
+
+<div
+  id="service-modal"
+  class="fixed inset-0 z-[200] bg-black opacity-0 pointer-events-none invisible"
+>
+  <img
+    id="modal-main-img"
+    src=""
+    alt=""
+    decoding="async"
+    class="absolute inset-0 w-full h-full object-cover z-0 grayscale"
+  />
+
+  <div
+    class="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-transparent via-black/80 to-[#050505] z-10 pointer-events-none"
+  ></div>
+  <div
+    class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 pointer-events-none"
+  ></div>
+
+  <button
+    id="close-modal"
+    class="absolute top-6 right-8 z-[210] text-white hover:text-[#e22472] transition-colors p-2 cursor-pointer"
+    aria-label="Close"
+    type="button"
+  >
+    <svg
+      class="w-8 h-8 drop-shadow-md"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      ></path>
+    </svg>
+  </button>
+
+  <div class="relative z-20 flex flex-col lg:flex-row w-full h-full">
+    <div
+      class="w-full lg:w-1/2 h-[45vh] lg:h-full p-8 lg:p-16 flex flex-col justify-end shrink-0"
+    >
+      <div class="inline-block mb-4">
+        <h3
+          id="modal-title"
+          class="text-4xl lg:text-7xl font-black text-white tracking-tighter relative inline-block pb-3"
+        >
+          <span id="modal-title-text"></span>
+          <span
+            id="modal-underline"
+            class="absolute bottom-0 left-0 w-full h-[4px] bg-gradient-to-r from-[#e22472] to-[#9f3794] origin-left scale-x-0"
+          ></span>
+        </h3>
+      </div>
+
+      <p
+        id="modal-desc"
+        class="text-gray-300 text-lg lg:text-xl leading-relaxed max-w-xl opacity-0 translate-y-8 drop-shadow-lg"
+      ></p>
+    </div>
+
+    <div
+      class="w-full lg:w-1/2 h-[55vh] lg:h-full p-8 lg:p-12 lg:pt-24 overflow-y-auto scrollbar-hide overscroll-contain relative"
+    >
+      <div id="modal-gallery" class="grid grid-cols-2 gap-4 auto-rows-max"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  :global(body.modal-open) {
+    overflow: hidden !important;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
+
+  #service-modal,
+  #modal-main-img,
+  #modal-gallery img {
+    will-change: opacity, transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .overscroll-contain {
+    overscroll-behavior: contain;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+
+  let modalAnimation: gsap.core.Timeline | null = null;
+  let initialized = false;
+
+  function initModalLogic() {
+    if (initialized) return;
+    initialized = true;
+
+    const modal = document.getElementById("service-modal");
+    const closeBtn = document.getElementById("close-modal");
+    const modalMainImg = document.getElementById("modal-main-img");
+    const modalTitleText = document.getElementById("modal-title-text");
+    const modalUnderline = document.getElementById("modal-underline");
+    const modalDesc = document.getElementById("modal-desc");
+    const modalGallery = document.getElementById("modal-gallery");
+
+    const allServiceTriggers = gsap.utils.toArray<HTMLElement>(".service-trigger");
+
+    if (
+      !modal ||
+      !closeBtn ||
+      !modalMainImg ||
+      !modalTitleText ||
+      !modalUnderline ||
+      !modalDesc ||
+      !modalGallery
+    ) {
+      return;
+    }
+
+    const lockScroll = () => {
+      document.body.classList.add("modal-open");
+    };
+
+    const unlockScroll = () => {
+      document.body.classList.remove("modal-open");
+    };
+
+    const resetModalState = () => {
+      gsap.set(modal, {
+        opacity: 0,
+        visibility: "hidden",
+        pointerEvents: "none",
+      });
+
+      gsap.set(modalMainImg, { opacity: 0 });
+      gsap.set(modalTitleText, { opacity: 0, y: 10 });
+      gsap.set(modalUnderline, { scaleX: 0 });
+      gsap.set(modalDesc, { opacity: 0, y: 10 });
+
+      modalGallery.innerHTML = "";
+      modalMainImg.src = "";
+    };
+
+    const closeModal = () => {
+      if (!modalAnimation) return;
+
+      modalAnimation.eventCallback("onReverseComplete", () => {
+        unlockScroll();
+        resetModalState();
+      });
+
+      modalAnimation.timeScale(2).reverse();
+    };
+
+    const openModal = (serviceData: any) => {
+      if (modalAnimation?.isActive()) return;
+
+      lockScroll();
+
+      modalTitleText.textContent = serviceData.title || "";
+      modalDesc.textContent = serviceData.description || "";
+
+      modalGallery.innerHTML = "";
+      if (serviceData.gallery?.length) {
+        const fragment = document.createDocumentFragment();
+
+        serviceData.gallery.forEach((imgSrc: string) => {
+          const img = document.createElement("img");
+          img.src = imgSrc;
+          img.decoding = "async";
+          img.loading = "lazy";
+          img.className = "w-full h-auto object-cover rounded-md shadow-sm";
+
+          gsap.set(img, { opacity: 0, y: 16 });
+          fragment.appendChild(img);
+        });
+
+        modalGallery.appendChild(fragment);
+      }
+
+      const preloadImg = new Image();
+      preloadImg.src = serviceData.image;
+
+      preloadImg.onload = () => {
+        modalMainImg.src = serviceData.image;
+
+        gsap.set(modal, {
+          opacity: 0,
+          visibility: "visible",
+          pointerEvents: "auto",
+        });
+
+        gsap.set(modalMainImg, { opacity: 0 });
+        gsap.set(modalTitleText, { opacity: 0, y: 10 });
+        gsap.set(modalUnderline, { scaleX: 0 });
+        gsap.set(modalDesc, { opacity: 0, y: 10 });
+
+        modalAnimation = gsap.timeline({
+          defaults: { force3D: true },
+        });
+
+        modalAnimation
+          .to(modal, {
+            opacity: 1,
+            duration: 0.35,
+            ease: "power2.out",
+          })
+          .to(
+            modalMainImg,
+            {
+              opacity: 1,
+              duration: 0.7,
+              ease: "power2.out",
+            },
+            "<"
+          )
+          .to(
+            modalTitleText,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              ease: "power2.out",
+            },
+            "-=0.3"
+          )
+          .to(
+            modalUnderline,
+            {
+              scaleX: 1,
+              duration: 0.45,
+              ease: "power2.out",
+            },
+            "-=0.25"
+          )
+          .to(
+            modalDesc,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              ease: "power2.out",
+            },
+            "-=0.25"
+          )
+          .to(
+            modalGallery.children,
+            {
+              opacity: 1,
+              y: 0,
+              stagger: 0.06,
+              duration: 0.45,
+              ease: "power2.out",
+              clearProps: "transform",
+            },
+            "-=0.2"
+          );
+      };
+    };
+
+    closeBtn.addEventListener("click", closeModal);
+
+    allServiceTriggers.forEach((card) => {
+      card.addEventListener("click", () => {
+        const raw = card.dataset.service || "{}";
+        let serviceData: any = {};
+
+        try {
+          serviceData = JSON.parse(raw);
+        } catch {
+          serviceData = {};
+        }
+
+        openModal(serviceData);
+      });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.style.pointerEvents === "auto") {
+        closeModal();
+      }
+    });
+
+    resetModalState();
+  }
+
+  document.addEventListener("astro:after-swap", () => {
+    initialized = false;
+    modalAnimation?.kill();
+    modalAnimation = null;
+  });
+
+  document.addEventListener("astro:page-load", initModalLogic);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initModalLogic);
+  } else {
+    initModalLogic();
+  }
+</script>

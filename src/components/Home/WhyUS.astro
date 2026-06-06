@@ -6,11 +6,8 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
 <section
   id="desktop-why-us"
   aria-label="Why Choose Us Desktop"
-  class="relative h-[800vh] hidden lg:block"
+  class="relative h-[800vh] hidden lg:block bg-gradient-to-b from-[#fbe5ee] to-[#fcf2f6]"
 >
-  <div class="absolute inset-0 -z-10 bg-white/80 opacity-40">
-    <div class="absolute inset-0 bg-[#e22472] opacity-30"></div>
-  </div>
 
   <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center">
     <div
@@ -59,154 +56,121 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
 
     <div
       id="wu-reasons-container"
-      class="absolute inset-0 z-20 flex flex-col justify-center px-8 md:px-24 pointer-events-none opacity-0"
+      class="absolute left-0 top-0 w-1/2 h-screen z-20 opacity-0 overflow-hidden pointer-events-none"
     >
-      <div class="relative w-full z-20 pb-[20vh]">
-        <div class="cards w-full md:w-[65%] mx-auto relative">
-          {
-            reasons.map(({ title, description, Icon }, index) => (
-              <div class="card-wrapper relative w-full my-[30vh]">
-                <div
-                  class="card-inner w-full min-h-[50vh] rounded-3xl overflow-hidden relative flex flex-col justify-start p-10 md:p-14"
-                  style="background: rgba(97, 97, 97, 0.45); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 30px 60px rgba(0,0,0,0.4);"
-                >
-                  <div
-                    class="absolute inset-x-0 bottom-0 h-[65%] pointer-events-none z-0"
-                    style="background: radial-gradient(circle at bottom center, rgba(226,36,114,0.4) 0%, rgba(159,55,148,0.15) 55%, transparent 85%); filter: blur(35px);"
-                  />
-                  <div class="card-depth-overlay absolute inset-0 bg-black z-10 pointer-events-none opacity-0 rounded-3xl" />
-
-                  <div class="relative z-20 flex items-center justify-between mb-8 md:mb-10 w-full">
-                    <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-white border border-white/10 shadow-lg backdrop-blur-md">
-                      <Icon className="w-8 h-8" style="color: #e22472;" />
-                    </div>
-                    <span class="text-4xl md:text-5xl font-black text-white/10 tracking-tighter">
-                      0{index + 1}
-                    </span>
-                  </div>
-
-                  <div class="relative z-20 flex flex-col mt-auto">
-                    <h3 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
-                      {title}
-                    </h3>
-                    <p class="text-base md:text-lg text-zinc-300 leading-relaxed font-light">
-                      {description}
-                    </p>
-                  </div>
-                </div>
+      <div class="desktop-reasons-track w-full flex flex-col pt-[100vh] pb-[50vh]">
+        {
+          reasons.map(({ title, description }, index) => (
+            <div class="desktop-reason px-12 xl:px-24 mb-[35vh] flex flex-col">
+              <div class="flex items-end gap-6 mb-8 border-b-2 border-black/10 pb-6">
+                <span class="text-4xl lg:text-5xl font-black text-[#e22472] tracking-tighter leading-none mb-1">
+                  0{index + 1}
+                </span>
+                <h3 class="text-4xl lg:text-6xl font-black text-black uppercase tracking-tighter leading-none">
+                  {title}
+                </h3>
               </div>
-            ))
-          }
-          <div
-            id="cards-end-marker"
-            class="absolute bottom-0 w-full h-10 pointer-events-none -mb-10"
-          >
-          </div>
-        </div>
+              <p class="text-xl lg:text-2xl text-black/70 font-medium leading-relaxed max-w-lg">
+                {description}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
 </section>
 
-<div class="block lg:hidden bg-[#050508]">
-  <section id="mobile-hero" class="relative h-[200vh]">
-    <div
-      class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden"
-    >
-      <div class="absolute inset-0 z-0">
+<div class="block lg:hidden bg-[#fcf2f6]">
+  <section id="mobile-hero" class="relative overflow-hidden bg-[#fcf2f6]">
+    <div class="shrink-0 sticky top-0 h-screen w-full overflow-hidden">
+      <div
+        id="mobile-hero-media"
+        class="absolute inset-0 z-0 origin-top will-change-transform"
+      >
         <img
           src="/images/collage_1.webp"
           alt="Why choose Virtex"
-          class="h-full w-full object-cover"
+          class="h-full w-full object-cover object-center"
         />
-        <div class="absolute inset-0 bg-black/75 z-10"></div>
+        <div class="absolute inset-0 bg-black/55 backdrop-blur-sm"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/45 to-black/80"
+        ></div>
       </div>
 
       <div
         id="mobile-hero-content"
-        class="relative z-20 flex flex-col items-center w-full"
+        class="absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center will-change-transform"
       >
-        <h2 class="text-6xl font-black uppercase tracking-tighter text-white">
+        <h2
+          id="mobile-hero-title"
+          class="text-6xl font-black uppercase tracking-tighter text-white opacity-0 translate-y-6"
+        >
           Why <em class="not-italic text-[#e22472]">Us?</em>
         </h2>
 
         <p
           id="mobile-wu-desc"
-          class="mt-8 px-6 text-center text-lg font-medium text-zinc-300 leading-relaxed max-w-sm"
+          class="mt-8 max-w-sm text-lg font-medium leading-relaxed text-zinc-200 opacity-0 translate-y-6"
         >
           {mobileHeroText}
         </p>
       </div>
     </div>
-  </section>
 
-  <div class="relative z-20">
     <div
-      class="w-full h-40 bg-gradient-to-b from-transparent to-[#050508] pointer-events-none -mb-1"
-    >
-    </div>
-
-    <section
-      id="mobile-reasons-list"
-      class="bg-[#050508] pb-24 pt-4 px-6 border-none"
+      id="mobile-reasons-sheet"
+      class="relative z-30 bg-[#fcf2f6] -mt-[60vh] px-6 pb-24 pt-10"
     >
       <div class="flex flex-col gap-12">
         {
           reasons.map(({ title, mobileDescription, Icon }, index) => (
-            <div class="mobile-reason-item opacity-0 translate-y-10 flex flex-col gap-4">
+            <div class="mobile-reason-item opacity-0 translate-y-12 flex flex-col gap-4">
               <div class="flex items-center gap-4">
-                <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 border border-white/20 shadow-lg">
+                <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-black/5 border border-black/10 shadow-sm">
                   <Icon size={24} color="#e22472" />
                 </div>
-                <span class="text-3xl font-black text-white/10 tracking-tighter ml-auto">
+                <span class="text-3xl font-black text-black/10 tracking-tighter ml-auto">
                   0{index + 1}
                 </span>
               </div>
 
-              <h3 class="text-2xl font-bold text-white tracking-tight">
+              <h3 class="text-2xl font-bold text-[#120b10] tracking-tight">
                 {title}
               </h3>
 
-              <p class="text-base text-zinc-400 leading-relaxed font-light">
+              <p class="text-base text-black/65 leading-relaxed font-light">
                 {mobileDescription}
               </p>
 
               {index !== reasons.length - 1 && (
-                <div class="w-full h-px bg-gradient-to-r from-white/10 to-transparent mt-6" />
+                <div class="w-full h-px bg-gradient-to-r from-black/10 to-transparent mt-6" />
               )}
             </div>
           ))
         }
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </div>
 
 <style>
-  /* Desktop Styles */
   #wu-image-wrapper,
   #wu-image,
   #wu-title,
-  .wu-reveal {
+  .wu-reveal,
+  .desktop-reasons-track,
+  .desktop-reason {
     will-change: transform, opacity, width, filter;
     transform: translateZ(0);
-  }
-  .card-inner {
-    will-change: transform, filter;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
   }
   .wu-blur-line {
     will-change: filter, opacity;
     line-height: 1.3;
   }
-
-  /* Mobile Styles */
-  .m-char {
-    display: inline-block;
-    will-change: opacity;
+  #wu-image {
+    filter: grayscale(1);
   }
 </style>
 
@@ -232,59 +196,36 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
         const imageWrapper = document.getElementById("wu-image-wrapper");
         const image = document.getElementById("wu-image");
         const overlay = document.getElementById("wu-overlay");
+        
+        // Grab the title wrapper to fade the whole block out properly
         const title = document.getElementById("wu-title");
+        const titleWrap = document.getElementById("wu-title-wrap") || title; 
+        
         const blurStage = document.getElementById("wu-blur-stage");
         const blurLinesBlock = document.getElementById("wu-blur-lines");
         const blurLines = gsap.utils.toArray<HTMLElement>(".wu-blur-line");
-        const reasonsContainer = document.getElementById(
-          "wu-reasons-container",
-        );
-        const cards = gsap.utils.toArray<HTMLElement>(".card-wrapper");
+        const reasonsContainer = document.getElementById("wu-reasons-container");
+        const reasonsTrack = document.querySelector(".desktop-reasons-track");
 
-        if (!section) return;
-
-        gsap.set(".cards", { height: "40vh" });
-
-        cards.forEach((card, index) => {
-          gsap.set(card, {
-            position: "absolute",
-            top: 0,
-            left: 0,
-            margin: 0,
-            zIndex: index,
-          });
-          gsap.set(card.querySelector(".card-inner"), { filter: "blur(0px)" });
-        });
-        gsap.set(image, { filter: "blur(0px)" });
+        if (!section || !reasonsTrack) return;
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
-            start: "top 90%",
-            end: "bottom bottom",
+            start: "top 90%", // Note: "top top" is recommended here if you want it to pin flush with the screen
+            end: "bottom 20%",
             scrub: 1,
             invalidateOnRefresh: true,
           },
         });
 
-        tl.to(
-          imageWrapper,
-          { width: "100vw", duration: 300, ease: "power1.inOut" },
-          0,
-        )
-          .to(
-            image,
-            {
-              scale: 1.15,
-              filter: "blur(10px)",
-              duration: 300,
-              ease: "power1.inOut",
-            },
-            0,
-          )
-          .to(title, { y: "20vw", duration: 315, ease: "power1.inOut" }, 0)
+        // 1. Image Expands & Title Moves
+        tl.to(imageWrapper, { width: "100vw", duration: 300, ease: "power1.inOut" }, 0)
+          .to(image, { scale: 1.15, filter: "grayscale(1) blur(10px)", duration: 300, ease: "power1.inOut" }, 0)
+          .to(titleWrap, { y: "20vw", duration: 315, ease: "power1.inOut" }, 0)
           .to(overlay, { opacity: 1, duration: 310 }, 10);
 
+        // 2. Blur Lines Sequence
         tl.to(blurStage, { opacity: 1, duration: 30 }, 200);
 
         const totalLines = blurLines.length;
@@ -295,12 +236,8 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
         tl.fromTo(
           blurLinesBlock,
           { y: "20vh" },
-          {
-            y: "-20vh",
-            duration: totalLines * lineGap + lineScrollWindow * 2,
-            ease: "none",
-          },
-          220,
+          { y: "-20vh", duration: totalLines * lineGap + lineScrollWindow * 2, ease: "none" },
+          220
         );
 
         blurLines.forEach((line, i) => {
@@ -308,145 +245,128 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
           tl.fromTo(
             line,
             { opacity: 0, filter: "blur(16px)" },
-            {
-              opacity: 1,
-              filter: "blur(0px)",
-              duration: lineScrollWindow,
-              ease: "power2.out",
-            },
-            startReveal,
+            { opacity: 1, filter: "blur(0px)", duration: lineScrollWindow, ease: "power2.out" },
+            startReveal
           );
           tl.to(
             line,
-            {
-              opacity: 0,
-              filter: "blur(16px)",
-              duration: lineScrollWindow,
-              ease: "power2.in",
-            },
-            startReveal + lineScrollWindow + lineHold,
+            { opacity: 0, filter: "blur(16px)", duration: lineScrollWindow, ease: "power2.in" },
+            startReveal + lineScrollWindow + lineHold
           );
         });
 
-        const blurEnd =
-          220 + totalLines * lineGap + lineScrollWindow * 2 + lineHold;
+        const blurEnd = 220 + totalLines * lineGap + lineScrollWindow * 2 + lineHold;
         tl.to(blurStage, { opacity: 0, duration: 30 }, blurEnd - 20);
 
-        const cardsStart = blurEnd + 20;
-        tl.to(reasonsContainer, { opacity: 1, duration: 40 }, cardsStart);
-
-        let timelineOffset = cardsStart + 30;
-
-        cards.forEach((card, index) => {
-          tl.fromTo(
-            card,
-            { y: () => window.innerHeight },
-            { y: 0, duration: 200, ease: "power2.out" },
-            timelineOffset,
-          );
-
-          if (index > 0) {
-            for (let j = 0; j < index; j++) {
-              const inner = cards[j].querySelector(".card-inner");
-              const shadow = cards[j].querySelector(".card-depth-overlay");
-              const distance = index - j;
-
-              tl.to(
-                inner,
-                {
-                  scale: 1 - distance * 0.05,
-                  y: -(distance * 35),
-                  filter: `blur(${distance * 4}px)`,
-                  duration: 200,
-                  ease: "power2.out",
-                },
-                timelineOffset,
-              );
-              tl.to(
-                shadow,
-                { opacity: distance * 0.35, duration: 115, ease: "power2.out" },
-                timelineOffset,
-              );
-            }
-          }
-          timelineOffset += 140;
-        });
-
-        const exitStart = timelineOffset + 20;
-        const exitDuration = 120;
+        // 3. The Split Transition
+        const splitStart = blurEnd + 20;
 
         tl.to(
-          image,
+          imageWrapper,
+          { width: "50vw", x: "50vw", duration: 250, ease: "power3.inOut" },
+          splitStart
+        );
+        tl.to(image, { filter: "grayscale(1) blur(0px)", scale: 1.05, duration: 250 }, splitStart);
+        tl.to(overlay, { opacity: 0.2, duration: 200 }, splitStart); 
+        
+        // FIX: Explicitly fade out and move the title left so it disappears completely
+        tl.to(titleWrap, { opacity: 0, x: -100, duration: 150, ease: "power2.inOut" }, splitStart);
+
+        // 4. Scrub the Typographic Reasons
+        tl.to(reasonsContainer, { opacity: 1, duration: 100 }, splitStart + 100);
+
+        // Set a dedicated duration for the vertical scroll of the track
+        const scrollDuration = 800; 
+
+        tl.to(
+          reasonsTrack,
           {
-            filter: "blur(60px)",
-            scale: 1.25,
-            duration: exitDuration,
-            ease: "power2.in",
+            y: () => -(reasonsTrack.scrollHeight - window.innerHeight),
+            duration: scrollDuration,
+            ease: "none",
           },
-          exitStart,
-        )
-          .to(
-            overlay,
-            { opacity: 0.92, duration: exitDuration, ease: "power2.in" },
-            exitStart,
-          )
-          .to(
-            reasonsContainer,
-            { opacity: 0, duration: exitDuration * 0.6, ease: "power2.in" },
-            exitStart + exitDuration * 0.4,
+          splitStart + 150
+        );
+
+        // FIX: Distribute the left-to-right fade mathematically based on the scroll duration
+        const desktopReasons = gsap.utils.toArray(".desktop-reason");
+        const numReasons = desktopReasons.length;
+        
+        desktopReasons.forEach((reason: any, i) => {
+          // Calculate a progress ratio (0.0 for first item, 1.0 for last item)
+          const progress = numReasons > 1 ? i / (numReasons - 1) : 0;
+          
+          // Multiply progress by 75% of the scrollDuration. 
+          // This ensures the last item finishes animating BEFORE the track stops scrolling.
+          const itemStartTime = (splitStart + 150) + (progress * scrollDuration * 0.75);
+
+          tl.fromTo(
+            reason,
+            { opacity: 0, x: -100 }, // Start further left for a clearer slide effect
+            { opacity: 1, x: 0, duration: 150, ease: "power3.out" },
+            itemStartTime
           );
+        });
       });
 
       // ==============================================
       // 📱 MOBILE TIMELINE (Displays Below 1024px)
       // ==============================================
       mm.add("(max-width: 1023px)", () => {
-        // 1. Manually Split Text (Keeping Native Spaces!)
-        const descEl = document.getElementById("mobile-wu-desc");
-        if (descEl) {
-          const originalText = descEl.innerText;
+        const hero = document.getElementById("mobile-hero");
+        const heroContent = document.getElementById("mobile-hero-content");
+        const title = document.getElementById("mobile-hero-title");
+        const media = document.getElementById("mobile-hero-media");
+        const sheet = document.getElementById("mobile-reasons-sheet");
+        const items = gsap.utils.toArray<HTMLElement>(".mobile-reason-item");
 
-          descEl.innerHTML = originalText
-            .split("")
-            .map((char) => {
-              // If it's a space, render a native space outside the span so it wraps naturally
-              if (char === " ") return " ";
-              return `<span class="m-char opacity-0">${char}</span>`;
-            })
-            .join("");
-        }
+        if (!hero || !heroContent || !title || !media || !sheet) return;
 
-        // 2. Scrubbed Timeline for Hero Title & Text Reveal
-        const heroTl = gsap.timeline({
+        // Set Initial States
+        gsap.set(title, { opacity: 0, y: 24 });
+        gsap.set(sheet, { yPercent: 100 });
+        gsap.set(items, { opacity: 0, x: -50 });
+
+        // 2. Initial Fade In & Character Reveal at 50%
+        ScrollTrigger.create({
+          trigger: hero,
+          start: "top 50%",
+          onEnter: () => {
+            gsap.to(title, { opacity: 1, y: 0, duration: 0.8 });
+          },
+          onLeaveBack: () => {
+            gsap.to([title], { opacity: 0, y: 24, duration: 0.4 });
+          }
+        });
+
+        // 3. Scrubbed Timeline (Shrink image & move content)
+        const shrinkTl = gsap.timeline({
           scrollTrigger: {
-            trigger: "#mobile-hero",
+            trigger: hero,
             start: "top top",
-            end: "bottom bottom",
+            end: "+=150%",
             scrub: 1,
+            pin: true,
           },
         });
 
-        heroTl
-          // Move the entire content block (Title + Desc) up dramatically
-          .to("#mobile-hero-content", { y: -50, duration: 1.5 })
-          // Fade characters in one by one right after movement starts
-          .to(".m-char", { opacity: 1, duration: 1.5, stagger: 0.05 }, "<0.2");
+        shrinkTl
+          .to(media, { height: "40vh", ease: "power2.inOut", duration: 1 }, 0)
+          .to(heroContent, { y: "-20vh", ease: "power2.inOut", duration: 1 }, 0)
+          .to(sheet, { yPercent: 0, ease: "power2.inOut", duration: 1 }, 0);
 
-        // 3. Simple In-View Timeline for the List Items
-        const listItems = gsap.utils.toArray<HTMLElement>(
-          ".mobile-reason-item",
-        );
-
-        listItems.forEach((item) => {
+        // 4. Staggered Reason Items
+        items.forEach((item) => {
           gsap.to(item, {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: item,
-              start: "top 85%",
+              start: "top 90%",
+              toggleActions: "play none none reverse",
             },
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power3.out",
           });
         });
       });

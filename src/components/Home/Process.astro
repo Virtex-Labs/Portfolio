@@ -1,5 +1,6 @@
 ---
 import { site } from "../../data/site";
+import { Image } from 'astro:assets';
 const { steps, introLines } = site.process;
 ---
 
@@ -17,14 +18,14 @@ const { steps, introLines } = site.process;
       alt=""
       aria-hidden="true"
       decoding="async"
-      class="absolute w-full h-[120%] -top-[10%] object-cover object-center opacity-30"
+      loading="eager"
       id="process-galaxy-bg"
+      class="absolute w-full h-[120%] -top-[10%] object-cover object-center opacity-30"
     />
     <div
       class="absolute inset-0"
       style="background: radial-gradient(ellipse at center, transparent 30%, rgba(5,5,8,0.9) 100%);"
-    >
-    </div>
+    ></div>
   </div>
 
   <div
@@ -49,18 +50,14 @@ const { steps, introLines } = site.process;
 
     <div
       id="process-paragraph-wrap"
-      class="absolute inset-0 flex flex-col items-center justify-center px-6 opacity-0 translate-y-20"
+      class="absolute inset-0 flex flex-col items-center justify-center px-6 opacity-0"
     >
-      {
-        introLines.map((line) => (
-          <p
-            class="intro-line text-center font-medium leading-relaxed tracking-wide text-lg md:text-2xl lg:text-3xl mb-1 md:mb-2"
-            style="color: rgba(255,255,255,0.15); filter: blur(12px);"
-          >
-            {line}
-          </p>
-        ))
-      }
+      <p
+        id="intro-text"
+        class="text-center font-medium leading-relaxed tracking-wide text-lg md:text-2xl lg:text-3xl max-w-4xl text-white"
+      >
+        {introLines.join(" ")}
+      </p>
     </div>
   </div>
 
@@ -75,8 +72,7 @@ const { steps, introLines } = site.process;
       <div
         id="desktop-path-fill"
         class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#e22472] via-[#9f3794] to-[#7e4199] origin-top scale-y-0 z-10"
-      >
-      </div>
+      ></div>
     </div>
 
     {
@@ -115,13 +111,12 @@ const { steps, introLines } = site.process;
   >
     <div
       id="mobile-process-track"
-      class="absolute left-[47px] top-[10vh] bottom-[50vh] sm:bottom-[5vh] w-[2px] bg-white/10 z-0"
+      class="absolute left-[47px] top-[5vh] sm:top-[10vh] bottom-[50vh] sm:bottom-[5vh] w-[2px] bg-white/10 z-0"
     >
       <div
         id="mobile-path-fill"
         class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#e22472] via-[#9f3794] to-[#7e4199] origin-top scale-y-0 z-10"
-      >
-      </div>
+      ></div>
     </div>
 
     {
@@ -158,15 +153,15 @@ const { steps, introLines } = site.process;
   >
     <div
       class="absolute top-0 left-0 w-full h-[35vh] bg-gradient-to-b from-[#050508] via-[#050508]/60 to-transparent z-40 pointer-events-none backdrop-blur-[1px]"
-    >
-    </div>
+    ></div>
 
     <img
       id="px-mountain"
       src="/images/mountain.png"
       alt="Mountain"
       decoding="async"
-      class="absolute bottom-[-1%] w-full h-[120%] object-cover object-bottom z-10"
+      loading="eager"
+      class="absolute sm:bottom-[-1%] w-full h-[120%] object-cover object-bottom z-10"
     />
 
     <img
@@ -174,7 +169,8 @@ const { steps, introLines } = site.process;
       src="/images/V.svg"
       alt="V"
       decoding="async"
-      class="absolute bottom-[17%] sm:bottom-[-15%] w-full h-[170%] sm:h-[110%] left-5 sm:left-22 object-contain object-bottom z-20 will-change-transform"
+      loading="eager"
+      class="absolute bottom-[20%] sm:bottom-[-15%] w-full h-[170%] sm:h-[110%] left-5 sm:left-22 object-contain object-bottom z-20 will-change-transform"
     />
 
     <img
@@ -182,12 +178,17 @@ const { steps, introLines } = site.process;
       src="/images/mountain_man.png"
       alt="Man on Mountain"
       decoding="async"
-      class="absolute bottom-[-30%] sm:bottom-[-20%] lg:bottom-[-25%] w-full h-[120%] object-cover object-bottom z-30"
+      loading="eager"
+      class="absolute sm:bottom-[-30%] sm:bottom-[-20%] lg:bottom-[-25%] w-full h-[120%] object-cover object-bottom z-30"
     />
   </div>
 </section>
 
 <style>
+  .word {
+    display: inline-block;
+    white-space: nowrap;
+  }
   /* Desktop Active States */
   .desktop-process-node.is-active {
     background: #fff;
@@ -248,6 +249,25 @@ const { steps, introLines } = site.process;
       // ==============================================
       // 🌐 SHARED ANIMATIONS (Backgrounds & Intro)
       // ==============================================
+      const introTextEl = document.getElementById("intro-text");
+
+      if (introTextEl) {
+        const text = introTextEl.textContent || "";
+
+        introTextEl.innerHTML = text
+          .split(" ")
+          .map(
+            (word) =>
+              `<span class="word opacity-0">${word}</span>`
+          )
+          .join(" ");
+
+        gsap.set(".word", {
+          opacity: 0,
+          filter: "blur(6px)",
+        });
+      }
+      
       if (mainBg) {
         gsap.to(mainBg, {
           yPercent: 12,
@@ -266,84 +286,83 @@ const { steps, introLines } = site.process;
         scrollTrigger: {
           trigger: introStage,
           start: "top top",
-          end: "+=200%",
-          scrub: 1,
+          end: "+=340%",
+          scrub: 0.8,
           pin: true,
         },
       });
 
-      introTl.to("#process-title-wrap", {
-        y: "-25vh",
-        opacity: 0,
-        duration: 2,
-        ease: "power2.inOut",
-        force3D: true,
-      });
-      introTl.to(
-        "#process-paragraph-wrap",
-        { y: "0", opacity: 1, duration: 2, ease: "power2.out", force3D: true },
-        "-=1.5",
-      );
-
-      const lines = gsap.utils.toArray(".intro-line");
-      lines.forEach((line) => {
-        introTl.to(
-          line,
+      introTl
+        .to({}, { duration: 1.0 })
+        .to("#process-title-wrap", {
+          opacity: 0,
+          y: -24,
+          duration: 0.9,
+          ease: "power2.out",
+        })
+        .to(
+          "#process-paragraph-wrap",
           {
-            color: "rgba(255,255,255,1)",
-            filter: "blur(0px)",
-            duration: 1.5,
-            ease: "power1.inOut",
-            force3D: true,
+            opacity: 1,
+            duration: 0.35,
+            ease: "none",
           },
-          "-=1.1",
-        );
-      });
-
-      introTl.to({}, { duration: 1.5 });
-      introTl.to("#process-paragraph-wrap", {
-        y: "-15vh",
-        opacity: 0,
-        duration: 2,
-        ease: "power2.in",
-        force3D: true,
-      });
-
-      // Shared Parallax End Panel
-      const endPanel = document.getElementById("process-end-panel");
-      if (endPanel) {
-        const parallaxTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: endPanel,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
+          "-=0.25",
+        )
+        .to(".word", {
+          opacity: 1,
+          filter: "blur(0px)",
+          scale: 1,
+          stagger: {
+            each: 0.018,
+            from: "start",
           },
+          duration: 0.45,
+          ease: "power2.out",
+        })
+        .to({}, { duration: 1.8 })
+        .to("#process-paragraph-wrap", {
+          opacity: 0,
+          y: -28,
+          duration: 0.8,
+          ease: "power2.inOut",
         });
-        const pxMountain = document.getElementById("px-mountain");
-        const pxV = document.getElementById("px-v");
-        const pxMan = document.getElementById("px-man");
-
-        if (pxMountain)
-          parallaxTl.to(
-            pxMountain,
-            { yPercent: 10, ease: "none", force3D: true },
-            0,
-          );
-        if (pxV)
-          parallaxTl.to(pxV, { yPercent: -5, ease: "none", force3D: true }, 0);
-        if (pxMan)
-          parallaxTl.to(
-            pxMan,
-            { yPercent: -20, ease: "none", force3D: true },
-            0,
-          );
-      }
 
       // ==============================================
       // 💻 DESKTOP TIMELINE (1024px+)
       // ==============================================
       mm.add("(min-width: 1024px)", () => {
+        // Desktop Parallax End Panel
+        const endPanel = document.getElementById("process-end-panel");
+        if (endPanel) {
+          const parallaxTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: endPanel,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+          const pxMountain = document.getElementById("px-mountain");
+          const pxV = document.getElementById("px-v");
+          const pxMan = document.getElementById("px-man");
+
+          if (pxMountain)
+            parallaxTl.to(
+              pxMountain,
+              { yPercent: 10, ease: "none", force3D: true },
+              0,
+            );
+          if (pxV)
+            parallaxTl.to(pxV, { yPercent: -5, ease: "none", force3D: true }, 0);
+          if (pxMan)
+            parallaxTl.to(
+              pxMan,
+              { yPercent: -20, ease: "none", force3D: true },
+              0,
+            );
+        }
+
         const track = document.getElementById("desktop-process-track");
         const pathFill = document.getElementById("desktop-path-fill");
         const steps = gsap.utils.toArray<HTMLElement>(".desktop-process-step");
@@ -428,60 +447,28 @@ const { steps, introLines } = site.process;
         const pathFill = document.getElementById("mobile-path-fill");
         const steps = gsap.utils.toArray<HTMLElement>(".mobile-process-step");
 
-        if (!track || !pathFill || steps.length === 0) return;
-
-        // Mobile Line fill
-        gsap.fromTo(
-          pathFill,
-          { scaleY: 0 },
-          {
+        if (track && pathFill) {
+          gsap.fromTo(pathFill, { scaleY: 0 }, {
             scaleY: 1,
-            ease: "none",
-            force3D: true,
-            scrollTrigger: {
-              trigger: track,
-              start: "top center",
-              end: "bottom center",
-              scrub: true,
-            },
-          },
-        );
+            scrollTrigger: { trigger: track, start: "top center", end: "bottom center", scrub: true }
+          });
+        }
 
         steps.forEach((step) => {
           const node = step.querySelector(".mobile-process-node");
           const content = step.querySelector(".mobile-process-content");
 
-          // Node highlight trigger
           ScrollTrigger.create({
             trigger: step,
-            start: "top center+=15%", // Triggers slightly earlier on mobile
-            onEnter: () => {
-              node?.classList.add("is-active");
-              step.classList.add("is-active");
-            },
-            onLeaveBack: () => {
-              node?.classList.remove("is-active");
-              step.classList.remove("is-active");
-            },
+            start: "top center+=15%",
+            onEnter: () => { node?.classList.add("is-active"); step.classList.add("is-active"); },
+            onLeaveBack: () => { node?.classList.remove("is-active"); step.classList.remove("is-active"); }
           });
 
-          // Content slide in from right
-          gsap.fromTo(
-            content,
-            { x: 30, opacity: 0 },
-            {
-              x: 0,
-              opacity: 1,
-              duration: 0.7,
-              ease: "power3.out",
-              force3D: true,
-              scrollTrigger: {
-                trigger: step,
-                start: "top 75%",
-                toggleActions: "play none none reverse",
-              },
-            },
-          );
+          gsap.fromTo(content, { x: 30, opacity: 0 }, {
+            x: 0, opacity: 1, duration: 0.7,
+            scrollTrigger: { trigger: step, start: "top 75%", toggleActions: "play none none reverse" }
+          });
         });
       });
     }, section);

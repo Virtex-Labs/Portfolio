@@ -152,7 +152,7 @@ const { steps, introLines } = site.process;
     style="mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);"
   >
     <div
-      class="absolute top-0 left-0 w-full h-[35vh] bg-gradient-to-b from-[#050508] via-[#050508]/60 to-transparent z-40 pointer-events-none backdrop-blur-[1px]"
+      class="absolute top-0 left-0 w-full h-[35vh] bg-gradient-to-b from-[#050508] via-[#050508]/60 to-transparent z-40 pointer-events-none"
     ></div>
 
     <img
@@ -264,7 +264,6 @@ const { steps, introLines } = site.process;
 
         gsap.set(".word", {
           opacity: 0,
-          filter: "blur(6px)",
         });
       }
       
@@ -311,13 +310,12 @@ const { steps, introLines } = site.process;
         )
         .to(".word", {
           opacity: 1,
-          filter: "blur(0px)",
           scale: 1,
           stagger: {
-            each: 0.018,
+            each: 0.04,
             from: "start",
           },
-          duration: 0.45,
+          duration: 0.8,
           ease: "power2.out",
         })
         .to({}, { duration: 1.8 })

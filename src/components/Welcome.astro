@@ -211,7 +211,7 @@
         const brandRect = navBrand?.getBoundingClientRect();
         let offsetX = 0;
         let offsetYDivider = 2.5;
-        let scaleMult = 0.437;
+        let scaleMult = mobileDevice ? 0.05 : 0.4;
         if (window.innerWidth <= 768) {
           offsetX = 0;
           offsetYDivider = 4.5;
@@ -226,7 +226,7 @@
 
         const targetY = brandRect
           ? brandRect.top +
-            brandRect.height / 2 -
+            brandRect.height / (mobileDevice ? 4.8 : 3.8) -
             (svgRect.top + svgRect.height / offsetYDivider)
           : -window.innerHeight / 2 + 58;
 

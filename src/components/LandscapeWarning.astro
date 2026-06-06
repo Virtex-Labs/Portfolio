@@ -1,7 +1,3 @@
----
-
----
-
 <div
   id="landscape-warning"
   class="landscape-block fixed inset-0 bg-[#050508] flex-col items-center justify-center text-center px-8"
@@ -57,16 +53,10 @@
 </div>
 
 <style>
-  /* 1. Hide it by default on all screens */
   .landscape-block {
     display: none !important;
   }
 
-  /* 2. Show it ONLY when:
-    - orientation: landscape (wider than tall)
-    - max-height: 600px (targets phones, allows iPads/Tablets to skip the warning)
-    - pointer: coarse (ensures it is a touch device, ignoring desktop windows that are resized to be short and wide)
-  */
   @media screen and (orientation: landscape) and (max-height: 600px) and (pointer: coarse) {
     .landscape-block {
       display: flex !important;

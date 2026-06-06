@@ -19,7 +19,10 @@ const {
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="web development, agency, creative studio, full-stack, design, Virtex Labs" />
+    <meta
+      name="keywords"
+      content="web development, agency, creative studio, full-stack, design, Virtex Labs"
+    />
     <meta name="author" content="Virtex Labs" />
     <link rel="canonical" href={canonical} />
 
@@ -43,18 +46,21 @@ const {
     <meta name="theme-color" content="#050508" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
 
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Virtex Labs",
-      "url": canonical,
-      "logo": new URL("/wordmark.svg", canonical).toString(),
-      "description": description,
-      "sameAs": [
-        "https://twitter.com/virtexlabs",
-        "https://linkedin.com/company/virtexlabs",
-      ]
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Virtex Labs",
+        url: canonical,
+        logo: new URL("/wordmark.svg", canonical).toString(),
+        description: description,
+        sameAs: [
+          "https://twitter.com/virtexlabs",
+          "https://linkedin.com/company/virtexlabs",
+        ],
+      })}
+    />
 
     <!-- Google Analytics (Uncomment and replace ID when ready) -->
     <!--

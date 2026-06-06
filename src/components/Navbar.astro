@@ -10,7 +10,7 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
   class="fixed inset-x-0 top-0 z-[100] transition-colors duration-500 bg-transparent"
 >
   <nav
-    class="mx-auto flex lg:grid h-[10vh] w-full lg:grid-cols-3 items-center justify-between px-6 lg:px-20 relative z-20"
+    class="mx-auto flex lg:grid h-[100px] w-full lg:grid-cols-3 items-center justify-between px-6 lg:px-20 relative z-20"
   >
     <ul
       class="hidden lg:flex h-full w-full items-center justify-between gap-1 list-none p-0 m-0"
@@ -138,8 +138,6 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
       transform: none !important;
     }
   }
-
-  /* Hamburger Active States */
   #mobile-menu-toggle.is-open .hamburger-line:nth-child(1) {
     transform: translateY(4px) rotate(45deg);
     background-color: #050508 !important;
@@ -161,12 +159,11 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
   const leftItems = Array.from(document.querySelectorAll(".nav-left-item"));
   const rightItems = Array.from(document.querySelectorAll(".nav-right-item"));
   const brand = document.querySelector(".nav-brand");
-
+  const logoImg = document.getElementById("nav-logo-img");
   const menuToggle = document.getElementById("mobile-menu-toggle");
   const mobileOverlay = document.getElementById("mobile-overlay");
   const mobileLinks = gsap.utils.toArray(".mobile-nav-link");
   const mobileFooter = document.querySelector(".mobile-nav-footer");
-  const logoImg = document.getElementById("nav-logo-img");
 
   const LOGO_EVENT = "vl-logo-complete";
   const userAgent = navigator.userAgent || "";
@@ -178,60 +175,78 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
     "(prefers-reduced-motion: reduce)",
   ).matches;
 
-  // ─── INITIAL DESKTOP NAV REVEAL ───
+  if (!prefersReduced) {
+    gsap.set(header, { opacity: 0 });
+    gsap.set(brand, { opacity: 0 });
+    if (menuToggle) gsap.set(menuToggle, { opacity: 0 });
+
+    if (!mobileDevice) {
+      gsap.set(leftItems, { opacity: 0, x: 40 });
+      gsap.set(rightItems, { opacity: 0, x: -40 });
+    }
+  }
+
   function startNavAnimation() {
     const tl = gsap.timeline({
-      delay: mobileDevice ? 0.3 : 0.85,
-      defaults: { ease: "power2.out" },
+      delay: mobileDevice ? 0.5 : 0.4,
+      defaults: { ease: "power3.out" },
     });
-    tl.to(header, { opacity: 1, y: 0, duration: 0.45 })
-      .to(brand, { opacity: 1, duration: 0.4 }, "-=0.25");
+
+    tl.to(header, { opacity: 1, y: 0, duration: 0.5 });
+
+    tl.to(brand, { opacity: 1, duration: 0.01 }, "<");
 
     if (!mobileDevice) {
       tl.to(
         leftItems,
-        { opacity: 1, x: 0, duration: 0.4, stagger: 0.05 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.45,
+          stagger: 0.06,
+        },
         "-=0.2",
       ).to(
         rightItems,
         {
           opacity: 1,
           x: 0,
-          duration: 0.4,
-          stagger: { each: 0.05, from: "end" },
+          duration: 0.45,
+          stagger: { each: 0.06, from: "start" },
         },
         "<",
       );
     }
+
+    if (menuToggle) {
+      tl.to(
+        menuToggle,
+        { opacity: 1, duration: 0.3 },
+        mobileDevice ? "-=0.1" : "-=0.3",
+      );
+    }
+
+    tl.to(logoImg, { opacity: 1, duration: 0.3, ease: "power1.in" });
   }
 
   if (!prefersReduced) {
-    gsap.set(header, { opacity: 0, y: -24 });
-    if (brand) gsap.set(brand, { opacity: 0 });
-    
-    if (!mobileDevice) {
-      gsap.set(leftItems, { opacity: 0, x: -22 });
-      gsap.set(rightItems, { opacity: 0, x: 22 });
-    }
-
     if (window.__vlLogoDone === true) {
       startNavAnimation();
     } else {
       window.addEventListener(
         LOGO_EVENT,
         () => {
-          if (window.__vlLogoDone === true) startNavAnimation();
+          startNavAnimation();
         },
         { once: true },
       );
 
       setTimeout(() => {
         if (window.__vlLogoDone !== true) startNavAnimation();
-      }, 2200);
+      }, 2800);
     }
   }
 
-  // ─── MOBILE MENU LOGIC ───
   let isMenuOpen = false;
   let menuAnimation;
 
@@ -239,10 +254,7 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
     gsap.set(mobileOverlay, { yPercent: -100 });
 
     menuAnimation = gsap
-      .timeline({
-        paused: true,
-        defaults: { ease: "power2.inOut" },
-      })
+      .timeline({ paused: true, defaults: { ease: "power2.inOut" } })
       .to(mobileOverlay, { yPercent: 0, pointerEvents: "auto", duration: 0.45 })
       .to(
         mobileLinks,
@@ -257,22 +269,16 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
       if (isMenuOpen) {
         menuToggle.classList.add("is-open");
         if (window.__lenis) window.__lenis.stop();
-
-        // Force header white so hamburger button stays visible on dark overlays
         header.classList.add("bg-white");
         header.classList.remove("bg-transparent");
-
         menuAnimation.timeScale(1).play();
       } else {
         menuToggle.classList.remove("is-open");
         if (window.__lenis) window.__lenis.start();
-
-        // Restore dynamic background logic
         if (window.scrollY < 50) {
           header.classList.remove("bg-white");
           header.classList.add("bg-transparent");
         }
-
         menuAnimation.timeScale(1.5).reverse();
       }
     });
@@ -284,19 +290,16 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
     });
   }
 
-  // ─── BULLETPROOF GSAP SCROLL LOGIC ───
   let isNavHidden = false;
 
   ScrollTrigger.create({
     start: "top top",
     end: "max",
     onUpdate: (self) => {
-      // Abort all scroll logic if the mobile menu is open
       if (isMenuOpen) return;
 
       const currentY = window.scrollY;
 
-      // 1. Dynamic Background Color
       if (currentY > 50) {
         header.classList.add("bg-white");
         header.classList.remove("bg-transparent");
@@ -305,17 +308,13 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
         header.classList.add("bg-transparent");
       }
 
-      // 2. Data-Hide-Nav Overlap Check (Hides nav entirely on dark sections)
       let forceHide = false;
       document.querySelectorAll("[data-hide-nav]").forEach((section) => {
         const rect = section.getBoundingClientRect();
-        // If the section is touching the header
-        if (rect.top <= header.offsetHeight && rect.bottom > 0) {
+        if (rect.top <= header.offsetHeight && rect.bottom > 0)
           forceHide = true;
-        }
       });
 
-      // 3. Flawless Visibility State Machine
       if (forceHide) {
         if (!isNavHidden) {
           gsap.to(header, {
@@ -327,9 +326,7 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
           isNavHidden = true;
         }
       } else {
-        // self.direction: 1 is scrolling down, -1 is scrolling up
         if (self.direction === 1 && !isNavHidden && currentY > 100) {
-          // Hide on scroll down
           gsap.to(header, {
             yPercent: -100,
             duration: 1,
@@ -338,7 +335,6 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
           });
           isNavHidden = true;
         } else if (self.direction === -1 && isNavHidden) {
-          // Show on scroll up
           gsap.to(header, {
             yPercent: 0,
             duration: 1,

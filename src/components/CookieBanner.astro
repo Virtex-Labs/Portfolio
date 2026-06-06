@@ -1,17 +1,24 @@
 ---
+
 ---
+
 <div
   id="cookie-banner"
   class="fixed bottom-0 left-0 w-full z-[999] pointer-events-none translate-y-full will-change-transform"
   aria-live="polite"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8">
-    <div class="pointer-events-auto flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-[#050508]/95 backdrop-blur-md border border-white/10 p-6 shadow-2xl">
+    <div
+      class="pointer-events-auto flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-[#050508]/95 backdrop-blur-md border border-white/10 p-6 shadow-2xl"
+    >
       <div class="flex-1">
-        <h3 class="text-white font-semibold text-lg tracking-wide mb-1">Your Privacy</h3>
+        <h3 class="text-white font-semibold text-lg tracking-wide mb-1">
+          Your Privacy
+        </h3>
         <p class="text-zinc-400 text-sm leading-relaxed max-w-3xl">
-          We use cookies to remember your preferences and analyze site traffic to give you the best possible experience. 
-          By continuing, you agree to our use of cookies.
+          We use cookies to remember your preferences and analyze site traffic
+          to give you the best possible experience. By continuing, you agree to
+          our use of cookies.
         </p>
       </div>
       <div class="flex items-center gap-3 w-full sm:w-auto mt-2 sm:mt-0">
@@ -42,18 +49,16 @@
 
     if (!banner || !acceptBtn || !declineBtn) return;
 
-    // Check if user already gave consent
     const consent = localStorage.getItem("vl-cookie-consent");
-    
+
     if (!consent) {
-      // Delay showing the banner slightly for better UX so it doesn't interrupt initial page load animations
       setTimeout(() => {
         gsap.to(banner, {
           y: 0,
           duration: 0.8,
           ease: "power3.out",
         });
-      }, 2500); 
+      }, 2500);
     }
 
     const hideBanner = (choice: "accepted" | "declined") => {
@@ -64,7 +69,7 @@
         ease: "power3.in",
         onComplete: () => {
           banner.style.display = "none";
-        }
+        },
       });
     };
 
@@ -72,10 +77,8 @@
     declineBtn.addEventListener("click", () => hideBanner("declined"));
   }
 
-  // Handle Astro page transitions
   document.addEventListener("astro:page-load", initCookieBanner);
 
-  // Initial load
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initCookieBanner);
   } else {

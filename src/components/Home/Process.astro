@@ -29,7 +29,8 @@ const { steps, introLines } = site.process;
     <div
       class="absolute inset-0"
       style="background: radial-gradient(ellipse at center, transparent 30%, rgba(5,5,8,0.9) 100%);"
-    ></div>
+    >
+    </div>
   </div>
 
   <div
@@ -76,7 +77,8 @@ const { steps, introLines } = site.process;
       <div
         id="desktop-path-fill"
         class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#e22472] via-[#9f3794] to-[#7e4199] origin-top scale-y-0 z-10"
-      ></div>
+      >
+      </div>
     </div>
 
     {
@@ -120,7 +122,8 @@ const { steps, introLines } = site.process;
       <div
         id="mobile-path-fill"
         class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#e22472] via-[#9f3794] to-[#7e4199] origin-top scale-y-0 z-10"
-      ></div>
+      >
+      </div>
     </div>
 
     {
@@ -157,7 +160,8 @@ const { steps, introLines } = site.process;
   >
     <div
       class="absolute top-0 left-0 w-full h-[35vh] bg-gradient-to-b from-[#050508] via-[#050508]/60 to-transparent z-40 pointer-events-none"
-    ></div>
+    >
+    </div>
 
     <Image
       id="px-mountain"
@@ -193,7 +197,6 @@ const { steps, introLines } = site.process;
     display: inline-block;
     white-space: nowrap;
   }
-  /* Desktop Active States */
   .desktop-process-node.is-active {
     background: #fff;
     border-color: #fff;
@@ -213,7 +216,6 @@ const { steps, introLines } = site.process;
     color: #e22472;
   }
 
-  /* Mobile Active States */
   .mobile-process-node.is-active {
     background: #fff;
     border-color: #fff;
@@ -250,9 +252,6 @@ const { steps, introLines } = site.process;
     if (!section || !introStage) return;
 
     ctx = gsap.context(() => {
-      // ==============================================
-      // 🌐 SHARED ANIMATIONS (Backgrounds & Intro)
-      // ==============================================
       const introTextEl = document.getElementById("intro-text");
 
       if (introTextEl) {
@@ -260,17 +259,14 @@ const { steps, introLines } = site.process;
 
         introTextEl.innerHTML = text
           .split(" ")
-          .map(
-            (word) =>
-              `<span class="word opacity-0">${word}</span>`
-          )
+          .map((word) => `<span class="word opacity-0">${word}</span>`)
           .join(" ");
 
         gsap.set(".word", {
           opacity: 0,
         });
       }
-      
+
       if (mainBg) {
         gsap.to(mainBg, {
           yPercent: 12,
@@ -330,11 +326,7 @@ const { steps, introLines } = site.process;
           ease: "power2.inOut",
         });
 
-      // ==============================================
-      // 💻 DESKTOP TIMELINE (1024px+)
-      // ==============================================
       mm.add("(min-width: 1024px)", () => {
-        // Desktop Parallax End Panel
         const endPanel = document.getElementById("process-end-panel");
         if (endPanel) {
           const parallaxTl = gsap.timeline({
@@ -356,7 +348,11 @@ const { steps, introLines } = site.process;
               0,
             );
           if (pxV)
-            parallaxTl.to(pxV, { yPercent: -5, ease: "none", force3D: true }, 0);
+            parallaxTl.to(
+              pxV,
+              { yPercent: -5, ease: "none", force3D: true },
+              0,
+            );
           if (pxMan)
             parallaxTl.to(
               pxMan,
@@ -441,19 +437,25 @@ const { steps, introLines } = site.process;
         });
       });
 
-      // ==============================================
-      // 📱 MOBILE TIMELINE (Under 1024px)
-      // ==============================================
       mm.add("(max-width: 1023px)", () => {
         const track = document.getElementById("mobile-process-track");
         const pathFill = document.getElementById("mobile-path-fill");
         const steps = gsap.utils.toArray<HTMLElement>(".mobile-process-step");
 
         if (track && pathFill) {
-          gsap.fromTo(pathFill, { scaleY: 0 }, {
-            scaleY: 1,
-            scrollTrigger: { trigger: track, start: "top center", end: "bottom center", scrub: true }
-          });
+          gsap.fromTo(
+            pathFill,
+            { scaleY: 0 },
+            {
+              scaleY: 1,
+              scrollTrigger: {
+                trigger: track,
+                start: "top center",
+                end: "bottom center",
+                scrub: true,
+              },
+            },
+          );
         }
 
         steps.forEach((step) => {
@@ -463,14 +465,30 @@ const { steps, introLines } = site.process;
           ScrollTrigger.create({
             trigger: step,
             start: "top center+=15%",
-            onEnter: () => { node?.classList.add("is-active"); step.classList.add("is-active"); },
-            onLeaveBack: () => { node?.classList.remove("is-active"); step.classList.remove("is-active"); }
+            onEnter: () => {
+              node?.classList.add("is-active");
+              step.classList.add("is-active");
+            },
+            onLeaveBack: () => {
+              node?.classList.remove("is-active");
+              step.classList.remove("is-active");
+            },
           });
 
-          gsap.fromTo(content, { x: 30, opacity: 0 }, {
-            x: 0, opacity: 1, duration: 0.7,
-            scrollTrigger: { trigger: step, start: "top 75%", toggleActions: "play none none reverse" }
-          });
+          gsap.fromTo(
+            content,
+            { x: 30, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.7,
+              scrollTrigger: {
+                trigger: step,
+                start: "top 75%",
+                toggleActions: "play none none reverse",
+              },
+            },
+          );
         });
       });
     }, section);

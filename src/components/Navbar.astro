@@ -181,33 +181,38 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
   // ─── INITIAL DESKTOP NAV REVEAL ───
   function startNavAnimation() {
     const tl = gsap.timeline({
-      delay: mobileDevice ? 0.9 : 0.85,
-      defaults: { ease: "power3.out" },
+      delay: mobileDevice ? 0.3 : 0.85,
+      defaults: { ease: "power2.out" },
     });
-    tl.to(header, { opacity: 1, y: 0, duration: 0.55 })
-      .to(brand, { opacity: 1, duration: 0.4 }, "-=0.25")
-      .to(
+    tl.to(header, { opacity: 1, y: 0, duration: 0.45 })
+      .to(brand, { opacity: 1, duration: 0.4 }, "-=0.25");
+
+    if (!mobileDevice) {
+      tl.to(
         leftItems,
-        { opacity: 1, x: 0, duration: 0.5, stagger: 0.08 },
-        "-=0.3",
-      )
-      .to(
+        { opacity: 1, x: 0, duration: 0.4, stagger: 0.05 },
+        "-=0.2",
+      ).to(
         rightItems,
         {
           opacity: 1,
           x: 0,
-          duration: 0.5,
-          stagger: { each: 0.08, from: "end" },
+          duration: 0.4,
+          stagger: { each: 0.05, from: "end" },
         },
         "<",
       );
+    }
   }
 
   if (!prefersReduced) {
     gsap.set(header, { opacity: 0, y: -24 });
-    gsap.set(leftItems, { opacity: 0, x: -22 });
-    gsap.set(rightItems, { opacity: 0, x: 22 });
     if (brand) gsap.set(brand, { opacity: 0 });
+    
+    if (!mobileDevice) {
+      gsap.set(leftItems, { opacity: 0, x: -22 });
+      gsap.set(rightItems, { opacity: 0, x: 22 });
+    }
 
     if (window.__vlLogoDone === true) {
       startNavAnimation();
@@ -236,15 +241,15 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
     menuAnimation = gsap
       .timeline({
         paused: true,
-        defaults: { ease: "power4.inOut" },
+        defaults: { ease: "power2.inOut" },
       })
-      .to(mobileOverlay, { yPercent: 0, pointerEvents: "auto", duration: 0.6 })
+      .to(mobileOverlay, { yPercent: 0, pointerEvents: "auto", duration: 0.45 })
       .to(
         mobileLinks,
-        { y: 0, duration: 0.6, stagger: 0.06, ease: "power4.out" },
-        "-=0.3",
+        { y: 0, duration: 0.4, stagger: 0.04, ease: "power2.out" },
+        "-=0.2",
       )
-      .to(mobileFooter, { opacity: 1, duration: 0.4 }, "-=0.3");
+      .to(mobileFooter, { opacity: 1, duration: 0.3 }, "-=0.2");
 
     menuToggle.addEventListener("click", () => {
       isMenuOpen = !isMenuOpen;

@@ -1,5 +1,7 @@
 ---
 import { site } from "../../data/site";
+import { Image } from "astro:assets";
+import collage1 from "../../assets/images/collage_1.webp";
 const { reasons, blurLines, mobileHeroText } = site.whyUs;
 ---
 
@@ -14,11 +16,14 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
       id="wu-image-wrapper"
       class="relative h-full w-0 shrink-0 overflow-hidden z-0"
     >
-      <img
+      <Image
         id="wu-image"
-        src="/images/collage_1.webp"
-        alt="Why choose Virtex"
+        src={collage1}
+        alt="A visual collage representing Virtex Labs' high-performance web development and creative design expertise"
         class="h-full w-full object-cover origin-center"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
       />
       <div id="wu-overlay" class="absolute inset-0 bg-black/70 opacity-0 z-10">
       </div>
@@ -88,10 +93,13 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
         id="mobile-hero-media"
         class="absolute inset-0 z-0 origin-top will-change-transform"
       >
-        <img
-          src="/images/collage_1.webp"
-          alt="Why choose Virtex"
+        <Image
+          src={collage1}
+          alt="A visual collage representing Virtex Labs' high-performance web development and creative design expertise"
           class="h-full w-full object-cover object-center"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />
         <div class="absolute inset-0 bg-black/65"></div>
         <div

@@ -19,18 +19,58 @@ const {
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content="web development, agency, creative studio, full-stack, design, Virtex Labs" />
+    <meta name="author" content="Virtex Labs" />
     <link rel="canonical" href={canonical} />
+
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.svg" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Virtex Labs" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <meta name="theme-color" content="#050508" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Virtex Labs",
+      "url": canonical,
+      "logo": new URL("/wordmark.svg", canonical).toString(),
+      "description": description,
+      "sameAs": [
+        "https://twitter.com/virtexlabs",
+        "https://linkedin.com/company/virtexlabs",
+      ]
+    })} />
+
+    <!-- Google Analytics (Uncomment and replace ID when ready) -->
+    <!--
+    <script is:inline>
+      const GA_ID = 'G-XXXXXXXXXX';
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    </script>
+    -->
 
     <slot name="head" />
   </head>

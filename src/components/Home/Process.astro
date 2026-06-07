@@ -135,16 +135,18 @@ const { steps, introLines } = site.process;
             </span>
           </div>
 
-          <div class="mobile-process-content ml-8 flex flex-col items-start text-left opacity-0 translate-x-8">
-            <div class="mobile-icon-wrap flex items-center justify-center rounded-xl border border-[#e22472]/30 bg-[#e22472]/10 mb-4 w-10 h-10 shadow-[0_0_15px_rgba(226,36,114,0.15)] transition-colors duration-300">
-              <div class="mobile-icon text-[#e22472] w-5 h-5 transition-colors duration-300">
-                <Fragment set:html={step.icon} />
+          <div class="mobile-process-content ml-8 flex flex-col items-start text-left">
+            <div class="mobile-icon-title-wrap w-full opacity-0 translate-x-8">
+              <div class="mobile-icon-wrap flex items-center justify-center rounded-xl border border-[#e22472]/30 bg-[#e22472]/10 mb-4 w-10 h-10 shadow-[0_0_15px_rgba(226,36,114,0.15)] transition-colors duration-300">
+                <div class="mobile-icon text-[#e22472] w-5 h-5 transition-colors duration-300">
+                  <Fragment set:html={step.icon} />
+                </div>
               </div>
+              <h3 class="text-white font-bold tracking-tight text-2xl leading-tight mb-2">
+                {step.title}
+              </h3>
             </div>
-            <h3 class="text-white font-bold tracking-tight text-2xl leading-tight mb-2">
-              {step.title}
-            </h3>
-            <p class="text-white/60 leading-relaxed font-light text-sm">
+            <p class="mobile-desc opacity-0 translate-x-8 text-white/60 leading-relaxed font-light text-sm">
               {step.mobileDescription}
             </p>
           </div>
@@ -367,21 +369,18 @@ const { steps, introLines } = site.process;
 
         if (!track || !pathFill || steps.length === 0) return;
 
-        gsap.fromTo(
-          pathFill,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            ease: "none",
-            force3D: true,
-            scrollTrigger: {
-              trigger: track,
-              start: "top center",
-              end: "bottom center",
-              scrub: true,
-            },
+        let desktopPathProgress = 0;
+        ScrollTrigger.create({
+          trigger: track,
+          start: "top center",
+          end: "bottom center",
+          onUpdate: (self) => {
+            if (self.progress > desktopPathProgress) {
+              desktopPathProgress = self.progress;
+              gsap.set(pathFill, { scaleY: desktopPathProgress, force3D: true });
+            }
           },
-        );
+        });
 
         steps.forEach((step) => {
           const node = step.querySelector(".desktop-process-node");
@@ -430,7 +429,7 @@ const { steps, introLines } = site.process;
               scrollTrigger: {
                 trigger: step,
                 start: "center 65%",
-                toggleActions: "play none none reverse",
+                toggleActions: "play none none none",
               },
             },
           );
@@ -443,19 +442,18 @@ const { steps, introLines } = site.process;
         const steps = gsap.utils.toArray<HTMLElement>(".mobile-process-step");
 
         if (track && pathFill) {
-          gsap.fromTo(
-            pathFill,
-            { scaleY: 0 },
-            {
-              scaleY: 1,
-              scrollTrigger: {
-                trigger: track,
-                start: "top center",
-                end: "bottom center",
-                scrub: true,
-              },
+          let mobilePathProgress = 0;
+          ScrollTrigger.create({
+            trigger: track,
+            start: "top center",
+            end: "bottom center",
+            onUpdate: (self) => {
+              if (self.progress > mobilePathProgress) {
+                mobilePathProgress = self.progress;
+                gsap.set(pathFill, { scaleY: mobilePathProgress, force3D: true });
+              }
             },
-          );
+          });
         }
 
         steps.forEach((step) => {
@@ -475,8 +473,11 @@ const { steps, introLines } = site.process;
             },
           });
 
+          const iconTitle = step.querySelector(".mobile-icon-title-wrap");
+          const desc = step.querySelector(".mobile-desc");
+
           gsap.fromTo(
-            content,
+            iconTitle,
             { x: 30, opacity: 0 },
             {
               x: 0,
@@ -486,6 +487,21 @@ const { steps, introLines } = site.process;
                 trigger: step,
                 start: "top 75%",
                 toggleActions: "play none none reverse",
+              },
+            },
+          );
+
+          gsap.fromTo(
+            desc,
+            { x: 30, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.7,
+              scrollTrigger: {
+                trigger: step,
+                start: "top 75%",
+                toggleActions: "play none none none",
               },
             },
           );

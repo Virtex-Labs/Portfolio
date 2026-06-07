@@ -8,9 +8,9 @@ import collage6 from "../assets/images/collage_6.webp";
 
 export const site = {
   name: "VIRTEX LABS | Premium Digital Design & Web Agency",
-  description: "We architect digital presence. Virtex Labs fuses high-end web design with rigorous engineering to create scalable platforms that drive measurable growth.",
+  description: "We architect digital presence. Virtex Labs fuses high-end web design with rigorous engineering to create scalable platforms that drive measurable growth. Contact us for more details.",
   url: "https://virtexlabs.com/",
-  ogImage: "favicon.svg",
+  ogImage: "/images/mountainV-og.jpg",
   nav_left: [
     { label: "Services", href: "#services" },
     { label: "Portfolio", href: "#work" },

@@ -172,15 +172,19 @@
         },
         "-=0.2",
       )
-      .set(".hero-svg-bg", {
-        opacity: 0.22,
-      })
-      .call(() => {
+      .set(
+        ".hero-svg-bg",
+        {
+          opacity: 0.22,
+        },
+        "-=0.5",
+      )
+      .add(() => {
         const paths = document.querySelectorAll(
           ".hero-svg-path",
         ) as NodeListOf<SVGElement>;
         paths.forEach((el) => (el.style.animationPlayState = "running"));
-      });
+      }, "<");
 
     gsap.to([".hero-headline", "#hero > div:first-child"], {
       y: -120,

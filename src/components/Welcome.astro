@@ -36,7 +36,7 @@
     <text
       id="vl-labs"
       transform="translate(568.3 759.45)"
-      font-family="EurostileExt-Med, 'Eurostile Extd', sans-serif"
+      font-family="EurostileExt-Med, 'Eurostile Extd'"
       font-size="156.33"
       letter-spacing="0.45em"
       fill="black"
@@ -110,6 +110,7 @@
     align-items: center;
     justify-content: center;
     pointer-events: none;
+    background-color: #fcf2f6;
   }
 
   .vl-wordmark {
@@ -138,7 +139,10 @@
   const intro = document.getElementById("vl-intro");
   const svg = document.getElementById("vl-svg");
   const navBrand = document.querySelector(".nav-brand");
+
   const LOGO_EVENT = "vl-logo-complete";
+  const FLY_EVENT = "vl-logo-flying"; // New event for flight synchronization
+
   const prefersReduced = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
@@ -175,28 +179,20 @@
     const tl = gsap.timeline({
       delay: 0.2,
       defaults: { ease: "power3.out" },
-      onComplete: finishLogoIntro,
     });
 
     tl.to("#vl-v", { attr: { opacity: 1 }, scale: 1, duration: 0.62 })
-
       .to(
         "#vl-shimmer-grad",
-        {
-          attr: { x1: 581, x2: 881 },
-          duration: 0.95,
-          ease: "power1.inOut",
-        },
+        { attr: { x1: 581, x2: 881 }, duration: 0.95, ease: "power1.inOut" },
         "-=0.1",
       )
-
       .fromTo(
         "#vl-irtex",
         { attr: { opacity: 0, transform: "translate(64 0)" } },
         { attr: { opacity: 1, transform: "translate(0 0)" }, duration: 0.7 },
         "-=0.42",
       )
-
       .fromTo(
         "#vl-labs",
         { attr: { opacity: 0, transform: "translate(378.3 759.45)" } },
@@ -209,14 +205,17 @@
       .add(() => {
         const svgRect = svg.getBoundingClientRect();
         const brandRect = navBrand?.getBoundingClientRect();
+
         let offsetX = 0;
         let offsetYDivider = 2.5;
         let scaleMult = mobileDevice ? 0.05 : 0.4;
+
         if (window.innerWidth <= 768) {
           offsetX = 0;
           offsetYDivider = 4.5;
           scaleMult = 0.95;
         }
+
         const targetX = brandRect
           ? brandRect.left +
             brandRect.width / 2 -
@@ -237,15 +236,33 @@
             ) * scaleMult
           : 0.18;
 
+        // 1. Tell the Navbar to start bringing in its links NOW
+        window.dispatchEvent(new CustomEvent(FLY_EVENT));
+
+        // 2. Fly the SVG up smoothly
         gsap.to(svg, {
           x: targetX,
           y: targetY,
           scale: targetScale,
-          duration: 0.6,
+          duration: 0.8,
           ease: "power3.inOut",
         });
-      })
-      .to(intro, { opacity: 0, duration: 0.22, delay: 0.72 }, "<");
+
+        // 3. Fade out the flying SVG right as it lands (Seamless handoff)
+        gsap.to(svg, {
+          opacity: 0,
+          duration: 0.2,
+          delay: 0.7,
+        });
+
+        // 4. Fade out the white background block, finalizing the intro
+        gsap.to(intro, {
+          opacity: 0,
+          duration: 0.4,
+          delay: 0.6,
+          onComplete: finishLogoIntro, // Unlocks scrolling
+        });
+      });
   } else {
     finishLogoIntro();
   }

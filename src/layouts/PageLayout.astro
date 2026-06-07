@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { site } from "../data/site";
+import { ClientRouter } from "astro:transitions";
 
 const {
   title = site.name,
@@ -16,6 +17,7 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
 
     <title>{title}</title>
     <meta name="description" content={description} />

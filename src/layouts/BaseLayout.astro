@@ -2,6 +2,7 @@
 import Navbar from "../components/Navbar.astro";
 import LandscapeWarning from "../components/LandscapeWarning.astro";
 import CookieBanner from "../components/CookieBanner.astro";
+import PageTransition from "../providers/PageTransition.astro";
 import PageLayout from "./PageLayout.astro";
 import "../styles/global.css";
 
@@ -28,6 +29,7 @@ const { title, description } = Astro.props;
   <main>
     <slot />
   </main>
+  <PageTransition />
 
   <script>
     import "../scripts/animations.ts";

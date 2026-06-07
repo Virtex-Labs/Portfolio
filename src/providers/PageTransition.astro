@@ -1,0 +1,111 @@
+<div
+  id="page-transition-overlay"
+  transition:persist
+  class="fixed inset-0 z-9999 pointer-events-none flex justify-center items-center"
+>
+  <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <path
+      id="page-transition-path"
+      class="fill-[#8b3faf]"
+      d="M 0 0 V 0 Q 50 0 100 0 V 0 z"></path>
+  </svg>
+</div>
+
+<script>
+  import gsap from "gsap";
+
+  let isInitialLoad = true;
+
+  const pathInStart = "M 0 100 V 100 Q 50 100 100 100 V 100 z";
+  const pathInMid = "M 0 100 V 50 Q 50 0 100 50 V 100 z";
+  const pathInEnd = "M 0 100 V 0 Q 50 0 100 0 V 100 z";
+
+  const pathOutStart = "M 0 0 V 100 Q 50 100 100 100 V 0 z";
+  const pathOutMid = "M 0 0 V 50 Q 50 100 100 50 V 0 z";
+  const pathOutEnd = "M 0 0 V 0 Q 50 0 100 0 V 0 z";
+
+  const playTransitionIn = () => {
+    return new Promise((resolve) => {
+      const path = document.getElementById("page-transition-path");
+      const overlay = document.getElementById("page-transition-overlay");
+
+      gsap.set(overlay, { pointerEvents: "auto" });
+
+      gsap
+        .timeline({ onComplete: resolve })
+        .set(path, { attr: { d: pathInStart } })
+        .to(path, { duration: 0.4, attr: { d: pathInMid }, ease: "power2.in" })
+        .to(path, {
+          duration: 0.4,
+          attr: { d: pathInEnd },
+          ease: "power2.out",
+        });
+    });
+  };
+
+  const playTransitionOut = () => {
+    return new Promise((resolve) => {
+      const path = document.getElementById("page-transition-path");
+      const overlay = document.getElementById("page-transition-overlay");
+
+      gsap
+        .timeline({
+          onComplete: () => {
+            gsap.set(overlay, { pointerEvents: "none" });
+            resolve();
+          },
+        })
+        .set(path, { attr: { d: pathOutStart } })
+        .to(path, { duration: 0.4, attr: { d: pathOutMid }, ease: "power2.in" })
+        .to(path, {
+          duration: 0.4,
+          attr: { d: pathOutEnd },
+          ease: "power2.out",
+        });
+    });
+  };
+
+  document.addEventListener("astro:before-preparation", (ev) => {
+    const originalLoader = ev.loader;
+    ev.loader = async function () {
+      await playTransitionIn();
+      await originalLoader();
+    };
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    if (isInitialLoad) {
+      isInitialLoad = false;
+      return;
+    }
+    playTransitionOut();
+  });
+
+  const initAnchorLinks = () => {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", async (e) => {
+        const targetId = anchor.getAttribute("href");
+        if (targetId === "#") return;
+
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          e.preventDefault();
+
+          await playTransitionIn();
+          const scrollTarget =
+            targetElement.closest(".pin-spacer") || targetElement;
+          if (window.__lenis) {
+            window.__lenis.scrollTo(scrollTarget, { immediate: true });
+          } else {
+            scrollTarget.scrollIntoView({ behavior: "instant" });
+          }
+
+          playTransitionOut();
+        }
+      });
+    });
+  };
+
+  document.addEventListener("astro:page-load", initAnchorLinks);
+</script>

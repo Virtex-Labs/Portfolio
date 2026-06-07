@@ -1,0 +1,397 @@
+---
+import { site } from "../../data/site";
+import { Image } from "astro:assets";
+import collage1 from "../../assets/images/collage_1.webp";
+const { reasons, blurLines, mobileHeroText } = site.whyUs;
+---
+
+<section
+  id="desktop-why-us"
+  aria-label="Why Choose Us Desktop"
+  class="relative h-[800vh] hidden lg:block bg-gradient-to-b from-[#fbe5ee] to-[#fcf2f6]"
+>
+  <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center">
+    <div
+      id="wu-image-wrapper"
+      class="relative h-full w-0 shrink-0 overflow-hidden z-0"
+    >
+      <Image
+        id="wu-image"
+        src={collage1}
+        alt="A visual collage representing Virtex Labs' high-performance web development and creative design expertise"
+        class="h-full w-full object-cover origin-center"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+      <div id="wu-overlay" class="absolute inset-0 bg-black/70 opacity-0 z-10">
+      </div>
+    </div>
+
+    <div class="shrink-0 pl-12 lg:pl-24 z-10">
+      <h2
+        id="wu-title"
+        class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-black whitespace-nowrap"
+      >
+        Why <em class="not-italic text-gradient">Us?</em>
+      </h2>
+    </div>
+
+    <div
+      id="wu-blur-stage"
+      class="absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none opacity-0 overflow-hidden"
+    >
+      <div
+        id="wu-blur-lines"
+        class="relative flex flex-col items-center max-w-5xl mx-auto px-6"
+      >
+        {
+          blurLines.map((line, i) => (
+            <p
+              class="wu-blur-line text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight text-center my-3 opacity-0"
+              data-index={i}
+            >
+              {line}
+            </p>
+          ))
+        }
+      </div>
+    </div>
+
+    <div
+      id="wu-reasons-container"
+      class="absolute left-0 top-0 w-1/2 h-screen z-20 opacity-0 overflow-hidden pointer-events-none"
+    >
+      <div
+        class="desktop-reasons-track w-full flex flex-col pt-[100vh] pb-[50vh]"
+      >
+        {
+          reasons.map(({ title, description }, index) => (
+            <div class="desktop-reason px-12 xl:px-24 mb-[35vh] flex flex-col">
+              <div class="flex items-end gap-6 mb-8 border-b-2 border-black/10 pb-6">
+                <span class="text-4xl lg:text-5xl font-black text-[#e22472] tracking-tighter leading-none mb-1">
+                  0{index + 1}
+                </span>
+                <h3 class="text-4xl lg:text-6xl font-black text-black uppercase tracking-tighter leading-none">
+                  {title}
+                </h3>
+              </div>
+              <p class="text-xl lg:text-2xl text-black/70 font-medium leading-relaxed max-w-lg">
+                {description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="block lg:hidden bg-[#fcf2f6]">
+  <section id="mobile-hero" class="relative overflow-hidden bg-[#fcf2f6]">
+    <div class="shrink-0 sticky top-0 h-screen w-full overflow-hidden">
+      <div
+        id="mobile-hero-media"
+        class="absolute inset-0 z-0 origin-top will-change-transform"
+      >
+        <Image
+          src={collage1}
+          alt="A visual collage representing Virtex Labs' high-performance web development and creative design expertise"
+          class="h-full w-full object-cover object-center"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <div class="absolute inset-0 bg-black/65"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/45 to-black/80"
+        >
+        </div>
+      </div>
+
+      <div
+        id="mobile-hero-content"
+        class="absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center will-change-transform"
+      >
+        <h2
+          id="mobile-hero-title"
+          class="text-6xl font-black uppercase tracking-tighter text-white opacity-0 translate-y-6"
+        >
+          Why <em class="not-italic text-[#e22472]">Us?</em>
+        </h2>
+
+        <p
+          id="mobile-wu-desc"
+          class="mt-8 max-w-sm text-lg font-medium leading-relaxed text-zinc-200 opacity-0 translate-y-6"
+        >
+          {mobileHeroText}
+        </p>
+      </div>
+    </div>
+
+    <div
+      id="mobile-reasons-sheet"
+      class="relative z-30 bg-[#fcf2f6] -mt-[60vh] px-6 pb-24 pt-10"
+    >
+      <div class="flex flex-col gap-12">
+        {
+          reasons.map(({ title, mobileDescription, Icon }, index) => (
+            <div class="mobile-reason-item opacity-0 translate-y-12 flex flex-col gap-4">
+              <div class="flex items-center gap-4">
+                <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-black/5 border border-black/10 shadow-sm">
+                  <Icon size={24} color="#e22472" />
+                </div>
+                <span class="text-3xl font-black text-black/10 tracking-tighter ml-auto">
+                  0{index + 1}
+                </span>
+              </div>
+
+              <h3 class="text-2xl font-bold text-[#120b10] tracking-tight">
+                {title}
+              </h3>
+
+              <p class="text-base text-black/65 leading-relaxed font-light">
+                {mobileDescription}
+              </p>
+
+              {index !== reasons.length - 1 && (
+                <div class="w-full h-px bg-gradient-to-r from-black/10 to-transparent mt-6" />
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  #wu-image-wrapper,
+  #wu-image,
+  #wu-title,
+  .wu-reveal,
+  .desktop-reasons-track,
+  .desktop-reason {
+    will-change: transform, opacity, width;
+    transform: translateZ(0);
+  }
+  .wu-blur-line {
+    will-change: transform, opacity;
+    line-height: 1.3;
+  }
+  #wu-image {
+    filter: grayscale(1);
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let ctx: gsap.Context | undefined;
+
+  function initWhyUs() {
+    ctx?.revert();
+
+    let mm = gsap.matchMedia();
+
+    ctx = gsap.context(() => {
+      mm.add("(min-width: 1024px)", () => {
+        const section = document.getElementById("desktop-why-us");
+        const imageWrapper = document.getElementById("wu-image-wrapper");
+        const image = document.getElementById("wu-image");
+        const overlay = document.getElementById("wu-overlay");
+
+        const title = document.getElementById("wu-title");
+        const titleWrap = document.getElementById("wu-title-wrap") || title;
+
+        const blurStage = document.getElementById("wu-blur-stage");
+        const blurLinesBlock = document.getElementById("wu-blur-lines");
+        const blurLines = gsap.utils.toArray<HTMLElement>(".wu-blur-line");
+        const reasonsContainer = document.getElementById(
+          "wu-reasons-container",
+        );
+        const reasonsTrack = document.querySelector(".desktop-reasons-track");
+
+        if (!section || !reasonsTrack) return;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top 90%",
+            end: "bottom 20%",
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        tl.to(
+          imageWrapper,
+          { width: "100vw", duration: 300, ease: "power1.inOut" },
+          0,
+        )
+          .to(image, { scale: 1.15, duration: 300, ease: "power1.inOut" }, 0)
+          .to(titleWrap, { y: "20vw", duration: 315, ease: "power1.inOut" }, 0)
+          .to(overlay, { opacity: 1, duration: 310 }, 10);
+
+        tl.to(blurStage, { opacity: 1, duration: 30 }, 200);
+
+        const totalLines = blurLines.length;
+        const lineGap = 45;
+        const lineScrollWindow = 60;
+        const lineHold = 15;
+
+        tl.fromTo(
+          blurLinesBlock,
+          { y: "20vh" },
+          {
+            y: "-20vh",
+            duration: totalLines * lineGap + lineScrollWindow * 2,
+            ease: "none",
+          },
+          220,
+        );
+
+        blurLines.forEach((line, i) => {
+          const startReveal = 220 + i * lineGap;
+          tl.fromTo(
+            line,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: lineScrollWindow,
+              ease: "power2.out",
+            },
+            startReveal,
+          );
+          tl.to(
+            line,
+            {
+              opacity: 0,
+              y: -20,
+              duration: lineScrollWindow,
+              ease: "power2.in",
+            },
+            startReveal + lineScrollWindow + lineHold,
+          );
+        });
+
+        const blurEnd =
+          220 + totalLines * lineGap + lineScrollWindow * 2 + lineHold;
+        tl.to(blurStage, { opacity: 0, duration: 30 }, blurEnd - 20);
+
+        const splitStart = blurEnd + 20;
+
+        tl.to(
+          imageWrapper,
+          { width: "50vw", x: "50vw", duration: 250, ease: "power3.inOut" },
+          splitStart,
+        );
+        tl.to(image, { scale: 1.05, duration: 250 }, splitStart);
+        tl.to(overlay, { opacity: 0.2, duration: 200 }, splitStart);
+
+        tl.to(
+          titleWrap,
+          { opacity: 0, x: -100, duration: 150, ease: "power2.inOut" },
+          splitStart,
+        );
+
+        tl.to(
+          reasonsContainer,
+          { opacity: 1, duration: 100 },
+          splitStart + 100,
+        );
+
+        const scrollDuration = 800;
+
+        tl.to(
+          reasonsTrack,
+          {
+            y: () => -(reasonsTrack.scrollHeight - window.innerHeight),
+            duration: scrollDuration,
+            ease: "none",
+          },
+          splitStart + 150,
+        );
+
+        const desktopReasons = gsap.utils.toArray(".desktop-reason");
+        const numReasons = desktopReasons.length;
+
+        desktopReasons.forEach((reason: any, i) => {
+          const progress = numReasons > 1 ? i / (numReasons - 1) : 0;
+          const itemStartTime =
+            splitStart + 150 + progress * scrollDuration * 0.75;
+
+          tl.fromTo(
+            reason,
+            { opacity: 0, x: -100 },
+            { opacity: 1, x: 0, duration: 150, ease: "power3.out" },
+            itemStartTime,
+          );
+        });
+      });
+
+      mm.add("(max-width: 1023px)", () => {
+        const hero = document.getElementById("mobile-hero");
+        const heroContent = document.getElementById("mobile-hero-content");
+        const title = document.getElementById("mobile-hero-title");
+        const media = document.getElementById("mobile-hero-media");
+        const sheet = document.getElementById("mobile-reasons-sheet");
+        const items = gsap.utils.toArray<HTMLElement>(".mobile-reason-item");
+
+        if (!hero || !heroContent || !title || !media || !sheet) return;
+
+        gsap.set(title, { opacity: 0, y: 24 });
+        gsap.set(sheet, { yPercent: 100 });
+        gsap.set(items, { opacity: 0, x: -50 });
+        ScrollTrigger.create({
+          trigger: hero,
+          start: "top 50%",
+          onEnter: () => {
+            gsap.to(title, { opacity: 1, y: 0, duration: 0.8 });
+          }
+        });
+        const shrinkTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: hero,
+            start: "top top",
+            end: "+=150%",
+            scrub: 1,
+            pin: true,
+          },
+        });
+
+        shrinkTl
+          .to(media, { height: "40vh", ease: "power2.inOut", duration: 1 }, 0)
+          .to(heroContent, { y: "-20vh", ease: "power2.inOut", duration: 1 }, 0)
+          .to(sheet, { yPercent: 0, ease: "power2.inOut", duration: 1 }, 0);
+
+        items.forEach((item) => {
+          gsap.to(item, {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          });
+        });
+      });
+    });
+  }
+
+  document.addEventListener("astro:after-swap", () => ctx?.revert());
+  document.addEventListener("astro:page-load", initWhyUs);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initWhyUs);
+  } else {
+    initWhyUs();
+  }
+</script>

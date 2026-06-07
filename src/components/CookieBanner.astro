@@ -1,0 +1,87 @@
+---
+
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 w-full z-[999] pointer-events-none translate-y-full will-change-transform"
+  aria-live="polite"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8">
+    <div
+      class="pointer-events-auto flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-[#050508]/95 backdrop-blur-md border border-white/10 p-6 shadow-2xl"
+    >
+      <div class="flex-1">
+        <h3 class="text-white font-semibold text-lg tracking-wide mb-1">
+          Cookies
+        </h3>
+        <p class="text-zinc-400 text-sm leading-relaxed max-w-3xl">
+          We use cookies to remember your preferences and analyze site traffic
+          to give you the best possible experience. By continuing, you agree to
+          our use of cookies.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 w-full sm:w-auto mt-2 sm:mt-0">
+        <button
+          id="cookie-decline"
+          class="flex-1 sm:flex-none px-6 py-2.5 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors whitespace-nowrap cursor-pointer"
+        >
+          Decline
+        </button>
+        <button
+          id="cookie-accept"
+          class="flex-1 sm:flex-none px-6 py-2.5 rounded-full bg-gradient-to-r from-[#e22472] to-[#9f3794] text-white text-sm font-medium hover:shadow-[0_0_15px_rgba(226,36,114,0.4)] transition-shadow whitespace-nowrap cursor-pointer"
+        >
+          Accept All
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import gsap from "gsap";
+
+  function initCookieBanner() {
+    const banner = document.getElementById("cookie-banner");
+    const acceptBtn = document.getElementById("cookie-accept");
+    const declineBtn = document.getElementById("cookie-decline");
+
+    if (!banner || !acceptBtn || !declineBtn) return;
+
+    const consent = localStorage.getItem("vl-cookie-consent");
+
+    if (!consent) {
+      setTimeout(() => {
+        gsap.to(banner, {
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        });
+      }, 2500);
+    }
+
+    const hideBanner = (choice: "accepted" | "declined") => {
+      localStorage.setItem("vl-cookie-consent", choice);
+      gsap.to(banner, {
+        y: "120%",
+        duration: 0.5,
+        ease: "power3.in",
+        onComplete: () => {
+          banner.style.display = "none";
+        },
+      });
+    };
+
+    acceptBtn.addEventListener("click", () => hideBanner("accepted"));
+    declineBtn.addEventListener("click", () => hideBanner("declined"));
+  }
+
+  document.addEventListener("astro:page-load", initCookieBanner);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCookieBanner);
+  } else {
+    initCookieBanner();
+  }
+</script>

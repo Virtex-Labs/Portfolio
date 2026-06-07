@@ -1,14 +1,16 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
-import react from '@astrojs/react';
 
+import tailwindcss from '@tailwindcss/vite';
+
+import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
+
+// https://astro.build/config
 export default defineConfig({
-  site: 'https://www.virtexlabs.com',
   vite: {
-    resolve: {
-      tsconfigPaths: true,
-    },
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss()]
   },
-  integrations: [react()],
+  site: "https://virtexlabs.com",
+  integrations: [react(), sitemap()]
 });

@@ -1,0 +1,86 @@
+---
+import "../styles/global.css";
+import { site } from "../data/site";
+
+const {
+  title = site.name,
+  description = site.description,
+  canonical = site.url,
+  ogImage = site.ogImage,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="web, mobile app, ui ux, digital, software, webdesign, development, agency, startup, creative studio, full-stack, design, Virtex Labs, Vertex Labs"
+    />
+    <meta name="author" content="Virtex Labs" />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, canonical).toString()} />
+    <meta property="og:site_name" content="Virtex Labs" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, canonical).toString()} />
+
+    <meta name="theme-color" content="#050508" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Virtex Labs",
+        url: canonical,
+        logo: new URL("/wordmark.svg", canonical).toString(),
+        description: description,
+        sameAs: [
+          "https://twitter.com/virtexlabs",
+          "https://linkedin.com/company/virtexlabs",
+        ],
+      })}
+    />
+
+    <!-- Google Analytics (Uncomment and replace ID when ready) -->
+    <!--
+    <script is:inline>
+      const GA_ID = 'G-XXXXXXXXXX';
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    </script>
+    -->
+
+    <slot name="head" />
+  </head>
+  <body class="text-zinc-900 overflow-x-hidden">
+    <slot />
+  </body>
+</html>

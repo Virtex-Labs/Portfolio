@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.virtexlabs.com/sitemap.xml
+Sitemap: https://virtexlabs.com/sitemap-index.xml

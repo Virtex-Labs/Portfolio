@@ -1,0 +1,84 @@
+<div
+  id="landscape-warning"
+  class="landscape-block fixed inset-0 bg-[#050508] flex-col items-center justify-center text-center px-8"
+  style="z-index: 99999;"
+>
+  <div class="mb-10 text-[#e22472] flex items-center justify-center relative">
+    <div class="rotate-phone">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="64"
+        height="64"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+        <path d="M12 18h.01"></path>
+      </svg>
+    </div>
+    <div class="absolute mt-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="80"
+        height="80"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="rgba(255,255,255,0.15)"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12A9 9 0 1 1 12 3v0"></path>
+        <path d="M17 3h4v4"></path>
+      </svg>
+    </div>
+  </div>
+
+  <h2
+    class="text-3xl sm:text-4xl font-black text-white uppercase tracking-tighter mb-4"
+  >
+    Rotate your <br /> device
+  </h2>
+
+  <p
+    class="text-white/60 text-sm sm:text-base font-medium tracking-wide max-w-70 mx-auto leading-relaxed"
+  >
+    This experience is heavily optimized for portrait mode. Please turn your
+    device for the best view.
+  </p>
+</div>
+
+<style>
+  .landscape-block {
+    display: none !important;
+  }
+
+  @media screen and (orientation: landscape) and (max-height: 600px) and (pointer: coarse) {
+    .landscape-block {
+      display: flex !important;
+    }
+  }
+
+  .rotate-phone {
+    animation: rotatePhone 2.5s ease-in-out infinite;
+    transform-origin: center center;
+  }
+
+  @keyframes rotatePhone {
+    0%,
+    15% {
+      transform: rotate(-90deg);
+    }
+    45%,
+    70% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-90deg);
+    }
+  }
+</style>

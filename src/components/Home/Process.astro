@@ -1,0 +1,519 @@
+---
+import { site } from "../../data/site";
+import { Image } from "astro:assets";
+import galaxyBg from "../../assets/images/galaxy.png";
+import mountainImg from "../../assets/images/mountain.png";
+import vImg from "../../assets/images/V.svg";
+import mountainManImg from "../../assets/images/mountain_man.png";
+const { steps, introLines } = site.process;
+---
+
+<section
+  id="process-section"
+  aria-label="Our Process"
+  class="relative overflow-hidden bg-[#050508] text-white"
+>
+  <div
+    class="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+    style="-webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);"
+  >
+    <Image
+      src={galaxyBg}
+      alt="Deep space galaxy background visualizing the infinite possibilities of web development"
+      aria-hidden="true"
+      decoding="async"
+      loading="eager"
+      id="process-galaxy-bg"
+      class="absolute w-full h-[120%] -top-[10%] object-cover object-center opacity-30"
+    />
+    <div
+      class="absolute inset-0"
+      style="background: radial-gradient(ellipse at center, transparent 30%, rgba(5,5,8,0.9) 100%);"
+    >
+    </div>
+  </div>
+
+  <div
+    id="intro-stage"
+    class="relative z-20 h-screen w-full flex flex-col items-center justify-center overflow-hidden"
+  >
+    <div
+      id="process-title-wrap"
+      class="absolute inset-0 flex flex-col items-center justify-center"
+    >
+      <h2
+        class="font-black leading-[1.05] tracking-tight text-center text-4xl md:text-6xl lg:text-7xl"
+      >
+        A clear process.<br />
+        <em
+          class="not-italic text-transparent bg-clip-text bg-gradient-to-r from-[#e22472] via-[#9f3794] to-[#7e4199]"
+        >
+          Outstanding <br /> results.
+        </em>
+      </h2>
+    </div>
+
+    <div
+      id="process-paragraph-wrap"
+      class="absolute inset-0 flex flex-col items-center justify-center px-6 opacity-0"
+    >
+      <p
+        id="intro-text"
+        class="text-center font-medium leading-relaxed tracking-wide text-xl md:text-3xl lg:text-4xl max-w-4xl text-white"
+      >
+        {introLines.join(" ")}
+      </p>
+    </div>
+  </div>
+
+  <div
+    id="desktop-scroll-stage"
+    class="relative z-10 w-full max-w-7xl mx-auto -mt-[30vh] hidden lg:block"
+  >
+    <div
+      id="desktop-process-track"
+      class="absolute left-1/2 -translate-x-1/2 top-[30vh] bottom-[30vh] w-[2px] bg-white/10 z-0"
+    >
+      <div
+        id="desktop-path-fill"
+        class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#e22472] via-[#9f3794] to-[#7e4199] origin-top scale-y-0 z-10"
+      >
+      </div>
+    </div>
+
+    {
+      steps.map((step) => (
+        <div class="desktop-process-step relative w-full z-10 h-[60vh] flex items-center justify-center">
+          <div class="process-left absolute right-1/2 w-1/2 pr-24 flex flex-col items-end text-right opacity-0">
+            <div class="desktop-icon-wrap flex items-center justify-center rounded-full border border-[#e22472]/30 bg-[#e22472]/10 mb-4 w-16 h-16 shadow-[0_0_20px_rgba(226,36,114,0.15)] transition-colors duration-300">
+              <div class="desktop-icon text-white/50 w-7 h-7 transition-colors duration-300">
+                <Fragment set:html={step.icon} />
+              </div>
+            </div>
+            <h3 class="text-white font-bold tracking-tight text-4xl leading-tight">
+              {step.title}
+            </h3>
+          </div>
+
+          <div class="desktop-process-node relative w-14 h-14 rounded-full border-2 border-white/20 bg-[#050508] flex items-center justify-center z-20 transition-all duration-500 ease-out">
+            <span class="desktop-process-num font-black text-white/40 text-sm tracking-widest transition-colors duration-300">
+              {step.number}
+            </span>
+          </div>
+
+          <div class="process-right absolute left-1/2 w-1/2 pl-24 flex flex-col items-start text-left opacity-0">
+            <p class="text-white/60 leading-relaxed font-light text-xl max-w-sm">
+              {step.description}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div
+    id="mobile-scroll-stage"
+    class="relative z-10 w-full px-6 -mt-[15vh] block lg:hidden pb-[20vh]"
+  >
+    <div
+      id="mobile-process-track"
+      class="absolute left-[47px] top-[5vh] sm:top-[10vh] bottom-[50vh] sm:bottom-[5vh] w-[2px] bg-white/10 z-0"
+    >
+      <div
+        id="mobile-path-fill"
+        class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#e22472] via-[#9f3794] to-[#7e4199] origin-top scale-y-0 z-10"
+      >
+      </div>
+    </div>
+
+    {
+      steps.map((step) => (
+        <div class="mobile-process-step relative w-full z-10 min-h-[25vh] flex items-start mb-16">
+          <div class="mobile-process-node relative shrink-0 w-12 h-12 rounded-full border-2 border-white/20 bg-[#050508] flex items-center justify-center z-20 mt-1 transition-all duration-500 ease-out">
+            <span class="mobile-process-num font-black text-white/40 text-[10px] tracking-widest transition-colors duration-300">
+              {step.number}
+            </span>
+          </div>
+
+          <div class="mobile-process-content ml-8 flex flex-col items-start text-left">
+            <div class="mobile-icon-title-wrap w-full opacity-0 translate-x-8">
+              <div class="mobile-icon-wrap flex items-center justify-center rounded-xl border border-[#e22472]/30 bg-[#e22472]/10 mb-4 w-10 h-10 shadow-[0_0_15px_rgba(226,36,114,0.15)] transition-colors duration-300">
+                <div class="mobile-icon text-[#e22472] w-5 h-5 transition-colors duration-300">
+                  <Fragment set:html={step.icon} />
+                </div>
+              </div>
+              <h3 class="text-white font-bold tracking-tight text-2xl leading-tight mb-2">
+                {step.title}
+              </h3>
+            </div>
+            <p class="mobile-desc opacity-0 translate-x-8 text-white/60 leading-relaxed font-light text-sm">
+              {step.mobileDescription}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div
+    id="process-end-panel"
+    class="relative w-full h-[150vh] lg:h-[200vh] overflow-hidden bg-transparent flex items-end justify-center"
+    style="mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);"
+  >
+    <div
+      class="absolute top-0 left-0 w-full h-[35vh] bg-gradient-to-b from-[#050508] via-[#050508]/60 to-transparent z-40 pointer-events-none"
+    >
+    </div>
+
+    <Image
+      id="px-mountain"
+      src={mountainImg}
+      alt="Majestic mountain peak representing the summit of digital success and high-performance websites"
+      decoding="async"
+      loading="eager"
+      class="absolute sm:bottom-[-1%] w-full h-[120%] object-cover object-bottom z-10"
+    />
+
+    <Image
+      id="px-v"
+      src={vImg}
+      alt="Large glowing letter V representing the Virtex Labs brand logo"
+      decoding="async"
+      loading="eager"
+      class="absolute bottom-[20%] sm:bottom-[-15%] w-full h-[170%] sm:h-[110%] left-5 sm:left-22 object-contain object-bottom z-20 will-change-transform"
+    />
+
+    <Image
+      id="px-man"
+      src={mountainManImg}
+      alt="Silhouette of an explorer standing on a mountain peak, symbolizing visionary leadership in tech"
+      decoding="async"
+      loading="eager"
+      class="absolute sm:bottom-[-30%] sm:bottom-[-20%] lg:bottom-[-25%] w-full h-[120%] object-cover object-bottom z-30"
+    />
+  </div>
+</section>
+
+<style>
+  .word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .desktop-process-node.is-active {
+    background: #fff;
+    border-color: #fff;
+    transform: scale(1.15);
+    box-shadow:
+      0 0 20px 4px rgba(255, 255, 255, 0.6),
+      0 0 50px 15px rgba(226, 36, 114, 0.5);
+  }
+  .desktop-process-node.is-active .desktop-process-num {
+    color: #050508 !important;
+  }
+  .desktop-process-step.is-active .desktop-icon-wrap {
+    border-color: rgba(226, 36, 114, 0.8);
+    background: rgba(226, 36, 114, 0.25);
+  }
+  .desktop-process-step.is-active .desktop-icon {
+    color: #e22472;
+  }
+
+  .mobile-process-node.is-active {
+    background: #fff;
+    border-color: #fff;
+    transform: scale(1.15);
+    box-shadow:
+      0 0 15px 2px rgba(255, 255, 255, 0.6),
+      0 0 30px 10px rgba(226, 36, 114, 0.5);
+  }
+  .mobile-process-node.is-active .mobile-process-num {
+    color: #050508 !important;
+  }
+  .mobile-process-step.is-active .mobile-icon-wrap {
+    border-color: rgba(226, 36, 114, 0.8);
+    background: rgba(226, 36, 114, 0.25);
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let ctx: gsap.Context | undefined;
+
+  function initProcess() {
+    ctx?.revert();
+    let mm = gsap.matchMedia();
+
+    const section = document.getElementById("process-section");
+    const introStage = document.getElementById("intro-stage");
+    const mainBg = document.getElementById("process-galaxy-bg");
+
+    if (!section || !introStage) return;
+
+    ctx = gsap.context(() => {
+      const introTextEl = document.getElementById("intro-text");
+
+      if (introTextEl) {
+        const text = introTextEl.textContent || "";
+
+        introTextEl.innerHTML = text
+          .split(" ")
+          .map((word) => `<span class="word opacity-0">${word}</span>`)
+          .join(" ");
+
+        gsap.set(".word", {
+          opacity: 0,
+        });
+      }
+
+      if (mainBg) {
+        gsap.to(mainBg, {
+          yPercent: 12,
+          ease: "none",
+          force3D: true,
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+
+      const introTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: introStage,
+          start: "top top",
+          end: "+=340%",
+          scrub: 0.8,
+          pin: true,
+        },
+      });
+
+      introTl
+        .to({}, { duration: 1.0 })
+        .to("#process-title-wrap", {
+          opacity: 0,
+          y: -24,
+          duration: 0.9,
+          ease: "power2.out",
+        })
+        .to(
+          "#process-paragraph-wrap",
+          {
+            opacity: 1,
+            duration: 0.35,
+            ease: "none",
+          },
+          "-=0.25",
+        )
+        .to(".word", {
+          opacity: 1,
+          scale: 1,
+          stagger: {
+            each: 0.04,
+            from: "start",
+          },
+          duration: 0.8,
+          ease: "power2.out",
+        })
+        .to({}, { duration: 1.8 })
+        .to("#process-paragraph-wrap", {
+          opacity: 0,
+          y: -28,
+          duration: 0.8,
+          ease: "power2.inOut",
+        });
+
+      mm.add("(min-width: 1024px)", () => {
+        const endPanel = document.getElementById("process-end-panel");
+        if (endPanel) {
+          const parallaxTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: endPanel,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+          const pxMountain = document.getElementById("px-mountain");
+          const pxV = document.getElementById("px-v");
+          const pxMan = document.getElementById("px-man");
+
+          if (pxMountain)
+            parallaxTl.to(
+              pxMountain,
+              { yPercent: 10, ease: "none", force3D: true },
+              0,
+            );
+          if (pxV)
+            parallaxTl.to(
+              pxV,
+              { yPercent: -5, ease: "none", force3D: true },
+              0,
+            );
+          if (pxMan)
+            parallaxTl.to(
+              pxMan,
+              { yPercent: -20, ease: "none", force3D: true },
+              0,
+            );
+        }
+
+        const track = document.getElementById("desktop-process-track");
+        const pathFill = document.getElementById("desktop-path-fill");
+        const steps = gsap.utils.toArray<HTMLElement>(".desktop-process-step");
+
+        if (!track || !pathFill || steps.length === 0) return;
+
+        let desktopPathProgress = 0;
+        ScrollTrigger.create({
+          trigger: track,
+          start: "top center",
+          end: "bottom center",
+          onUpdate: (self) => {
+            if (self.progress > desktopPathProgress) {
+              desktopPathProgress = self.progress;
+              gsap.set(pathFill, { scaleY: desktopPathProgress, force3D: true });
+            }
+          },
+        });
+
+        steps.forEach((step) => {
+          const node = step.querySelector(".desktop-process-node");
+          const left = step.querySelector(".process-left");
+          const right = step.querySelector(".process-right");
+
+          ScrollTrigger.create({
+            trigger: step,
+            start: "center center+=5%",
+            onEnter: () => {
+              node?.classList.add("is-active");
+              step.classList.add("is-active");
+            },
+            onLeaveBack: () => {
+              node?.classList.remove("is-active");
+              step.classList.remove("is-active");
+            },
+          });
+
+          gsap.fromTo(
+            left,
+            { x: 40, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.7,
+              ease: "power3.out",
+              force3D: true,
+              scrollTrigger: {
+                trigger: step,
+                start: "center 65%",
+                toggleActions: "play none none reverse",
+              },
+            },
+          );
+
+          gsap.fromTo(
+            right,
+            { x: -40, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.7,
+              ease: "power3.out",
+              force3D: true,
+              scrollTrigger: {
+                trigger: step,
+                start: "center 65%",
+                toggleActions: "play none none none",
+              },
+            },
+          );
+        });
+      });
+
+      mm.add("(max-width: 1023px)", () => {
+        const track = document.getElementById("mobile-process-track");
+        const pathFill = document.getElementById("mobile-path-fill");
+        const steps = gsap.utils.toArray<HTMLElement>(".mobile-process-step");
+
+        if (track && pathFill) {
+          let mobilePathProgress = 0;
+          ScrollTrigger.create({
+            trigger: track,
+            start: "top center",
+            end: "bottom center",
+            onUpdate: (self) => {
+              if (self.progress > mobilePathProgress) {
+                mobilePathProgress = self.progress;
+                gsap.set(pathFill, { scaleY: mobilePathProgress, force3D: true });
+              }
+            },
+          });
+        }
+
+        steps.forEach((step) => {
+          const node = step.querySelector(".mobile-process-node");
+          const content = step.querySelector(".mobile-process-content");
+
+          ScrollTrigger.create({
+            trigger: step,
+            start: "top center+=15%",
+            onEnter: () => {
+              node?.classList.add("is-active");
+              step.classList.add("is-active");
+            },
+            onLeaveBack: () => {
+              node?.classList.remove("is-active");
+              step.classList.remove("is-active");
+            },
+          });
+
+          const iconTitle = step.querySelector(".mobile-icon-title-wrap");
+          const desc = step.querySelector(".mobile-desc");
+
+          gsap.fromTo(
+            iconTitle,
+            { x: 30, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.7,
+              scrollTrigger: {
+                trigger: step,
+                start: "top 75%",
+                toggleActions: "play none none reverse",
+              },
+            },
+          );
+
+          gsap.fromTo(
+            desc,
+            { x: 30, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.7,
+              scrollTrigger: {
+                trigger: step,
+                start: "top 75%",
+                toggleActions: "play none none none",
+              },
+            },
+          );
+        });
+      });
+    }, section);
+  }
+
+  document.addEventListener("astro:page-load", initProcess);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProcess);
+  } else {
+    initProcess();
+  }
+</script>

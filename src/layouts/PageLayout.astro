@@ -21,7 +21,7 @@ const {
     <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="web development, agency, creative studio, full-stack, design, Virtex Labs"
+      content="web, mobile app, ui ux, digital, software, webdesign, development, agency, startup, creative studio, full-stack, design, Virtex Labs, Vertex Labs"
     />
     <meta name="author" content="Virtex Labs" />
     <link rel="canonical" href={canonical} />
@@ -35,13 +35,13 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={new URL(ogImage, canonical).toString()} />
     <meta property="og:site_name" content="Virtex Labs" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={new URL(ogImage, canonical).toString()} />
 
     <meta name="theme-color" content="#050508" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />

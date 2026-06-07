@@ -352,10 +352,7 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
           start: "top 50%",
           onEnter: () => {
             gsap.to(title, { opacity: 1, y: 0, duration: 0.8 });
-          },
-          onLeaveBack: () => {
-            gsap.to([title], { opacity: 0, y: 24, duration: 0.4 });
-          },
+          }
         });
         const shrinkTl = gsap.timeline({
           scrollTrigger: {
@@ -381,7 +378,7 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
             scrollTrigger: {
               trigger: item,
               start: "top 90%",
-              toggleActions: "play none none reverse",
+              toggleActions: "play none none none",
             },
           });
         });

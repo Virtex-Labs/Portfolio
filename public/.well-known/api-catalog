@@ -1,0 +1,25 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://virtexlabs.com",
+      "service-desc": [
+        {
+          "href": "https://virtexlabs.com/openapi.yaml",
+          "type": "application/vnd.oai.openapi"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://virtexlabs.com/docs/api",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://virtexlabs.com/health",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

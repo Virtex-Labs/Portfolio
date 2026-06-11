@@ -44,16 +44,28 @@
 <script>
   import gsap from "gsap";
 
-  function animateTransitionIn() {
-    return new Promise<void>((resolve) => {
-      const paths = ["#transition-path-1", "#transition-path-2"];
+  function getPathLength(selector) {
+    const path = document.querySelector(selector);
+    return path ? path.getTotalLength() : 0;
+  }
 
-      // Reset play state
-      gsap.set(paths, { strokeDasharray: "100%", strokeDashoffset: "100%" });
+  function animateTransitionIn() {
+    return new Promise((resolve) => {
+      const len1 = getPathLength("#transition-path-1");
+      const len2 = getPathLength("#transition-path-2");
+
+      // Set exact pixel lengths dynamically
+      gsap.set("#transition-path-1", {
+        strokeDasharray: len1,
+        strokeDashoffset: len1,
+      });
+      gsap.set("#transition-path-2", {
+        strokeDasharray: len2,
+        strokeDashoffset: len2,
+      });
 
       const tl = gsap.timeline({ onComplete: resolve });
 
-      // Draw the first path, then the second one overlapping
       tl.to("#transition-path-1", {
         strokeDashoffset: 0,
         duration: 1,
@@ -66,7 +78,7 @@
           ease: "power3.inOut",
         },
         "-=0.6",
-      ); // Start 2nd line a bit earlier
+      );
     });
   }
 

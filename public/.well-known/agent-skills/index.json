@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agentskills.io/schema/v0.2.0/index.json",
+  "skills": [
+    {
+      "name": "portfolio-info",
+      "type": "openapi",
+      "description": "Skill for retrieving public portfolio information and service details.",
+      "url": "https://virtexlabs.com/.well-known/agent-skills/portfolio-info/SKILL.md",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

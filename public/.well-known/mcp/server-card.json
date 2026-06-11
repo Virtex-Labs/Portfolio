@@ -1,0 +1,15 @@
+{
+  "serverInfo": {
+    "name": "virtexlabs-portfolio-mcp",
+    "version": "1.0.0"
+  },
+  "transport": {
+    "type": "sse",
+    "endpoint": "https://virtexlabs.com/mcp/sse"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": true,
+    "prompts": false
+  }
+}

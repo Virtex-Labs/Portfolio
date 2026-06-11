@@ -19,6 +19,23 @@ const { title, description } = Astro.props;
       window.addEventListener("pageshow", () => {
         window.scrollTo(0, 0);
       });
+
+      // WebMCP Support for AI Agents
+      if (typeof navigator !== 'undefined' && 'modelContext' in navigator) {
+        // @ts-ignore
+        navigator.modelContext.provideContext({
+          tools: [
+            {
+              name: "get_portfolio_info",
+              description: "Returns basic information about this portfolio",
+              inputSchema: { type: "object", properties: {} },
+              execute: async () => {
+                return { content: [{ type: "text", text: "This is the portfolio of Virtex Labs." }] };
+              }
+            }
+          ]
+        });
+      }
     </script>
   </Fragment>
 

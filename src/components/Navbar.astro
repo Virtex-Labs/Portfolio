@@ -23,14 +23,14 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
               class="group relative flex h-full items-center px-4 text-lg font-[450] tracking-wide no-underline overflow-hidden"
             >
               <span class="relative block h-[1.3em] overflow-hidden">
-                <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-black">
+                <span class="block transition-transform duration-300 ease-out group-hover:-translate-y-full text-black">
                   {item.label}
                 </span>
-                <span class="absolute top-full left-0 block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
+                <span class="absolute top-full left-0 block transition-transform duration-300 ease-out group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
                   {item.label}
                 </span>
               </span>
-              <span class="absolute top-0 left-0 h-[3px] w-full origin-center scale-x-0 bg-gradient-to-r from-[#9f3794] via-[#e22472] to-[#9f3794] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-x-100" />
+              <span class="absolute top-0 left-0 h-[3px] w-full origin-center scale-x-0 bg-gradient-to-r from-[#9f3794] via-[#e22472] to-[#9f3794] transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </a>
           </li>
         ))
@@ -46,6 +46,8 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
           <img
             src="/wordmark.svg"
             alt={site.name}
+            width="200"
+            height="80"
             class="h-20 lg:h-24 w-auto object-contain transition-transform duration-300 opacity-0"
             id="nav-logo-img"
           />
@@ -65,14 +67,14 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
                 class="group relative flex h-full items-center px-4 text-lg font-[450] tracking-wide no-underline overflow-hidden"
               >
                 <span class="relative block h-[1.3em] overflow-hidden">
-                  <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-black">
+                  <span class="block transition-transform duration-300 ease-out group-hover:-translate-y-full text-black">
                     {item.label}
                   </span>
-                  <span class="absolute top-full left-0 block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
+                  <span class="absolute top-full left-0 block transition-transform duration-300 ease-out group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
                     {item.label}
                   </span>
                 </span>
-                <span class="absolute top-0 left-0 h-[3px] w-full origin-center scale-x-0 bg-gradient-to-r from-[#9f3794] via-[#e22472] to-[#9f3794] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-x-100" />
+                <span class="absolute top-0 left-0 h-[3px] w-full origin-center scale-x-0 bg-gradient-to-r from-[#9f3794] via-[#e22472] to-[#9f3794] transition-transform duration-300 ease-out group-hover:scale-x-100" />
               </a>
             </li>
           ))
@@ -252,7 +254,7 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
     gsap.set(mobileOverlay, { yPercent: -100 });
 
     menuAnimation = gsap
-      .timeline({ paused: true, defaults: { ease: "power2.inOut" } })
+      .timeline({ paused: true, defaults: { ease: "power2.out" } })
       .to(mobileOverlay, { yPercent: 0, pointerEvents: "auto", duration: 0.45 })
       .to(
         mobileLinks,

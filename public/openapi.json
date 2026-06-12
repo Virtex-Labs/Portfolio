@@ -1,0 +1,49 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Virtex Labs API",
+    "version": "1.0.0",
+    "description": "API for Virtex Labs portfolio interactions"
+  },
+  "servers": [
+    {"url": "https://virtexlabs.com"}
+  ],
+  "paths": {
+    "/api/contact": {
+      "post": {
+        "operationId": "sendMessage",
+        "summary": "Send a contact inquiry or message",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Full name of the sender"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Email address for replies"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Message or project blueprint details"
+                  }
+                },
+                "required": ["name", "email", "message"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Message sent successfully"
+          }
+        }
+      }
+    }
+  }
+}

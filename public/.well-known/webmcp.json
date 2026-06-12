@@ -1,0 +1,16 @@
+{
+  "spec": "webmcp/0.1",
+  "tools": [
+    {
+      "name": "send-message",
+      "description": "Send a project inquiry or message to Virtex Labs",
+      "url": "/api/contact",
+      "method": "POST",
+      "parameters": [
+        {"name": "name", "type": "string", "description": "Full name of the sender", "required": true},
+        {"name": "email", "type": "string", "description": "Email address for replies", "required": true},
+        {"name": "message", "type": "string", "description": "Message or project blueprint details", "required": true}
+      ]
+    }
+  ]
+}

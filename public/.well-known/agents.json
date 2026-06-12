@@ -1,0 +1,11 @@
+{
+  "agents": [
+    {
+      "name": "Virtex Labs Inquiry Agent",
+      "description": "Handles project inquiries, messages, and contact forms for Virtex Labs.",
+      "url": "https://virtexlabs.com/api/agent",
+      "protocol": "a2a",
+      "capabilities": ["text"]
+    }
+  ]
+}

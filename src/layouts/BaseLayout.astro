@@ -21,7 +21,7 @@ const { title, description } = Astro.props;
       });
 
       // WebMCP Support for AI Agents
-      if (typeof navigator !== 'undefined' && 'modelContext' in navigator) {
+      if (typeof navigator !== "undefined" && "modelContext" in navigator) {
         // @ts-ignore
         navigator.modelContext.provideContext({
           tools: [
@@ -30,13 +30,63 @@ const { title, description } = Astro.props;
               description: "Returns basic information about this portfolio",
               inputSchema: { type: "object", properties: {} },
               execute: async () => {
-                return { content: [{ type: "text", text: "This is the portfolio of Virtex Labs." }] };
-              }
-            }
-          ]
+                return {
+                  content: [
+                    {
+                      type: "text",
+                      text: "This is the portfolio of Virtex Labs.",
+                    },
+                  ],
+                };
+              },
+            },
+          ],
         });
       }
     </script>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://virtexlabs.com/#organization",
+            name: "Virtex Labs",
+            url: "https://virtexlabs.com",
+            logo: "https://virtexlabs.com/favicon.svg",
+            sameAs: [
+              "https://twitter.com/virtexlabs",
+              "https://linkedin.com/company/virtexlabs",
+              "https://www.instagram.com/virtexlabs",
+            ],
+            contactPoint: {
+              "@type": "ContactPoint",
+              email: "hello@virtexlabs.com",
+              contactType: "customer service",
+            },
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://virtexlabs.com/#website",
+            name: "Virtex Labs",
+            url: "https://virtexlabs.com",
+            publisher: { "@id": "https://virtexlabs.com/#organization" },
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://virtexlabs.com/#webpage",
+            url: "https://virtexlabs.com",
+            name: "Virtex Labs Portfolio",
+            isPartOf: { "@id": "https://virtexlabs.com/#website" },
+            about: { "@id": "https://virtexlabs.com/#organization" },
+            datePublished: "2024-01-01T00:00:00Z",
+            dateModified: new Date().toISOString(),
+            author: { "@id": "https://virtexlabs.com/#organization" },
+          },
+        ],
+      })}
+    />
   </Fragment>
 
   <LandscapeWarning />

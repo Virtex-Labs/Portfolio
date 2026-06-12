@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "virtex-labs": {
+      "url": "https://virtexlabs.com/api/mcp",
+      "name": "Virtex Labs MCP Server",
+      "description": "Provides project inquiry and portfolio information tools"
+    }
+  }
+}

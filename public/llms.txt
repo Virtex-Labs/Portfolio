@@ -1,0 +1,18 @@
+# Virtex Labs
+
+> Virtex Labs crafts fluid code and sharp digital products, specializing in web design, UI/UX architecture, web applications, and mobile apps.
+
+## Digital Presence
+- [Website](https://virtexlabs.com/)
+- [LinkedIn](https://linkedin.com/company/virtex-labs)
+- [Instagram](https://www.instagram.com/virtexlabs)
+- [Twitter / X](https://twitter.com/virtexlabs)
+
+## Pages
+- [Home](https://virtexlabs.com/)
+- [Services & Process](https://virtexlabs.com/#services)
+- [Contact](https://virtexlabs.com/#contact)
+
+## APIs & Endpoints
+- [OpenAPI Specification](https://virtexlabs.com/openapi.json)
+- [WebMCP Manifest](https://virtexlabs.com/.well-known/webmcp.json)

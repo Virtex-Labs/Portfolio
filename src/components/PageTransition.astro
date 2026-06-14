@@ -1,12 +1,7 @@
----
-// PageTransition.astro
----
-
 <div
   id="page-transition"
   class="fixed inset-0 z-[9999] pointer-events-none overflow-hidden flex items-center justify-center"
 >
-  <!-- First SVG Layer -->
   <svg
     id="transition-svg-1"
     class="absolute inset-0 w-full h-full"
@@ -54,7 +49,6 @@
       const len1 = getPathLength("#transition-path-1");
       const len2 = getPathLength("#transition-path-2");
 
-      // Set exact pixel lengths dynamically
       gsap.set("#transition-path-1", {
         strokeDasharray: len1,
         strokeDashoffset: len1,
@@ -100,10 +94,7 @@
     );
   }
 
-  // Hook into Astro's View Transitions API
   document.addEventListener("astro:before-preparation", (event) => {
-    // Cast event to any to bypass TS compilation issues if type is missing,
-    // though Astro provides this in their API.
     const ev = event as any;
     const originalLoader = ev.loader;
     ev.loader = async function () {

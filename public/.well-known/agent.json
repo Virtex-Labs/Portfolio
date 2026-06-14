@@ -1,0 +1,19 @@
+{
+  "name": "Virtex Labs Agent",
+  "description": "AI assistant and routing for Virtex Labs inquiries and project tracking.",
+  "url": "https://virtexlabs.com/api/agent",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "skills": [
+    {
+      "id": "contact-inquiry",
+      "name": "Contact Inquiry",
+      "description": "Process project inquiries and send messages"
+    }
+  ],
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["application/json"]
+}

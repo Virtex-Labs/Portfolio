@@ -1,0 +1,14 @@
+{
+  "name": "Virtex Labs",
+  "description": "Premium digital design and web agency specializing in UI/UX architecture and web applications.",
+  "url": "https://virtexlabs.com",
+  "version": "1.0.0",
+  "capabilities": {
+    "agent-discovery": true,
+    "portfolio-inquiry": true
+  },
+  "supportedInterfaces": [
+    "https://virtexlabs.com/openapi.json",
+    "https://virtexlabs.com/.well-known/webmcp.json"
+  ]
+}

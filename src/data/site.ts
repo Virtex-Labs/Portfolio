@@ -13,7 +13,7 @@ export const site = {
   ogImage: "/images/mountainV-og.jpg",
   nav_left: [
     { label: "Services", href: "#services" },
-    { label: "Portfolio", href: "#work" },
+    { label: "FAQ", href: "#faq" },
   ],
   nav_right: [
     { label: "About", href: "#about" },
@@ -27,7 +27,7 @@ export const site = {
   ],
 
   vision: {
-    phrase1: "We build lean products that feel sharp,",
+    phrase1: "We build lean products that feels sharp,",
     phrase2: "that will give your vision a true meaning."
   },
 
@@ -103,7 +103,7 @@ export const site = {
       {
         title: "Fluid & Responsive",
         description:
-          "We don't just build websites; we engineer digital ecosystems. Every interface is meticulously crafted with pixel-perfect precision, ensuring that whether your users are on a massive desktop monitor or a compact mobile screen, the experience remains flawless, immersive, and uncompromisingly intuitive.",
+          "We don't just build websites, we engineer digital ecosystems. Every interface is meticulously crafted with pixel-perfect precision, ensuring that whether your users are on a massive desktop monitor or a compact mobile screen, the experience remains flawless, immersive, and uncompromisingly intuitive.",
         mobileDescription:
           "Pixel-perfect, fluid interfaces that adapt flawlessly to any screen size.",
         Icon: FiLayout,
@@ -111,7 +111,7 @@ export const site = {
       {
         title: "Uncompromising Performance",
         description:
-          "Speed isn't a luxury; it's the baseline. We build incredibly fast, lean architectures with rigorous SEO optimization and efficient asset delivery. This means drastically reduced bounce rates, maximized user retention, and top-tier search engine visibility that keeps you ahead of the competition.",
+          "Speed isn't a luxury, it's the baseline. We build incredibly fast, lean architectures with rigorous SEO optimization and efficient asset delivery. This means drastically reduced bounce rates, maximized user retention, and top-tier search engine visibility that keeps you ahead of the competition.",
         mobileDescription:
           "Lightning-fast architectures optimized for SEO and maximum user retention.",
         Icon: FiZap,
@@ -209,33 +209,34 @@ export const site = {
   about: {
     headline: "VIRTEX LABS is a one-person studio, a full-stack engineer and CS/AI student based in Sri Lanka.",
     description: "I build modern web products that are fast, clean, and designed to actually work. No bloated teams, no unnecessary overhead, just focused execution and craft.",
-    established: "2024",
+    established: "2026",
     location: "Sri Lanka",
   },
 
-  portfolio: [
-    {
-      title: "Virtex Labs",
-      label: "Personal project",
-      description: "This very website, built with Astro, GSAP ScrollTrigger, and Tailwind CSS. A showcase of motion-driven, performance-first web design.",
-      href: "#",
-    },
-    {
-      title: "SocialPulse AI",
-      label: "Concept build",
-      description: "An AI-powered social media analytics dashboard prototype. Real-time sentiment analysis with a clean, data-dense interface.",
-      href: "#",
-    },
-  ],
+  // portfolio: [
+  //   {
+  //     title: "Virtex Labs",
+  //     label: "Personal project",
+  //     description: "This very website, built with Astro, GSAP ScrollTrigger, and Tailwind CSS. A showcase of motion-driven, performance-first web design.",
+  //     href: "#",
+  //   },
+  //   {
+  //     title: "SocialPulse AI",
+  //     label: "Concept build",
+  //     description: "An AI-powered social media analytics dashboard prototype. Real-time sentiment analysis with a clean, data-dense interface.",
+  //     href: "#",
+  //   },
+  // ],
 
-  stats: [
-    { value: "1+", label: "Years of experience" },
-    { value: "10+", label: "Technologies mastered" },
-    { value: "5+", label: "Projects completed" },
-  ],
+  // stats: [
+  //   { value: "1+", label: "Years of experience" },
+  //   { value: "10+", label: "Technologies mastered" },
+  //   { value: "5+", label: "Projects completed" },
+  // ],
 
   socials: [
-    { label: "GitHub", href: "#", icon: "github" },
-    { label: "LinkedIn", href: "#", icon: "linkedin" },
+    { label: "Instagram", href: "https://www.instagram.com/virtexlabs/" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/virtex-labs/" },
+    { label: "Twitter / X", href: "https://x.com/virtexlabs/" },
   ],
 };

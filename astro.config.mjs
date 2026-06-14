@@ -6,11 +6,14 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
+  site: "https://virtexlabs.com",
+  adapter: cloudflare(),
   vite: {
     plugins: [tailwindcss()]
   },
-  site: "https://virtexlabs.com",
-  integrations: [react(), sitemap()]
+  integrations: [react(), sitemap()],
 });

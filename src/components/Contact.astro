@@ -64,13 +64,24 @@
             </p>
             <ul class="space-y-2 text-[2vh] font-medium">
               <li>
-                <a href="#" class="hover:text-[#9f3794] transition-colors block"
+                <a
+                  href="https://www.linkedin.com/company/virtex-labs/"
+                  class="hover:text-[#9f3794] transition-colors block"
                   >LinkedIn</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-[#9f3794] transition-colors block"
+                <a
+                  href="https://www.instagram.com/virtexlabs/"
+                  class="hover:text-[#9f3794] transition-colors block"
                   >Instagram</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://x.com/virtexlabs"
+                  class="hover:text-[#9f3794] transition-colors block"
+                  >Twitter / X</a
                 >
               </li>
             </ul>
@@ -91,6 +102,10 @@
 
     <form
       id="contact-form"
+      action="/api/contact"
+      method="POST"
+      tool-name="send-message"
+      tool-description="Send a project inquiry or message to Virtex Labs"
       class="lg:col-span-7 w-full mt-4 lg:mt-0 space-y-8 md:space-y-10 opacity-0 will-change-transform translate-y-20"
     >
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
@@ -98,7 +113,9 @@
           <input
             type="text"
             id="name"
+            name="name"
             required
+            tool-param-description="Full name of the sender"
             placeholder=" "
             class="form-input w-full bg-transparent border-b border-white/10 focus:border-white py-4 outline-none focus:outline-none focus:ring-0 transition-colors text-[2.5vh] font-light tracking-wide z-10 relative"
           />
@@ -117,7 +134,9 @@
           <input
             type="email"
             id="email"
+            name="email"
             required
+            tool-param-description="Email address for replies"
             placeholder=" "
             class="form-input w-full bg-transparent border-b border-white/10 focus:border-white py-4 outline-none focus:outline-none focus:ring-0 transition-colors text-[2.5vh] font-light tracking-wide z-10 relative"
           />
@@ -148,7 +167,7 @@
             ].map((tag) => (
               <button
                 type="button"
-                class="project-tag-btn px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10 bg-white/5 text-[1.5vh] sm:text-[2vh] font-medium hover:border-white/30 transition-all cursor-pointer select-none"
+                class="project-tag-btn relative z-20 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10 bg-white/5 text-[1.5vh] sm:text-[2vh] font-medium hover:border-white/30 transition-all cursor-pointer select-none"
               >
                 {tag}
               </button>
@@ -160,7 +179,9 @@
       <div class="form-group relative w-full pt-4">
         <textarea
           id="message"
+          name="message"
           required
+          tool-param-description="Message or project blueprint details"
           rows="4"
           placeholder=" "
           class="form-input w-full bg-transparent border-b border-white/10 focus:border-white py-4 outline-none focus:outline-none focus:ring-0 transition-colors text-[2.5vh] font-light tracking-wide resize-none z-10 relative"
@@ -176,7 +197,15 @@
         </div>
       </div>
 
-      <div class="pt-6 pb-6 flex justify-end">
+      <div
+        class="pt-6 pb-6 flex flex-wrap items-center justify-center sm:justify-end gap-4"
+      >
+        <div
+          class="cf-turnstile"
+          data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY_PROD}
+          data-theme="dark"
+        >
+        </div>
         <button
           type="submit"
           id="submit-btn"
@@ -189,12 +218,14 @@
           </div>
 
           <span
+            id="submit-text"
             class="relative z-10 text-[1.8vh] sm:text-[2.2vh] font-bold uppercase tracking-wider transition-colors duration-300"
           >
             Send Blueprint
           </span>
 
           <svg
+            id="submit-icon"
             class="relative z-10 w-4 h-4 transform rotate-[45deg] transition-transform duration-500 group-hover:-rotate-[45deg]"
             fill="none"
             stroke="currentColor"
@@ -219,6 +250,10 @@
     <p class="tracking-widest">CRAFTING FLUID CODE & SHARP PRODUCTS</p>
   </div>
 </section>
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+  async
+  defer></script>
 
 <style>
   .form-input:focus ~ .form-label,
@@ -256,30 +291,53 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  let ctx: gsap.Context | undefined;
+  declare global {
+    interface Window {
+      __vxCtx?: gsap.Context;
+      __vxAbort?: AbortController;
+    }
+  }
+
+  function renderTurnstile() {
+    const widget = document.querySelector(".cf-turnstile");
+    if (!widget || widget.querySelector("iframe")) return;
+
+    if (typeof turnstile !== "undefined") {
+      turnstile.render(widget, {
+        sitekey: widget.getAttribute("data-sitekey") ?? "",
+        theme: "dark",
+      });
+    } else {
+      setTimeout(renderTurnstile, 250);
+    }
+  }
 
   function initContact() {
-    ctx?.revert();
+    window.__vxCtx?.revert();
+    window.__vxAbort?.abort();
+    const abort = new AbortController();
+    window.__vxAbort = abort;
+    const { signal } = abort;
 
     const section = document.getElementById("contact");
     const header = document.getElementById("contact-header");
     const meta = document.getElementById("contact-meta");
     const form = document.getElementById("contact-form");
     const footer = document.getElementById("contact-footer");
-
     if (!section || !header || !meta || !form || !footer) return;
 
-    ctx = gsap.context(() => {
-      const masterTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 75%",
-          end: "top 25%",
-          toggleActions: "play none none reverse",
-        },
-      });
+    renderTurnstile();
 
-      masterTl
+    window.__vxCtx = gsap.context(() => {
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top 75%",
+            end: "top 25%",
+            toggleActions: "play none none reverse",
+          },
+        })
         .fromTo(
           header,
           { opacity: 0, y: 50 },
@@ -298,20 +356,109 @@
           "-=0.8",
         )
         .fromTo(footer, { opacity: 0 }, { opacity: 1, duration: 1 }, "-=0.5");
-
-      const tagButtons = document.querySelectorAll(".project-tag-btn");
-      tagButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          btn.classList.toggle("is-selected");
-        });
-      });
     }, section);
+
+    const tagButtons = document.querySelectorAll(".project-tag-btn");
+    tagButtons.forEach((btn) => {
+      btn.addEventListener(
+        "click",
+        () => {
+          const wasSelected = btn.classList.contains("is-selected");
+          tagButtons.forEach((b) => b.classList.remove("is-selected"));
+          if (!wasSelected) {
+            btn.classList.add("is-selected");
+          }
+        },
+        { signal },
+      );
+    });
+
+    function showToast(message: string, type: "success" | "error" = "success") {
+      document.dispatchEvent(
+        new CustomEvent("show-toast", { detail: { message, type } }),
+      );
+    }
+
+    const contactForm = document.getElementById(
+      "contact-form",
+    ) as HTMLFormElement;
+    if (!contactForm) return;
+
+    contactForm.addEventListener(
+      "submit",
+      async (e) => {
+        e.preventDefault();
+        if (contactForm.dataset.submitting === "true") return;
+        contactForm.dataset.submitting = "true";
+        const submitBtn = document.getElementById(
+          "submit-btn",
+        ) as HTMLButtonElement;
+        const submitText = document.getElementById(
+          "submit-text",
+        ) as HTMLElement;
+        if (!submitBtn || !submitText) return;
+
+        const originalText = submitText.innerText;
+        submitBtn.disabled = true;
+        submitText.innerText = "SENDING...";
+
+        const formData = new FormData(contactForm);
+        const turnstileToken = formData.get("cf-turnstile-response");
+
+        if (!turnstileToken) {
+          submitBtn.disabled = false;
+          submitText.innerText = originalText;
+          showToast("Please complete the security verification.", "error");
+          return;
+        }
+
+        const selectedTags = Array.from(
+          document.querySelectorAll(".project-tag-btn.is-selected"),
+        ).map((btn) => (btn as HTMLElement).innerText.trim());
+        if (selectedTags.length > 0)
+          formData.set("tag", selectedTags.join(", "));
+
+        const resetTurnstile = () => {
+          const widget = document.querySelector(".cf-turnstile") as HTMLElement;
+          if (window.turnstile && widget) turnstile.reset(widget);
+        };
+
+        try {
+          const res = await fetch("/api/contact", {
+            method: "POST",
+            body: formData,
+          });
+          const data = await res.json();
+
+          if (res.ok) {
+            submitText.innerText = "SENT!";
+            showToast(
+              "Your blueprint has been securely transmitted.",
+              "success",
+            );
+            contactForm.reset();
+            document
+              .querySelectorAll(".project-tag-btn")
+              .forEach((b) => b.classList.remove("is-selected"));
+            resetTurnstile();
+          } else {
+            throw new Error(data.error || "An error occurred");
+          }
+        } catch (err: any) {
+          submitBtn.disabled = false;
+          submitText.innerText = originalText;
+          showToast(err.message || "Failed to send message.", "error");
+          resetTurnstile();
+        }
+      },
+      { signal },
+    );
   }
 
   document.addEventListener("astro:page-load", initContact);
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initContact);
-  } else {
-    initContact();
-  }
+
+  document.addEventListener("astro:before-swap", () => {
+    window.__vxCtx?.revert();
+    window.__vxAbort?.abort();
+  });
 </script>

@@ -2,6 +2,8 @@
 import { site } from "../data/site";
 
 const allNavItems = [...site.nav_left, ...site.nav_right];
+const isHomepage = Astro.url.pathname === "/" || Astro.url.pathname === "/index.html";
+const brandHref = isHomepage ? "#hero" : "/";
 ---
 
 <header
@@ -23,14 +25,14 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
               class="group relative flex h-full items-center px-4 text-lg font-[450] tracking-wide no-underline overflow-hidden"
             >
               <span class="relative block h-[1.3em] overflow-hidden">
-                <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-black">
+                <span class="block transition-transform duration-300 ease-out group-hover:-translate-y-full text-black">
                   {item.label}
                 </span>
-                <span class="absolute top-full left-0 block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
+                <span class="absolute top-full left-0 block transition-transform duration-300 ease-out group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
                   {item.label}
                 </span>
               </span>
-              <span class="absolute top-0 left-0 h-[3px] w-full origin-center scale-x-0 bg-gradient-to-r from-[#9f3794] via-[#e22472] to-[#9f3794] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-x-100" />
+              <span class="absolute top-0 left-0 h-[3px] w-full origin-center scale-x-0 bg-gradient-to-r from-[#9f3794] via-[#e22472] to-[#9f3794] transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </a>
           </li>
         ))
@@ -41,11 +43,13 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
       class="nav-brand flex h-full items-center justify-start lg:justify-center"
       aria-label="Home"
     >
-      <a href="#hero" class="flex items-center no-underline relative z-50">
+      <a href={brandHref} class="flex items-center no-underline relative z-50">
         <slot name="brand">
           <img
             src="/wordmark.svg"
             alt={site.name}
+            width="200"
+            height="80"
             class="h-20 lg:h-24 w-auto object-contain transition-transform duration-300 opacity-0"
             id="nav-logo-img"
           />
@@ -65,14 +69,14 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
                 class="group relative flex h-full items-center px-4 text-lg font-[450] tracking-wide no-underline overflow-hidden"
               >
                 <span class="relative block h-[1.3em] overflow-hidden">
-                  <span class="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-black">
+                  <span class="block transition-transform duration-300 ease-out group-hover:-translate-y-full text-black">
                     {item.label}
                   </span>
-                  <span class="absolute top-full left-0 block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
+                  <span class="absolute top-full left-0 block transition-transform duration-300 ease-out group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
                     {item.label}
                   </span>
                 </span>
-                <span class="absolute top-0 left-0 h-[3px] w-full origin-center scale-x-0 bg-gradient-to-r from-[#9f3794] via-[#e22472] to-[#9f3794] transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:scale-x-100" />
+                <span class="absolute top-0 left-0 h-[3px] w-full origin-center scale-x-0 bg-gradient-to-r from-[#9f3794] via-[#e22472] to-[#9f3794] transition-transform duration-300 ease-out group-hover:scale-x-100" />
               </a>
             </li>
           ))
@@ -157,191 +161,201 @@ const allNavItems = [...site.nav_left, ...site.nav_right];
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const header = document.getElementById("site-nav");
-  const leftItems = Array.from(document.querySelectorAll(".nav-left-item"));
-  const rightItems = Array.from(document.querySelectorAll(".nav-right-item"));
-  const brand = document.querySelector(".nav-brand");
-  const logoImg = document.getElementById("nav-logo-img");
-  const menuToggle = document.getElementById("mobile-menu-toggle");
-  const mobileOverlay = document.getElementById("mobile-overlay");
-  const mobileLinks = gsap.utils.toArray(".mobile-nav-link");
-  const mobileFooter = document.querySelector(".mobile-nav-footer");
+  function initNav() {
+    const header = document.getElementById("site-nav");
+    const leftItems = Array.from(document.querySelectorAll(".nav-left-item"));
+    const rightItems = Array.from(document.querySelectorAll(".nav-right-item"));
+    const brand = document.querySelector(".nav-brand");
+    const logoImg = document.getElementById("nav-logo-img");
+    const menuToggle = document.getElementById("mobile-menu-toggle");
+    const mobileOverlay = document.getElementById("mobile-overlay");
+    const mobileLinks = gsap.utils.toArray(".mobile-nav-link");
+    const mobileFooter = document.querySelector(".mobile-nav-footer");
 
-  const LOGO_EVENT = "vl-logo-complete";
-  const FLY_EVENT = "vl-logo-flying";
+    const LOGO_EVENT = "vl-logo-complete";
+    const FLY_EVENT = "vl-logo-flying";
 
-  const userAgent = navigator.userAgent || "";
-  const mobileDevice = isMobile({ userAgent });
+    const userAgent = navigator.userAgent || "";
+    const mobileDevice = isMobile({ userAgent });
 
-  if (!header) throw new Error("Site navigation element not found.");
+    if (!header) return;
 
-  const prefersReduced = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-  if (!prefersReduced) {
-    gsap.set(header, { opacity: 0 });
-    gsap.set(brand, { opacity: 0 });
-    gsap.set(logoImg, { opacity: 0 });
-    if (menuToggle) gsap.set(menuToggle, { opacity: 0 });
+    const isHomepage = window.location.pathname === "/" || window.location.pathname === "/index.html";
 
-    if (!mobileDevice) {
-      gsap.set(leftItems, { opacity: 0, x: 40 });
-      gsap.set(rightItems, { opacity: 0, x: -40 });
-    }
-  }
+    if (!prefersReduced) {
+      gsap.set(header, { opacity: 0 });
+      gsap.set(brand, { opacity: 0 });
+      gsap.set(logoImg, { opacity: 0 });
+      if (menuToggle) gsap.set(menuToggle, { opacity: 0 });
 
-  function startNavAnimation() {
-    const tl = gsap.timeline({
-      defaults: { ease: "power3.out" },
-    });
-
-    tl.to(header, { opacity: 1, duration: 0.5 });
-    tl.to(brand, { opacity: 1, duration: 0.1 }, "<");
-
-    if (!mobileDevice) {
-      tl.to(
-        leftItems,
-        { opacity: 1, x: 0, duration: 0.45, stagger: 0.06 },
-        "-=0.2",
-      ).to(
-        rightItems,
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.45,
-          stagger: { each: 0.06, from: "start" },
-        },
-        "<",
-      );
+      if (!mobileDevice) {
+        gsap.set(leftItems, { opacity: 0, x: 40 });
+        gsap.set(rightItems, { opacity: 0, x: -40 });
+      }
     }
 
-    if (menuToggle) {
-      tl.to(
-        menuToggle,
-        { opacity: 1, duration: 0.3 },
-        mobileDevice ? "-=0.1" : "-=0.3",
-      );
+    function startNavAnimation() {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+      });
+
+      tl.to(header, { opacity: 1, duration: 0.5 });
+      tl.to(brand, { opacity: 1, duration: 0.1 }, "<");
+
+      if (!mobileDevice) {
+        tl.to(
+          leftItems,
+          { opacity: 1, x: 0, duration: 0.45, stagger: 0.06 },
+          "-=0.2",
+        ).to(
+          rightItems,
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.45,
+            stagger: { each: 0.06, from: "start" },
+          },
+          "<",
+        );
+      }
+
+      if (menuToggle) {
+        tl.to(
+          menuToggle,
+          { opacity: 1, duration: 0.3 },
+          mobileDevice ? "-=0.1" : "-=0.3",
+        );
+      }
+
+      tl.to(logoImg, { opacity: 1, duration: 0.2 }, 0.7);
     }
 
-    tl.to(logoImg, { opacity: 1, duration: 0.2 }, 0.7);
-  }
-
-  if (!prefersReduced) {
-    if (window.__vlLogoDone === true) {
-      startNavAnimation();
-    } else {
-      window.addEventListener(
-        FLY_EVENT,
-        () => {
-          startNavAnimation();
-        },
-        { once: true },
-      );
-
-      setTimeout(() => {
-        if (window.__vlLogoDone !== true) startNavAnimation();
-      }, 4500);
-    }
-  }
-
-  let isMenuOpen = false;
-  let menuAnimation;
-
-  if (menuToggle && mobileOverlay) {
-    gsap.set(mobileOverlay, { yPercent: -100 });
-
-    menuAnimation = gsap
-      .timeline({ paused: true, defaults: { ease: "power2.inOut" } })
-      .to(mobileOverlay, { yPercent: 0, pointerEvents: "auto", duration: 0.45 })
-      .to(
-        mobileLinks,
-        { y: 0, duration: 0.4, stagger: 0.04, ease: "power2.out" },
-        "-=0.2",
-      )
-      .to(mobileFooter, { opacity: 1, duration: 0.3 }, "-=0.2");
-
-    menuToggle.addEventListener("click", () => {
-      isMenuOpen = !isMenuOpen;
-
-      if (isMenuOpen) {
-        menuToggle.classList.add("is-open");
-        if (window.__lenis) window.__lenis.stop();
-        header.classList.add("bg-white");
-        header.classList.remove("bg-transparent");
-        menuAnimation.timeScale(1).play();
+    if (!prefersReduced) {
+      if (!isHomepage || window.__vlLogoDone === true) {
+        startNavAnimation();
       } else {
-        menuToggle.classList.remove("is-open");
-        if (window.__lenis) window.__lenis.start();
-        if (window.scrollY < 50) {
+        window.addEventListener(
+          FLY_EVENT,
+          () => {
+            startNavAnimation();
+          },
+          { once: true },
+        );
+
+        setTimeout(() => {
+          if (window.__vlLogoDone !== true) startNavAnimation();
+        }, 4500);
+      }
+    }
+
+    let isMenuOpen = false;
+    let menuAnimation;
+
+    if (menuToggle && mobileOverlay) {
+      gsap.set(mobileOverlay, { yPercent: -100 });
+
+      menuAnimation = gsap
+        .timeline({ paused: true, defaults: { ease: "power2.out" } })
+        .to(mobileOverlay, { yPercent: 0, pointerEvents: "auto", duration: 0.45 })
+        .to(
+          mobileLinks,
+          { y: 0, duration: 0.4, stagger: 0.04, ease: "power2.out" },
+          "-=0.2",
+        )
+        .to(mobileFooter, { opacity: 1, duration: 0.3 }, "-=0.2");
+
+      menuToggle.addEventListener("click", () => {
+        isMenuOpen = !isMenuOpen;
+
+        if (isMenuOpen) {
+          menuToggle.classList.add("is-open");
+          if (window.__lenis) window.__lenis.stop();
+          header.classList.add("bg-white");
+          header.classList.remove("bg-transparent");
+          menuAnimation.timeScale(1).play();
+        } else {
+          menuToggle.classList.remove("is-open");
+          if (window.__lenis) window.__lenis.start();
+          if (window.scrollY < 50) {
+            header.classList.remove("bg-white");
+            header.classList.add("bg-transparent");
+          }
+          menuAnimation.timeScale(1.5).reverse();
+        }
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (isMenuOpen) menuToggle.click();
+        });
+      });
+    }
+
+    let isNavHidden = false;
+
+    if (window.__vlNavScrollTrigger) {
+      window.__vlNavScrollTrigger.kill();
+    }
+
+    window.__vlNavScrollTrigger = ScrollTrigger.create({
+      start: "top top",
+      end: "max",
+      onUpdate: (self) => {
+        if (isMenuOpen) return;
+
+        const currentY = window.scrollY;
+
+        if (currentY > 50) {
+          header.classList.add("bg-white");
+          header.classList.remove("bg-transparent");
+        } else {
           header.classList.remove("bg-white");
           header.classList.add("bg-transparent");
         }
-        menuAnimation.timeScale(1.5).reverse();
-      }
-    });
 
-    mobileLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (isMenuOpen) menuToggle.click();
-      });
+        let forceHide = false;
+        document.querySelectorAll("[data-hide-nav]").forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= header.offsetHeight && rect.bottom > 0)
+            forceHide = true;
+        });
+
+        if (forceHide) {
+          if (!isNavHidden) {
+            gsap.to(header, {
+              yPercent: -100,
+              duration: 1,
+              ease: "power2.inOut",
+              overwrite: "auto",
+            });
+            isNavHidden = true;
+          }
+        } else {
+          if (self.direction === 1 && !isNavHidden && currentY > 100) {
+            gsap.to(header, {
+              yPercent: -100,
+              duration: 1,
+              ease: "power2.inOut",
+              overwrite: "auto",
+            });
+            isNavHidden = true;
+          } else if (self.direction === -1 && isNavHidden) {
+            gsap.to(header, {
+              yPercent: 0,
+              duration: 1,
+              ease: "power3.out",
+              overwrite: "auto",
+            });
+            isNavHidden = false;
+          }
+        }
+      },
     });
   }
 
-  let isNavHidden = false;
-
-  ScrollTrigger.create({
-    start: "top top",
-    end: "max",
-    onUpdate: (self) => {
-      if (isMenuOpen) return;
-
-      const currentY = window.scrollY;
-
-      if (currentY > 50) {
-        header.classList.add("bg-white");
-        header.classList.remove("bg-transparent");
-      } else {
-        header.classList.remove("bg-white");
-        header.classList.add("bg-transparent");
-      }
-
-      let forceHide = false;
-      document.querySelectorAll("[data-hide-nav]").forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= header.offsetHeight && rect.bottom > 0)
-          forceHide = true;
-      });
-
-      if (forceHide) {
-        if (!isNavHidden) {
-          gsap.to(header, {
-            yPercent: -100,
-            duration: 1,
-            ease: "power2.inOut",
-            overwrite: "auto",
-          });
-          isNavHidden = true;
-        }
-      } else {
-        if (self.direction === 1 && !isNavHidden && currentY > 100) {
-          gsap.to(header, {
-            yPercent: -100,
-            duration: 1,
-            ease: "power2.inOut",
-            overwrite: "auto",
-          });
-          isNavHidden = true;
-        } else if (self.direction === -1 && isNavHidden) {
-          gsap.to(header, {
-            yPercent: 0,
-            duration: 1,
-            ease: "power3.out",
-            overwrite: "auto",
-          });
-          isNavHidden = false;
-        }
-      }
-    },
-  });
+  document.addEventListener("astro:page-load", initNav);
 </script>

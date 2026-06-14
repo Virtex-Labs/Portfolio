@@ -171,7 +171,7 @@ const { steps, introLines } = site.process;
       alt="Majestic mountain peak representing the summit of digital success and high-performance websites"
       decoding="async"
       loading="eager"
-      class="absolute sm:bottom-[-1%] w-full h-[120%] object-cover object-bottom z-10"
+      class="absolute sm:bottom-[-1%] w-full h-[120%] object-cover object-bottom z-10 will-change-transform"
     />
 
     <Image
@@ -189,7 +189,7 @@ const { steps, introLines } = site.process;
       alt="Silhouette of an explorer standing on a mountain peak, symbolizing visionary leadership in tech"
       decoding="async"
       loading="eager"
-      class="absolute sm:bottom-[-30%] sm:bottom-[-20%] lg:bottom-[-25%] w-full h-[120%] object-cover object-bottom z-30"
+      class="absolute sm:bottom-[-30%] sm:bottom-[-20%] lg:bottom-[-25%] w-full h-[120%] object-cover object-bottom z-30 will-change-transform"
     />
   </div>
 </section>
@@ -336,7 +336,7 @@ const { steps, introLines } = site.process;
               trigger: endPanel,
               start: "top bottom",
               end: "bottom top",
-              scrub: true,
+              scrub: 1,
             },
           });
           const pxMountain = document.getElementById("px-mountain");
@@ -514,6 +514,10 @@ const { steps, introLines } = site.process;
         });
       });
     }, section);
+
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh();
+    });
   }
 
   document.addEventListener("astro:page-load", initProcess);

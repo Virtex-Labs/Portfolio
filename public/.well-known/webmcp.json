@@ -9,7 +9,8 @@
       "parameters": [
         {"name": "name", "type": "string", "description": "Full name of the sender", "required": true},
         {"name": "email", "type": "string", "description": "Email address for replies", "required": true},
-        {"name": "message", "type": "string", "description": "Message or project blueprint details", "required": true}
+        {"name": "message", "type": "string", "description": "Message or project blueprint details", "required": true},
+        {"name": "turnstileToken", "type": "string", "description": "Cloudflare Turnstile verification token", "required": true}
       ]
     }
   ]

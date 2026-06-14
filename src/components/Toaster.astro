@@ -1,0 +1,38 @@
+<div
+  id="toast-container"
+  class="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"
+>
+</div>
+
+<script>
+  if (!(window as any).__vxToastReady) {
+    (window as any).__vxToastReady = true;
+
+    document.addEventListener("show-toast", (e: any) => {
+      const { message, type } = e.detail;
+      const container = document.getElementById("toast-container");
+      if (!container) return;
+
+      const bgColor =
+        type === "success"
+          ? "bg-green-500/10 border-green-500/30 text-green-400"
+          : "bg-[#e22472]/10 border-[#e22472]/30 text-[#e22472]";
+      const icon = type === "success" ? "✓" : "✕";
+
+      const toast = document.createElement("div");
+      toast.className = `flex items-center gap-3 px-6 py-4 rounded-xl border backdrop-blur-md shadow-2xl transform transition-all duration-300 translate-x-full opacity-0 pointer-events-none ${bgColor}`;
+      toast.innerHTML = `<span class="font-bold text-lg">${icon}</span><span class="font-medium text-[1.6vh]">${message}</span>`;
+
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove("translate-x-full", "opacity-0");
+      });
+
+      setTimeout(() => {
+        toast.classList.add("translate-x-full", "opacity-0");
+        setTimeout(() => toast.remove(), 300);
+      }, 5000);
+    });
+  }
+</script>

@@ -1,7 +1,9 @@
 ---
 import Navbar from "../components/Navbar.astro";
+import Welcome from "../components/Welcome.astro";
 import LandscapeWarning from "../components/LandscapeWarning.astro";
 import CookieBanner from "../components/CookieBanner.astro";
+import Toaster from "../components/Toaster.astro";
 import PageTransition from "../providers/PageTransition.astro";
 import PageLayout from "./PageLayout.astro";
 import "../styles/global.css";
@@ -20,7 +22,6 @@ const { title, description } = Astro.props;
         window.scrollTo(0, 0);
       });
 
-      // WebMCP Support for AI Agents
       if (typeof navigator !== "undefined" && "modelContext" in navigator) {
         // @ts-ignore
         navigator.modelContext.provideContext({
@@ -90,12 +91,14 @@ const { title, description } = Astro.props;
   </Fragment>
 
   <LandscapeWarning />
+  <Welcome />
   <Navbar />
   <CookieBanner />
 
   <main>
     <slot />
   </main>
+  <Toaster />
   <PageTransition />
 
   <script>

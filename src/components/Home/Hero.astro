@@ -145,56 +145,77 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const wordInners = gsap.utils.toArray<HTMLElement>(".word-inner");
-  const sub = document.getElementById("hero-sub");
-  const prefersReduced = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
+  function initHero() {
+    const wordInners = gsap.utils.toArray<HTMLElement>("#hero .word-inner");
+    const sub = document.getElementById("hero-sub");
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-  if (prefersReduced) {
-    gsap.set(wordInners, { y: 0 });
-    if (sub) gsap.set(sub, { opacity: 1 });
-  } else {
-    const tl = gsap.timeline({ delay: 4 });
+    if (window.__vlHeroScrollTrigger) {
+      window.__vlHeroScrollTrigger.kill();
+    }
 
-    tl.to(wordInners, {
-      y: 0,
-      duration: 0.75,
-      ease: "power4.out",
-      stagger: 0.1,
-    })
-      .to(
-        sub,
-        {
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
+    if (prefersReduced || window.__vlLogoDone === true) {
+      gsap.set(wordInners, { y: 0 });
+      if (sub) gsap.set(sub, { opacity: 1 });
+      gsap.set(".hero-svg-bg", { opacity: 0.22 });
+      
+      const paths = document.querySelectorAll(
+        ".hero-svg-path",
+      ) as NodeListOf<SVGElement>;
+      paths.forEach((el) => {
+        el.style.animation = "none";
+        el.style.strokeDashoffset = "0";
+      });
+    } else {
+      const tl = gsap.timeline({ delay: 4 });
+
+      tl.to(wordInners, {
+        y: 0,
+        duration: 0.75,
+        ease: "power4.out",
+        stagger: 0.1,
+      })
+        .to(
+          sub,
+          {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "-=0.2",
+        )
+        .set(
+          ".hero-svg-bg",
+          {
+            opacity: 0.22,
+          },
+          "-=0.5",
+        )
+        .add(() => {
+          const paths = document.querySelectorAll(
+            ".hero-svg-path",
+          ) as NodeListOf<SVGElement>;
+          paths.forEach((el) => (el.style.animationPlayState = "running"));
+        }, "<");
+    }
+
+    const heroEl = document.getElementById("hero");
+    if (heroEl) {
+      const heroAnim = gsap.to([".hero-headline", "#hero > div:first-child"], {
+        y: -120,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
         },
-        "-=0.2",
-      )
-      .set(
-        ".hero-svg-bg",
-        {
-          opacity: 0.22,
-        },
-        "-=0.5",
-      )
-      .add(() => {
-        const paths = document.querySelectorAll(
-          ".hero-svg-path",
-        ) as NodeListOf<SVGElement>;
-        paths.forEach((el) => (el.style.animationPlayState = "running"));
-      }, "<");
-
-    gsap.to([".hero-headline", "#hero > div:first-child"], {
-      y: -120,
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
+      });
+      window.__vlHeroScrollTrigger = heroAnim.scrollTrigger;
+    }
   }
+
+  document.addEventListener("astro:page-load", initHero);
 </script>

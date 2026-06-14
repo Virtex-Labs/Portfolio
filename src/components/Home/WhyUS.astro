@@ -374,12 +374,12 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
           gsap.to(item, {
             opacity: 1,
             x: 0,
-            duration: 0.8,
-            ease: "power3.out",
+            ease: "none",
             scrollTrigger: {
               trigger: item,
-              start: "top 90%",
-              toggleActions: "play none none none",
+              start: "top 95%",
+              end: "top 60%",
+              scrub: 1,
             },
           });
         });

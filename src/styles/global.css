@@ -89,28 +89,30 @@ canvas {
   max-width: 100%;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-::selection {
-  background: var(--color-brand-purple);
-  color: var(--color-white);
-}
+  ::selection {
+    background: var(--color-brand-purple);
+    color: var(--color-white);
+  }
 
-:focus-visible {
-  outline: 2px solid var(--color-brand-pink) !important;
-  outline-offset: 3px !important;
-}
+  :focus-visible {
+    outline: 2px solid var(--color-brand-pink) !important;
+    outline-offset: 3px !important;
+  }
 
-a,
-button,
-input,
-textarea,
-select {
-  font: inherit;
-  touch-action: manipulation;
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+    touch-action: manipulation;
+  }
 }
 
 #custom-cursor {

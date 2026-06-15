@@ -1,0 +1,734 @@
+---
+import { faqs } from "../../data/faq.ts";
+import mannequin from "../../assets/images/mannequin.png";
+import { FiPlus, FiX } from "react-icons/fi";
+import { Image } from "astro:assets";
+---
+
+<section
+  id="faq-page"
+  class="relative overflow-hidden bg-[#fcf2f6] text-[#050505]"
+  aria-label="Frequently Asked Questions"
+>
+  <section
+    id="faq-desktop"
+    class="faq-desktop-scene hidden lg:block relative min-h-screen overflow-hidden bg-[#fcf2f6]"
+    aria-label="Frequently Asked Questions desktop"
+  >
+    <div
+      class="faq-desktop-pin isolate relative flex min-h-screen w-full items-center justify-center overflow-hidden px-10 py-20"
+    >
+      <div class="faq-gradient-wash absolute inset-0 z-0"></div>
+
+      <header
+        class="faq-title-wrap pointer-events-none absolute left-1/2 top-1/2 z-30 w-full max-w-[92vw] -translate-x-1/2 -translate-y-1/2 text-center"
+      >
+        <h1
+          class="faq-title mx-auto space-x-11 text-[clamp(5.25rem,10.4vw,13rem)] font-black leading-[1.2] tracking-tight text-[#050505]"
+        >
+          Frequently Asked <br />
+          <em
+            class="not-italic text-transparent bg-clip-text bg-gradient-to-r from-[#e22472] via-[#9f3794] to-[#7e4199]"
+            >Questions</em
+          >
+        </h1>
+      </header>
+
+      <div
+        class="faq-list-wrap absolute bottom-[5vh] right-[5vw] z-10 w-[min(54vw,880px)] h-[75vh] overflow-hidden"
+      >
+        <div class="faq-items space-y-3">
+          {
+            faqs.map((faq, index) => (
+              <details
+                class="faq-item group border-b border-[#050505]/10 bg-white/35 px-5 py-4 backdrop-blur-sm transition-colors duration-300 open:bg-white/75"
+                data-index={index}
+              >
+                <summary class="flex cursor-pointer list-none items-start justify-between gap-6">
+                  <span class="flex gap-5">
+                    <span class="faq-num pt-1 text-xs font-black text-[#e22472]/70">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 class="text-xl font-bold tracking-tight text-[#050505] m-0 p-0">
+                      {faq.question}
+                    </h3>
+                  </span>
+                  <span
+                    class="faq-plus relative mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[#050505]/15 text-[#050505] transition-transform duration-300 group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    <FiPlus className="absolute text-sm transition-all duration-300 group-open:rotate-90 group-open:scale-50 group-open:opacity-0" />
+                    <FiX className="absolute rotate-[-90deg] scale-50 text-sm opacity-0 transition-all duration-300 group-open:rotate-0 group-open:scale-100 group-open:opacity-100" />
+                  </span>
+                </summary>
+
+                <div class="faq-answer-body overflow-hidden">
+                  <p class="faq-answer-text max-w-3xl pb-2 pl-[3.25rem] pt-4 text-base leading-relaxed text-[#050505]/65">
+                    {faq.answer}
+                  </p>
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+
+      <div
+        class="faq-mannequin-wrap absolute bottom-[-2vh] left-1/2 z-20 w-[30vw] -translate-x-1/2 pointer-events-none overflow-visible"
+        aria-hidden="true"
+      >
+        <div class="faq-mannequin-shadow"></div>
+
+        <div class="relative z-10 w-full floating-mannequin-shadow">
+          <Image
+            src={mannequin}
+            alt=""
+            width={1200}
+            quality="max"
+            class="faq-mannequin-img relative h-auto w-full max-w-none grayscale"
+            loading="eager"
+          />
+        </div>
+      </div>
+
+      <aside
+        class="faq-more-info pointer-events-auto absolute left-[7vw] top-1/2 z-20 w-[min(34vw,520px)] -translate-y-1/2"
+        aria-label="More information"
+      >
+        <p
+          class="mb-5 text-xs font-black uppercase tracking-[0.42em] text-[#e22472]"
+        >
+          Still curious?
+        </p>
+        <h2
+          class="text-[clamp(4rem,7.4vw,9rem)] font-black leading-[0.82] tracking-tight text-[#050505]"
+        >
+          Need more info?
+        </h2>
+        <a
+          href="mailto:hello@virtexlabs.com"
+          class="mt-10 inline-flex border-b border-[#050505]/25 pb-2 text-[clamp(1.1rem,1.5vw,1.5rem)] font-bold tracking-tight text-[#050505] transition-colors hover:text-[#e22472] duration-500"
+        >
+          hello@virtexlabs.com
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <div class="block lg:hidden bg-[#fcf2f6]">
+    <section id="faq-mobile-hero" class="relative overflow-hidden bg-[#fcf2f6]">
+      <div
+        class="shrink-0 sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center"
+      >
+        <div
+          id="faq-mobile-bg"
+          class="absolute inset-0 bg-[#fcf2f6] z-0 origin-top"
+        >
+        </div>
+
+        <div
+          id="faq-mobile-content"
+          class="absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center will-change-transform"
+        >
+          <h1
+            class="text-[15vh] sm:text-[18vh] font-black leading-[1.2] tracking-tight text-[#050505]"
+          >
+            FA<em
+              class="not-italic text-transparent bg-clip-text bg-gradient-to-r from-[#e22472] via-[#9f3794] to-[#7e4199]"
+              >Q</em
+            >
+          </h1>
+        </div>
+      </div>
+
+      <div
+        id="faq-mobile-sheet"
+        data-hide-nav
+        class="relative z-30 bg-[#fcf2f6] -mt-[60vh] px-6 pb-24 pt-10"
+      >
+        <div class="mobile-list flex flex-col gap-3">
+          {
+            faqs.map((faq, index) => (
+              <details class="mobile-faq-item group border-b border-[#050505]/10 bg-white/45 px-4 py-4 backdrop-blur-sm open:bg-white/80">
+                <summary class="flex cursor-pointer list-none items-start justify-between gap-4">
+                  <span class="flex gap-3">
+                    <span class="faq-num pt-1 text-[0.68rem] font-black text-[#9f3794]/70">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 class="text-[1.05rem] font-black leading-tight tracking-tight text-[#050505] m-0 p-0">
+                      {faq.question}
+                    </h3>
+                  </span>
+                  <span
+                    class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[#050505]/15 text-sm font-black transition-transform duration-300 group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    <FiPlus className="absolute text-sm transition-all duration-300 group-open:rotate-90 group-open:scale-50 group-open:opacity-0" />
+                    <FiX className="absolute rotate-[-90deg] scale-50 text-sm opacity-0 transition-all duration-300 group-open:rotate-0 group-open:scale-100 group-open:opacity-100" />
+                  </span>
+                </summary>
+
+                <div class="faq-answer-body overflow-hidden">
+                  <p class="faq-answer-text pb-2 pl-9 pt-4 text-[0.94rem] leading-relaxed text-[#050505]/65">
+                    {faq.answer}
+                  </p>
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="mobile-more-scene relative min-h-[200vh] overflow-hidden bg-[#fcf2f6]"
+      aria-label="More information"
+    >
+      <div
+        class="mobile-more-pin relative flex min-h-screen flex-col items-center justify-center px-5 text-center"
+      >
+        <h2
+          class="mobile-more-words absolute flex flex-col items-center justify-center text-center text-[15vh] font-black leading-[1.1] tracking-tighter text-[#050505]"
+          aria-label="Need more info?"
+        >
+          <span class="mobile-word block">Need</span>
+          <span
+            class="mobile-word block text-transparent bg-clip-text bg-gradient-to-r from-[#e22472] via-[#9f3794] to-[#7e4199]"
+          >
+            more
+          </span>
+          <span class="mobile-word block">info?</span>
+        </h2>
+
+        <div
+          class="mobile-contact-container absolute flex flex-col items-center justify-center w-full"
+        >
+          <p
+            class="mobile-contact-text text-[8vh] font-black tracking-tight text-[#050505]"
+          >
+            Contact us,
+          </p>
+          <a
+            href="mailto:hello@virtexlabs.com"
+            class="mobile-email mt-4 inline-block whitespace-nowrap border-b border-[#050505]/20 pb-2 text-[3.5vh] font-black tracking-tight text-[#050505] transition-colors hover:text-[#e22472]"
+          >
+            hello@virtexlabs.com
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <style>
+    .faq-gradient-wash {
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(226, 36, 114, 0.24),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 85% 82%,
+          rgba(126, 65, 153, 0.22),
+          transparent 32%
+        ),
+        linear-gradient(180deg, #ffffff 0%, #fcf2f6 62%, #fcf2f6 100%);
+    }
+
+    .faq-title,
+    .faq-more-info h2,
+    .mobile-faq-title h1,
+    .mobile-more-words {
+      text-wrap: balance;
+    }
+
+    .faq-title-wrap,
+    .faq-list-wrap,
+    .faq-item,
+    .faq-more-info,
+    .mobile-faq-title,
+    .mobile-faq-item,
+    .mobile-word,
+    .mobile-email {
+      will-change: transform, opacity;
+    }
+
+    .faq-item summary::-webkit-details-marker,
+    .mobile-faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-more-info {
+      opacity: 0;
+      transform: translate3d(-38vw, -50%, 0);
+    }
+
+    .faq-list-wrap {
+      opacity: 0;
+      transform: translate3d(0, 12vh, 0);
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 10%,
+        black 75%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 10%,
+        black 75%,
+        transparent 100%
+      );
+    }
+
+    .faq-item,
+    .mobile-faq-item {
+      position: relative;
+      border-left: 2px solid transparent;
+      transition:
+        border-color 0.4s ease,
+        background-color 0.3s ease;
+    }
+
+    .faq-item[open],
+    .mobile-faq-item[open] {
+      border-left-color: #e22472;
+      background-color: rgba(255, 255, 255, 0.72);
+    }
+
+    .faq-plus,
+    .mobile-faq-item .faq-plus {
+      transition:
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background-color 0.3s ease;
+    }
+
+    .faq-item[open] .faq-plus,
+    .mobile-faq-item[open] .faq-plus {
+      background-color: #e22472;
+      color: white;
+      border-color: transparent;
+    }
+
+    .faq-item[open] .faq-num,
+    .mobile-faq-item[open] .faq-num {
+      color: #e22472;
+      transition: color 0.3s ease;
+    }
+    .faq-mannequin-wrap {
+      opacity: 0;
+      filter: none;
+    }
+
+    .faq-mannequin-shadow {
+      position: absolute;
+      left: 50%;
+      bottom: -10%;
+      width: 60%;
+      height: 8%;
+      transform: translateX(-50%);
+      background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.15) 50%,
+        rgba(0, 0, 0, 0) 75%
+      );
+      filter: blur(24px);
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    .faq-mannequin-img {
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mobile-more-scene {
+      background-size: 50px 50px;
+      background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    }
+
+    .mobile-word,
+    .mobile-email {
+      opacity: 0;
+    }
+
+    .mobile-word {
+      display: inline-block;
+      transform: translate3d(4rem, 0, 0);
+    }
+
+    @media (max-width: 420px) {
+      .mobile-more-words {
+        gap-row: 0.15em;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .faq-title-wrap,
+      .faq-mannequin-wrap,
+      .faq-list-wrap,
+      .faq-item,
+      .faq-more-info,
+      .mobile-faq-title,
+      .mobile-faq-item,
+      .mobile-word,
+      .mobile-email {
+        opacity: 1 !important;
+      }
+
+      .faq-more-info {
+        position: absolute;
+        left: 7vw;
+        top: 50%;
+        transform: translateY(-50%) !important;
+      }
+
+      .mobile-email {
+        transform: translate(-50%, 3rem) !important;
+      }
+    }
+  </style>
+
+  <script>
+    import gsap from "gsap";
+    import ScrollTrigger from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    let mm: gsap.MatchMedia | undefined;
+
+    function initFaq() {
+      mm?.revert();
+      mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set(
+          [
+            ".faq-title-wrap",
+            ".faq-mannequin-wrap",
+            ".faq-list-wrap",
+            ".faq-item",
+            ".faq-more-info",
+            ".mobile-faq-title",
+            ".mobile-faq-item",
+            ".mobile-word",
+            ".mobile-email",
+          ],
+          { clearProps: "all", autoAlpha: 1 },
+        );
+      });
+
+      mm.add(
+        "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const scene = document.querySelector("#faq-desktop");
+          const pin = document.querySelector(".faq-desktop-pin");
+          if (!scene || !pin) return;
+
+          const items = gsap.utils.toArray<HTMLElement>(".faq-item", scene);
+
+          gsap.set(".faq-title-wrap", { autoAlpha: 0, y: 50 });
+          gsap.set(".faq-mannequin-wrap", {
+            xPercent: -50,
+            y: "22vh",
+            x: 0,
+            autoAlpha: 0,
+          });
+          gsap.set(".faq-list-wrap", { autoAlpha: 0 });
+          gsap.set(".faq-items", { y: "70vh" });
+          gsap.set(".faq-more-info", {
+            x: "-38vw",
+            yPercent: 50,
+            autoAlpha: 0,
+          });
+
+          gsap.to(".faq-title-wrap", {
+            autoAlpha: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+          });
+
+          gsap.to(".faq-mannequin-wrap", {
+            autoAlpha: 0.7,
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            delay: 0.5,
+            ease: "power2.out",
+          });
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: scene,
+              start: "top top",
+              end: () => {
+                const list = document.querySelector(".faq-items");
+                return `+=${(list?.scrollHeight || window.innerHeight) + window.innerHeight * 3}`;
+              },
+              scrub: 2,
+              pin: true,
+              invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                if (ScrollTrigger.isRefreshing) return;
+                const header = document.getElementById("site-nav");
+                if (header) {
+                  if (self.progress > 0.05 && self.progress < 0.95) {
+                    header.setAttribute("data-force-hide-nav", "true");
+                  } else {
+                    header.removeAttribute("data-force-hide-nav");
+                  }
+                }
+              },
+            },
+          });
+
+          tl.fromTo(
+            ".faq-title-wrap",
+            { y: 0, scale: 1, autoAlpha: 1 },
+            {
+              y: "-32vh",
+              scale: 0.3,
+              autoAlpha: 1,
+              duration: 1.5,
+              ease: "power2.inOut",
+              immediateRender: false,
+            },
+            0,
+          )
+            .fromTo(
+              ".faq-mannequin-wrap",
+              { x: 0, y: 0, scale: 1, autoAlpha: 0.7 },
+              {
+                autoAlpha: 1,
+                x: "-29vw",
+                y: "-15vh",
+                duration: 2,
+                scale: 1.5,
+                ease: "power2.inOut",
+                immediateRender: false,
+                force3D: false,
+              },
+              0,
+            )
+            .fromTo(
+              ".faq-mannequin-img",
+              {
+                filter:
+                  "grayscale(100%) drop-shadow(10px 10px 3px rgba(0, 0, 0, 0.45))",
+              },
+              {
+                filter:
+                  "grayscale(0%) drop-shadow(10px 10px 3px rgba(0, 0, 0, 0.45))",
+                duration: 2,
+                ease: "power2.inOut",
+              },
+              0,
+            )
+            .to(
+              ".faq-list-wrap",
+              { autoAlpha: 1, duration: 0.6, ease: "power2.out" },
+              0.1,
+            )
+
+            .to(
+              ".faq-items",
+              {
+                y: () => {
+                  const list = document.querySelector(".faq-items");
+                  const wrap = document.querySelector(".faq-list-wrap");
+                  if (!list || !wrap) return "-100vh";
+                  const travelDistance =
+                    list.scrollHeight - wrap.clientHeight + 60;
+
+                  const initialOffsetCompensation = window.innerHeight * 0.7;
+
+                  return -(travelDistance + initialOffsetCompensation) + "px";
+                },
+                delay: 0.7,
+                duration: 4,
+                ease: "none",
+              },
+              0,
+            )
+
+            .add("outro", 5)
+
+            .to(".faq-list-wrap", { autoAlpha: 0, duration: 0.5 }, "outro")
+            .fromTo(
+              ".faq-title-wrap",
+              { y: "-32vh", scale: 0.3, autoAlpha: 1 },
+              {
+                y: "-100vh",
+                scale: 0.3,
+                autoAlpha: 0,
+                duration: 0.8,
+                ease: "power2.in",
+                immediateRender: false,
+              },
+              "outro",
+            )
+            .to(
+              ".faq-mannequin-wrap",
+              {
+                x: "20vw",
+                scale: 1.75,
+                duration: 1.5,
+                ease: "power2.inOut",
+                force3D: false,
+              },
+              "outro",
+            )
+            .to(
+              ".faq-more-info",
+              { x: "8vw", autoAlpha: 1, duration: 1.2, ease: "power3.out" },
+              "outro+=0.2",
+            );
+
+          items.forEach((item) => {
+            item.addEventListener("toggle", () => {
+              ScrollTrigger.refresh();
+            });
+          });
+        },
+      );
+
+      mm.add(
+        "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const hero = document.getElementById("faq-mobile-hero");
+          const bg = document.getElementById("faq-mobile-bg");
+          const heroContent = document.getElementById("faq-mobile-content");
+          const sheet = document.getElementById("faq-mobile-sheet");
+
+          const moreScene = document.querySelector(".mobile-more-scene");
+          const morePin = document.querySelector(".mobile-more-pin");
+
+          const mobileItems =
+            gsap.utils.toArray<HTMLElement>(".mobile-faq-item");
+          const words = gsap.utils.toArray<HTMLElement>(".mobile-word");
+
+          if (!hero || !bg || !heroContent || !sheet || !moreScene || !morePin)
+            return;
+
+          gsap.set(sheet, { yPercent: 100 });
+          gsap.set(mobileItems, { opacity: 0, y: 48 });
+          gsap.set(words, { x: "120vw", autoAlpha: 0 });
+          gsap.set(".mobile-contact-text", { y: 48, autoAlpha: 0 });
+          gsap.set(".mobile-email", { y: 48, autoAlpha: 0 });
+
+          const shrinkTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: hero,
+              start: "top top",
+              end: "+=150%",
+              scrub: 0,
+              pin: true,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          shrinkTl
+            .to(bg, { height: "40vh", ease: "power2.inOut", duration: 1 }, 0)
+            .to(
+              heroContent,
+              {
+                y: "-20vh",
+                scale: 0.8,
+                transformOrigin: "center center",
+                ease: "power2.inOut",
+                duration: 1,
+              },
+              0,
+            )
+            .to(sheet, { yPercent: 0, ease: "power2.inOut", duration: 1 }, 0);
+
+          mobileItems.forEach((item) => {
+            item.addEventListener("toggle", () => {
+              ScrollTrigger.refresh();
+            });
+
+            gsap.to(item, {
+              opacity: 1,
+              y: 0,
+              ease: "none",
+              scrollTrigger: {
+                trigger: item,
+                start: "top 95%",
+                end: "top 65%",
+                scrub: 1,
+              },
+            });
+          });
+
+          const wordTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: moreScene,
+              start: "top top",
+              end: "+=250%",
+              scrub: 1,
+              pin: morePin,
+            },
+          });
+
+          wordTl.to(
+            words,
+            {
+              x: "-50vw",
+              keyframes: [
+                { autoAlpha: 1, duration: 6 },
+                { autoAlpha: 1, duration: 10 },
+                { autoAlpha: 0, duration: 6 },
+              ],
+              stagger: 2,
+              duration: 40,
+              ease: "none",
+            },
+            0,
+          );
+          const contactText = moreScene.querySelector(".mobile-contact-text");
+
+          const contactEmail = moreScene.querySelector(".mobile-email");
+
+          wordTl.to(
+            contactText,
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 10,
+              ease: "power3.out",
+            },
+            "-=1",
+          );
+
+          wordTl.to(
+            contactEmail,
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 10,
+              ease: "power3.out",
+            },
+            "-=8",
+          );
+        },
+      );
+
+      ScrollTrigger.refresh();
+    }
+
+    document.addEventListener("astro:page-load", initFaq);
+    document.addEventListener("astro:before-swap", () => mm?.revert());
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initFaq, { once: true });
+    } else {
+      initFaq();
+    }
+  </script>
+</section>

@@ -8,10 +8,10 @@ import PageTransition from "../providers/PageTransition.astro";
 import PageLayout from "./PageLayout.astro";
 import "../styles/global.css";
 
-const { title, description } = Astro.props;
+const { title, description, canonical, ogImage } = Astro.props;
 ---
 
-<PageLayout title={title} description={description}>
+<PageLayout title={title} description={description} canonical={canonical} ogImage={ogImage}>
   <Fragment slot="head">
     <script is:inline>
       if ("scrollRestoration" in history) {
@@ -88,6 +88,7 @@ const { title, description } = Astro.props;
         ],
       })}
     />
+    <slot name="head" />
   </Fragment>
 
   <LandscapeWarning />

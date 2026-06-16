@@ -13,7 +13,7 @@ export const site = {
   ogImage: "/images/mountainV-og.jpg",
   nav_left: [
     { label: "Services", href: "#services" },
-    { label: "FAQ", href: "#faq" },
+    { label: "FAQ", href: "/faq" },
   ],
   nav_right: [
     { label: "About", href: "#about" },

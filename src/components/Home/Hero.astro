@@ -4,7 +4,7 @@
 >
   <div class="absolute inset-0 -z-10 bg-white/80 opacity-40">
     <div
-      class="absolute inset-0 bg-gradient-to-t from-[#e22472] via-[#9f3794] to-[#7e4199] opacity-30"
+      class="absolute inset-0 bg-gradient-to-t from-[#e22472] via-[#9f3794] to-[#7e4199] opacity-10"
     >
     </div>
   </div>
@@ -33,27 +33,33 @@
   </div>
 
   <h1
-    class="hero-headline relative z-10 m-0 p-0 font-sans text-[10vh] lg:text-[20vh] xl:text-[28vh] font-black leading-[1.05] tracking-tight"
+    class="hero-headline m-0 p-0 font-sans text-[10vh] lg:text-[15vh] xl:text-[25vh] font-black leading-[1.05] tracking-tight"
   >
     <div class="line color-black flex flex-wrap gap-x-[0.3em]">
-      <span class="word overflow-hidden pb-[0.08em]">
-        <span class="word-inner inline-block translate-y-full">Make</span>
+      <span class="word relative z-[30] overflow-hidden pb-[0.08em]">
+        <span class="word-inner inline-block translate-y-full">Put</span>
       </span>
-      <span class="word overflow-hidden pb-[0.08em]">
+      <span class="word relative z-[30] overflow-hidden pb-[0.08em]">
         <span class="word-inner inline-block translate-y-full">your</span>
       </span>
     </div>
 
     <div class="line flex flex-wrap gap-x-[0.3em]">
-      <span class="word overflow-hidden pb-[0.08em]">
+      <span class="word relative z-[10] overflow-hidden pb-[0.08em]">
         <span
           class="word-inner text-gray-500 inline-block translate-y-full font-normal italic"
           >vision</span
         >
       </span>
-      <span class="word overflow-hidden pb-[0.08em]">
+      <span class="word relative z-[30] overflow-hidden pb-[0.08em]">
+        <span
+          class="word-inner inline-block text-[8vh] xl:text-[15vh] translate-y-full"
+          >in</span
+        >
+      </span>
+      <span class="word relative z-[30] overflow-hidden pb-[0.08em]">
         <span class="word-inner word-gradient inline-block translate-y-full"
-          >work.</span
+          >action.</span
         >
       </span>
     </div>
@@ -71,12 +77,13 @@
 
   .hero-svg-bg {
     position: absolute;
-    inset: 50% auto auto 50%;
-    z-index: 0;
+    inset: 59% auto auto 50%;
+    z-index: 20;
     width: min(150vw, 1900px);
     pointer-events: none;
     opacity: 0;
-    filter: saturate(1);
+    filter: saturate(1) brightness(1)
+      drop-shadow(0px 10px 30px rgba(226, 36, 114, 0.4));
     transform: translate(-50%, -50%);
     animation: hero-svg-drift 12s ease-in-out infinite alternate;
   }
@@ -120,7 +127,8 @@
   @media (max-width: 768px) {
     .hero-svg-bg {
       width: 220vw;
-      opacity: 0.18;
+      opacity: 1;
+      inset: 80% auto auto 50%;
     }
   }
 
@@ -159,8 +167,8 @@
     if (prefersReduced || window.__vlLogoDone === true) {
       gsap.set(wordInners, { y: 0 });
       if (sub) gsap.set(sub, { opacity: 1 });
-      gsap.set(".hero-svg-bg", { opacity: 0.22 });
-      
+      gsap.set(".hero-svg-bg", { opacity: 0.8 });
+
       const paths = document.querySelectorAll(
         ".hero-svg-path",
       ) as NodeListOf<SVGElement>;
@@ -181,7 +189,7 @@
           sub,
           {
             opacity: 1,
-            duration: 0.6,
+            duration: 0.4,
             ease: "power2.out",
           },
           "-=0.2",
@@ -189,7 +197,7 @@
         .set(
           ".hero-svg-bg",
           {
-            opacity: 0.22,
+            opacity: 0.4,
           },
           "-=0.5",
         )
@@ -203,16 +211,19 @@
 
     const heroEl = document.getElementById("hero");
     if (heroEl) {
-      const heroAnim = gsap.to([".hero-headline", "#hero > div:first-child"], {
-        y: -120,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
+      const heroAnim = gsap.to(
+        [".hero-headline .word", "#hero > div:first-child"],
+        {
+          y: -120,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
         },
-      });
+      );
       window.__vlHeroScrollTrigger = heroAnim.scrollTrigger;
     }
   }

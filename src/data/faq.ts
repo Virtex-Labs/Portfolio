@@ -1,50 +1,52 @@
 export const faqs = [
   {
-    question: "What is UniHome?",
-    answer: "UniHome is a platform that helps students find safe, affordable, and verified accommodation near their universities."
+    question: "What exactly does Virtex Labs do?",
+    answer:
+      "We help teams of all sizes turn ideas into polished digital products and websites. Whether you are a small startup, a growing business, or an established company, we focus on thoughtful design, solid development, and a smooth user experience.",
   },
   {
-    question: "How do I book a hostel?",
-    answer: "You can browse available properties, select a room, and follow the booking process through the platform."
+    question: "Do you design everything from scratch or use pre-made templates?",
+    answer:
+      "Everything is built from scratch. That means your project is shaped around your goals, your brand, and your users, rather than being forced into a template.",
   },
   {
-    question: "Do I need an account to make a booking?",
-    answer: "Yes, creating an account allows you to manage bookings, save favorites, and communicate with property owners."
+    question: "What technologies and frameworks do you build with?",
+    answer:
+      "We work with modern, reliable tools that fit the project best. That can include Astro, React, and serverless deployment setups, with an emphasis on speed, security, and maintainability.",
   },
   {
-    question: "Are all hostels verified?",
-    answer: "We strive to verify all listed properties to ensure they meet our quality and safety standards."
+    question: "How long does a typical web project take from start to finish?",
+    answer:
+      "Timelines depend on scope and complexity. A smaller website or landing page may take 2 to 4 weeks, while larger websites or custom applications can take 6 to 12 weeks or more.",
   },
   {
-    question: "Can I contact hostel owners directly?",
-    answer: "Yes, you can communicate with hostel owners through the platform before making a booking."
+    question: "Do you handle both the visual design and the actual backend coding?",
+    answer:
+      "Yes. We handle the full process, from planning and interface design to development and launch, so the final product feels consistent end to end.",
   },
   {
-    question: "Is there a booking fee?",
-    answer: "Booking fees may vary depending on the property. Any applicable charges will be shown before confirmation."
+    question: "Can you help my startup build and launch a Minimum Viable Product (MVP)?",
+    answer:
+      "Yes. We work with startups that need to move quickly without cutting corners. The goal is to build the right version first, launch it well, and leave room to grow.",
   },
   {
-    question: "Can I cancel my booking?",
-    answer: "Cancellation policies differ by property. Please review the property's cancellation terms before booking."
+    question: "Will my website be optimized for mobile devices and search engines (SEO)?",
+    answer:
+      "Yes. We build responsive websites that work well on mobile and include strong technical SEO foundations, clean structure, and fast performance.",
   },
   {
-    question: "How do I find accommodation near my university?",
-    answer: "Use the search feature to filter properties by university, location, budget, and amenities."
+    question: "How much does a custom web project cost?",
+    answer:
+      "Pricing depends on the size of the project, the features needed, and the timeline. We work with different budgets and project scales, and we scope things clearly before any work begins.",
   },
   {
-    question: "What payment methods are accepted?",
-    answer: "Most properties accept major debit cards, credit cards, and other supported online payment methods."
+    question: "Do you provide ongoing maintenance and support after launch?",
+    answer:
+      "Yes. We offer ongoing support for updates, fixes, performance checks, and small changes after launch, based on what your project needs.",
   },
   {
-    question: "Can I leave reviews for a hostel?",
-    answer: "Yes, students can leave reviews and ratings after completing their stay to help future tenants."
+    question: "What is the process to get started on a project together?",
+    answer:
+      "It starts with a discovery call to understand your goals, audience, and requirements. From there, we map out the scope, timeline, and next steps before design and development begin.",
   },
-  {
-    question: "What amenities can I expect in listed hostels?",
-    answer: "Amenities vary by property but commonly include Wi-Fi, laundry facilities, study areas, parking, and security."
-  },
-  {
-    question: "How can I get support if I face an issue?",
-    answer: "You can contact our support team through the help center, email, or the contact form available on the platform."
-  }
 ];

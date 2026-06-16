@@ -1,42 +1,52 @@
 export const faqs = [
   {
     question: "What exactly does Virtex Labs do?",
-    answer: "We are a premium digital product studio that helps teams turn ideas into polished web experiences. We specialize in high-end UI/UX design, custom web applications, and high-converting marketing websites."
+    answer:
+      "We help teams of all sizes turn ideas into polished digital products and websites. Whether you are a small startup, a growing business, or an established company, we focus on thoughtful design, solid development, and a smooth user experience.",
   },
   {
     question: "Do you design everything from scratch or use pre-made templates?",
-    answer: "Everything is designed and developed entirely from scratch. We do not rely on generic templates, ensuring your digital experience features a custom-tailored layout, unique branding, and a highly optimized codebase."
+    answer:
+      "Everything is built from scratch. That means your project is shaped around your goals, your brand, and your users, rather than being forced into a template.",
   },
   {
     question: "What technologies and frameworks do you build with?",
-    answer: "We build using ultra-modern, high-performance tech stacks optimized for speed and security. This includes utilizing frameworks like Astro and React, alongside serverless deployment architectures on global edge networks like Cloudflare."
+    answer:
+      "We work with modern, reliable tools that fit the project best. That can include Astro, React, and serverless deployment setups, with an emphasis on speed, security, and maintainability.",
   },
   {
     question: "How long does a typical web project take from start to finish?",
-    answer: "Timelines depend on complexity. A premium marketing website or landing page typically takes 2 to 4 weeks, while a custom web application or complex startup MVP can take anywhere from 6 to 12 weeks."
+    answer:
+      "Timelines depend on scope and complexity. A smaller website or landing page may take 2 to 4 weeks, while larger websites or custom applications can take 6 to 12 weeks or more.",
   },
   {
     question: "Do you handle both the visual design and the actual backend coding?",
-    answer: "Yes, we provide true end-to-end digital product creation. We manage the entire lifecycle, including strategic brand positioning, interactive UI/UX wireframing, high-fidelity visual design, and clean software engineering."
+    answer:
+      "Yes. We handle the full process, from planning and interface design to development and launch, so the final product feels consistent end to end.",
   },
   {
     question: "Can you help my startup build and launch a Minimum Viable Product (MVP)?",
-    answer: "Yes, launching startup MVPs is a core specialty. We strip away the noise to identify your core features, create a stellar user interface, and develop a production-ready product quickly so you can validate and scale."
+    answer:
+      "Yes. We work with startups that need to move quickly without cutting corners. The goal is to build the right version first, launch it well, and leave room to grow.",
   },
   {
     question: "Will my website be optimized for mobile devices and search engines (SEO)?",
-    answer: "Absolutely. Responsive mobile performance is a non-negotiable baseline. Furthermore, we bake deep technical SEO architecture, clean semantic HTML, and rapid load speeds directly into the foundational codebase."
+    answer:
+      "Yes. We build responsive websites that work well on mobile and include strong technical SEO foundations, clean structure, and fast performance.",
   },
   {
     question: "How much does a custom web project cost?",
-    answer: "Because every web experience is custom-engineered to meet unique business goals, we don't offer generic flat rates. Projects are priced based on scope, technical complexity, and timeline requirements."
+    answer:
+      "Pricing depends on the size of the project, the features needed, and the timeline. We work with different budgets and project scales, and we scope things clearly before any work begins.",
   },
   {
     question: "Do you provide ongoing maintenance and support after launch?",
-    answer: "Yes. Once the project is deployed, we offer tailored maintenance packages to handle security updates, content changes, performance monitoring, and ongoing technical support."
+    answer:
+      "Yes. We offer ongoing support for updates, fixes, performance checks, and small changes after launch, based on what your project needs.",
   },
   {
     question: "What is the process to get started on a project together?",
-    answer: "It begins with a brief discovery call where we dive into your project vision, target audience, and core technical requirements. From there, we construct a detailed strategy roadmap and project scope to kick off the design phase."
-  }
+    answer:
+      "It starts with a discovery call to understand your goals, audience, and requirements. From there, we map out the scope, timeline, and next steps before design and development begin.",
+  },
 ];

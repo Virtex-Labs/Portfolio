@@ -1,7 +1,7 @@
 ---
 import { faqs } from "../../data/faq.ts";
 import mannequin from "../../assets/images/mannequin.png";
-import { FiPlus, FiX } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import { Image } from "astro:assets";
 ---
 
@@ -54,11 +54,10 @@ import { Image } from "astro:assets";
                     </h3>
                   </span>
                   <span
-                    class="faq-plus relative mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[#050505]/15 text-[#050505] transition-transform duration-300 group-open:rotate-45"
+                    class="faq-plus relative mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[#050505]/15 text-[#050505]"
                     aria-hidden="true"
                   >
-                    <FiPlus className="absolute text-sm transition-all duration-300 group-open:rotate-90 group-open:scale-50 group-open:opacity-0" />
-                    <FiX className="absolute rotate-[-90deg] scale-50 text-sm opacity-0 transition-all duration-300 group-open:rotate-0 group-open:scale-100 group-open:opacity-100" />
+                    <FiPlus className="text-sm" />
                   </span>
                 </summary>
 
@@ -160,11 +159,10 @@ import { Image } from "astro:assets";
                     </h3>
                   </span>
                   <span
-                    class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[#050505]/15 text-sm font-black transition-transform duration-300 group-open:rotate-45"
+                    class="faq-plus grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[#050505]/15 text-[#050505] text-sm font-black"
                     aria-hidden="true"
                   >
-                    <FiPlus className="absolute text-sm transition-all duration-300 group-open:rotate-90 group-open:scale-50 group-open:opacity-0" />
-                    <FiX className="absolute rotate-[-90deg] scale-50 text-sm opacity-0 transition-all duration-300 group-open:rotate-0 group-open:scale-100 group-open:opacity-100" />
+                    <FiPlus className="text-sm" />
                   </span>
                 </summary>
 
@@ -309,6 +307,7 @@ import { Image } from "astro:assets";
       background-color: #e22472;
       color: white;
       border-color: transparent;
+      transform: rotate(135deg);
     }
 
     .faq-item[open] .faq-num,

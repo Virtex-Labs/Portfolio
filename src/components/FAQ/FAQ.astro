@@ -283,7 +283,8 @@ import { Image } from "astro:assets";
     .faq-item,
     .mobile-faq-item {
       position: relative;
-      border-left: 2px solid transparent;
+      border-left: 3px solid transparent;
+      border-radius: 20px;
       transition:
         border-color 0.4s ease,
         background-color 0.3s ease;
@@ -615,7 +616,7 @@ import { Image } from "astro:assets";
           if (!hero || !bg || !heroContent || !sheet || !moreScene || !morePin)
             return;
 
-          gsap.set(sheet, { yPercent: 100 });
+          gsap.set(sheet, { y: "200vh" });
           gsap.set(mobileItems, { opacity: 0, y: 48 });
           gsap.set(words, { x: "120vw", autoAlpha: 0 });
           gsap.set(".mobile-contact-text", { y: 48, autoAlpha: 0 });
@@ -637,7 +638,7 @@ import { Image } from "astro:assets";
             .to(
               heroContent,
               {
-                y: "-20vh",
+                y: "-30vh",
                 scale: 0.8,
                 transformOrigin: "center center",
                 ease: "power2.inOut",
@@ -645,7 +646,7 @@ import { Image } from "astro:assets";
               },
               0,
             )
-            .to(sheet, { yPercent: 0, ease: "power2.inOut", duration: 1 }, 0);
+            .to(sheet, { y: "-15vh", ease: "power2.inOut", duration: 1 }, 0);
 
           mobileItems.forEach((item) => {
             item.addEventListener("toggle", () => {
@@ -658,7 +659,7 @@ import { Image } from "astro:assets";
               ease: "none",
               scrollTrigger: {
                 trigger: item,
-                start: "top 95%",
+                start: "top 80%",
                 end: "top 65%",
                 scrub: 1,
               },

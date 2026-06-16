@@ -4,7 +4,7 @@
 >
   <div class="absolute inset-0 -z-10 bg-white/80 opacity-40">
     <div
-      class="absolute inset-0 bg-gradient-to-t from-[#e22472] via-[#9f3794] to-[#7e4199] opacity-10"
+      class="absolute inset-0 bg-gradient-to-t from-[#e22472] via-[#9f3794] to-[#7e4199] opacity-30"
     >
     </div>
   </div>
@@ -167,7 +167,7 @@
     if (prefersReduced || window.__vlLogoDone === true) {
       gsap.set(wordInners, { y: 0 });
       if (sub) gsap.set(sub, { opacity: 1 });
-      gsap.set(".hero-svg-bg", { opacity: 0.8 });
+      gsap.set(".hero-svg-bg", { opacity: 0.4 });
 
       const paths = document.querySelectorAll(
         ".hero-svg-path",

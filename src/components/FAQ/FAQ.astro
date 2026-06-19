@@ -10,6 +10,7 @@ import { Image } from "astro:assets";
   class="relative overflow-hidden bg-[#fcf2f6] text-[#050505]"
   aria-label="Frequently Asked Questions"
 >
+  <h1 class="sr-only">Frequently Asked Questions</h1>
   <section
     id="faq-desktop"
     class="faq-desktop-scene hidden lg:block relative min-h-screen overflow-hidden bg-[#fcf2f6]"
@@ -23,7 +24,7 @@ import { Image } from "astro:assets";
       <header
         class="faq-title-wrap pointer-events-none absolute left-1/2 top-1/2 z-30 w-full max-w-[92vw] -translate-x-1/2 -translate-y-1/2 text-center"
       >
-        <h1
+        <h2
           class="faq-title mx-auto space-x-11 text-[clamp(5.25rem,10.4vw,13rem)] font-black leading-[1.2] tracking-tight text-[#050505]"
         >
           Frequently Asked <br />
@@ -31,7 +32,7 @@ import { Image } from "astro:assets";
             class="not-italic text-transparent bg-clip-text bg-gradient-to-r from-[#e22472] via-[#9f3794] to-[#7e4199]"
             >Questions</em
           >
-        </h1>
+        </h2>
       </header>
 
       <div
@@ -129,14 +130,14 @@ import { Image } from "astro:assets";
           id="faq-mobile-content"
           class="absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center px-6 text-center will-change-transform"
         >
-          <h1
+          <h2
             class="text-[15vh] sm:text-[18vh] font-black leading-[1.2] tracking-tight text-[#050505]"
           >
             FA<em
               class="not-italic text-transparent bg-clip-text bg-gradient-to-r from-[#e22472] via-[#9f3794] to-[#7e4199]"
               >Q</em
             >
-          </h1>
+          </h2>
         </div>
       </div>
 
@@ -190,12 +191,11 @@ import { Image } from "astro:assets";
           aria-label="Need more info?"
         >
           <span class="mobile-word block">Need</span>
+          <span class="mobile-word block"> more </span>
           <span
             class="mobile-word block text-transparent bg-clip-text bg-gradient-to-r from-[#e22472] via-[#9f3794] to-[#7e4199]"
+            >info?</span
           >
-            more
-          </span>
-          <span class="mobile-word block">info?</span>
         </h2>
 
         <div
@@ -616,7 +616,7 @@ import { Image } from "astro:assets";
           if (!hero || !bg || !heroContent || !sheet || !moreScene || !morePin)
             return;
 
-          gsap.set(sheet, { y: "200vh" });
+          gsap.set(sheet, { y: "125vh" });
           gsap.set(mobileItems, { opacity: 0, y: 48 });
           gsap.set(words, { x: "120vw", autoAlpha: 0 });
           gsap.set(".mobile-contact-text", { y: 48, autoAlpha: 0 });
@@ -659,7 +659,7 @@ import { Image } from "astro:assets";
               ease: "none",
               scrollTrigger: {
                 trigger: item,
-                start: "top 80%",
+                start: "top 95%",
                 end: "top 65%",
                 scrub: 1,
               },
@@ -681,12 +681,12 @@ import { Image } from "astro:assets";
             {
               x: "-50vw",
               keyframes: [
-                { autoAlpha: 1, duration: 6 },
-                { autoAlpha: 1, duration: 10 },
-                { autoAlpha: 0, duration: 6 },
+                { autoAlpha: 0, duration: 3 },
+                { autoAlpha: 1, duration: 5 },
+                { autoAlpha: 0, duration: 3 },
               ],
               stagger: 2,
-              duration: 40,
+              duration: 10,
               ease: "none",
             },
             0,

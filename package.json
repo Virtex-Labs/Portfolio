@@ -20,6 +20,7 @@
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "astro": "^6.3.7",
+    "astro-seo": "^1.1.0",
     "astro-useragent": "^6.0.0",
     "framer-motion": "^12.40.0",
     "get-browser": "^2.0.0",

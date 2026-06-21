@@ -8,7 +8,7 @@ const services = site.services;
   <section
     id="desktop-services"
     aria-label="Find the service you need"
-    class="hidden sm:pt-72 lg:block relative w-full bg-[#fcf2f6] py-32 overflow-hidden z-10"
+    class="hidden sm:pt-72 sm:block relative w-full bg-[#fcf2f6] py-32 overflow-hidden z-10"
   >
     <div class="w-full max-w-screen-2xl mx-auto px-10">
       <div class="flex items-start justify-between mb-24">
@@ -53,7 +53,7 @@ const services = site.services;
   <section
     id="mobile-services"
     aria-label="Find the service you need mobile"
-    class="block lg:hidden relative w-full bg-[#fcf2f6] py-24 px-4 overflow-hidden z-10"
+    class="block sm:hidden relative w-full bg-[#fcf2f6] py-24 px-4 overflow-hidden z-10"
   >
     <div class="relative mb-16 px-2">
       <h2
@@ -105,7 +105,7 @@ const services = site.services;
     if (mm) mm.revert();
     mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1024px)", () => {
+    mm.add("(min-width: 712px)", () => {
       const titles = gsap.utils.toArray(".desktop-service-title");
 
       titles.forEach((title: any) => {

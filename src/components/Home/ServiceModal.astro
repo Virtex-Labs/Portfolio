@@ -136,10 +136,16 @@
 
     const lockScroll = () => {
       document.body.classList.add("modal-open");
+      if (window.__lenis) {
+        window.__lenis.stop();
+      }
     };
 
     const unlockScroll = () => {
       document.body.classList.remove("modal-open");
+      if (window.__lenis) {
+        window.__lenis.start();
+      }
     };
 
     const resetModalState = () => {

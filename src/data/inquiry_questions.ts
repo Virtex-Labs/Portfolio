@@ -1,17 +1,17 @@
 export const SERVICES = [
   {
-    id: "web-app",
-    title: "Web Application Development",
-    description:
-      "For complex platforms, custom software, and portals (e.g. SaaS, internal dashboards, booking systems).",
-    info: "Milestone Model (30/30/40): 30% upfront for Project Kickoff & Architecture, 30% split across verifiable Feature-Based Sprints, and 40% upon UAT & Final Deployment.",
-  },
-  {
     id: "web-design",
     title: "Web Development & Design",
     description:
       "For landing pages, digital business cards, and marketing sites (e.g. standard business presences).",
     info: "Hybrid Setup: 50% upfront Commitment Deposit, and 50% upon Pre-Launch approval on a staging server. A standard Yearly Retainer plan begins post-launch for hosting and maintenance.",
+  },
+  {
+    id: "web-app",
+    title: "Web Application Development",
+    description:
+      "For complex platforms, custom software, and portals (e.g. SaaS, internal dashboards, booking systems).",
+    info: "Milestone Model (30/30/40): 30% upfront for Project Kickoff & Architecture, 30% split across verifiable Feature-Based Sprints, and 40% upon UAT & Final Deployment.",
   },
   {
     id: "mobile-app",

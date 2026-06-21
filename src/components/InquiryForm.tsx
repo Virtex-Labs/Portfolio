@@ -331,7 +331,7 @@ export default function InquiryForm() {
 
       <div className={`transition-all duration-500 w-full flex-col lg:flex-row max-w-[1600px] mx-auto p-4 sm:p-8 lg:p-12 pb-24 gap-8 lg:items-start lg:justify-center ${phase === 2 ? 'flex opacity-100 animate-in fade-in zoom-in-95' : 'hidden opacity-0'}`}>
 
-        <div className="flex flex-col gap-6 lg:w-1/3 w-full shrink-0 sm:sticky sm:top-[120px] h-fit z-10">
+        <div className="flex flex-col gap-6 lg:w-1/3 w-full shrink-0 sm:sticky lg:top-[120px] h-fit z-10">
           <div>
             <Button variant="outline" size="sm" type="button" onClick={() => { setPhase(1); setTimeout(scrollToTop, 50); }} className="mb-6 w-fit">
               &larr; Back

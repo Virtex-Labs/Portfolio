@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+import { generateInquiryEmailHtml } from '../../data/inquiry_mails';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -9,9 +10,15 @@ export const POST: APIRoute = async ({ request }) => {
     const message = data.get('message')?.toString();
     const turnstileToken = data.get('cf-turnstile-response')?.toString();
     const tag = data.get('tag')?.toString();
+    const service = data.get('service')?.toString();
+    const questionnaireDataStr = data.get('questionnaireData')?.toString();
 
-    if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
+    if (!name || !email) {
+      return new Response(JSON.stringify({ error: "Missing name or email" }), { status: 400 });
+    }
+
+    if (!service && !message) {
+      return new Response(JSON.stringify({ error: "Message is required" }), { status: 400 });
     }
 
     if (!turnstileToken) {
@@ -31,13 +38,34 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const resend = new Resend(import.meta.env.RESEND_API_KEY);
-    const subjectTag = tag ? ` about ${tag}` : '';
+
+    const isProjectInquiry = !!service;
+    let subject = '';
+    let htmlContent = '';
+
+    if (isProjectInquiry) {
+      subject = `🚀 [New Project Inquiry] ${service} - ${name}`;
+      htmlContent = generateInquiryEmailHtml(service, name, email, questionnaireDataStr);
+    } else {
+      const subjectTag = tag ? ` about ${tag}` : '';
+      subject = `New Portfolio Lead from ${name}${subjectTag}`;
+      htmlContent = `
+        <div style="font-family: sans-serif; color: #111;">
+          <h2>New Portfolio Lead from ${name}</h2>
+          <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+          ${tag ? `<p><strong>Tag:</strong> ${tag}</p>` : ''}
+          <hr style="border: 1px solid #eee; margin: 20px 0;" />
+          <h3>Message</h3>
+          <p style="white-space: pre-wrap; background-color: #f9f9f9; padding: 15px; border-radius: 8px;">${message}</p>
+        </div>
+      `;
+    }
 
     const { error } = await resend.emails.send({
-      from: 'hello@virtexlabs.com',
+      from: 'Virtex Labs <hello@virtexlabs.com>',
       to: 'virtexlabs27@gmail.com',
-      subject: `New Portfolio Lead from ${name}${subjectTag}`,
-      text: `Email: ${email}\nMessage:\n${message}`,
+      subject: subject,
+      html: htmlContent,
     });
 
     if (error) {

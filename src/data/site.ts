@@ -16,7 +16,7 @@ export const site = {
     { label: "FAQ", href: "/faq" },
   ],
   nav_right: [
-    { label: "About", href: "#about" },
+    { label: "Inquiry", href: "/inquiry" },
     { label: "Contact", href: "#contact" }
   ],
   features: [

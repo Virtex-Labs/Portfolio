@@ -46,6 +46,15 @@ function initCursor() {
 
   if (!finePointer || reducedMotion) return;
 
+  const noCursorPaths = ["/inquiry", "/inquiry/", "/terms", "/terms/"];
+  if (noCursorPaths.includes(window.location.pathname)) {
+    if (cursorElement && document.body.contains(cursorElement)) {
+      document.body.removeChild(cursorElement);
+    }
+    document.documentElement.classList.remove("has-custom-cursor");
+    return;
+  }
+
   if (!cursorInitialized) {
     cursorElement = document.createElement("div");
     cursorElement.id = "custom-cursor";
@@ -137,7 +146,6 @@ function initCursor() {
     cursorInitialized = true;
   }
 
-  // Re-append to new body on View Transition
   if (cursorElement && !document.body.contains(cursorElement)) {
     document.body.appendChild(cursorElement);
     document.documentElement.classList.add("has-custom-cursor");

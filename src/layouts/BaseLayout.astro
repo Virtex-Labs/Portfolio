@@ -8,7 +8,7 @@ import PageTransition from "../providers/PageTransition.astro";
 import PageLayout from "./PageLayout.astro";
 import "../styles/global.css";
 
-const { title, description, canonical, ogImage } = Astro.props;
+const { title, description, canonical, ogImage, forceSolidNav = false, noHideNav = false } = Astro.props;
 ---
 
 <PageLayout title={title} description={description} canonical={canonical} ogImage={ogImage}>
@@ -50,23 +50,7 @@ const { title, description, canonical, ogImage } = Astro.props;
       set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@graph": [
-          {
-            "@type": "Organization",
-            "@id": "https://virtexlabs.com/#organization",
-            name: "Virtex Labs",
-            url: "https://virtexlabs.com",
-            logo: "https://virtexlabs.com/favicon.svg",
-            sameAs: [
-              "https://twitter.com/virtexlabs",
-              "https://linkedin.com/company/virtexlabs",
-              "https://www.instagram.com/virtexlabs",
-            ],
-            contactPoint: {
-              "@type": "ContactPoint",
-              email: "hello@virtexlabs.com",
-              contactType: "customer service",
-            },
-          },
+
           {
             "@type": "WebSite",
             "@id": "https://virtexlabs.com/#website",
@@ -93,7 +77,7 @@ const { title, description, canonical, ogImage } = Astro.props;
 
   <LandscapeWarning />
   <Welcome />
-  <Navbar />
+  <Navbar forceSolid={forceSolidNav} noHide={noHideNav} />
   <CookieBanner />
 
   <main>

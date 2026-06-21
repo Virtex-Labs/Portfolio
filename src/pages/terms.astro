@@ -1,0 +1,147 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="VIRTEX LABS | Terms & Conditions - Digital Agency Policies"
+  description="Review the official Terms and Conditions, payment structures, intellectual property rights, and service policies for Virtex Labs digital projects."
+  canonical="https://virtexlabs.com/terms"
+  forceSolidNav={true}
+  noHideNav={true}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Terms & Conditions - Virtex Labs",
+        "description": "Read the official Terms and Conditions governing digital design and development services provided by Virtex Labs.",
+        "url": "https://virtexlabs.com/terms"
+      }
+    </script>
+  </Fragment>
+  <div class="min-h-screen bg-white text-zinc-900 pt-32 pb-32 px-6 lg:px-20 relative z-10 isolate">
+    <div class="max-w-3xl mx-auto">
+      
+      <div class="border-b border-zinc-200 pb-8 mb-12">
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900 mb-4">
+          Terms & Conditions
+        </h1>
+        <p class="text-zinc-500 flex items-center gap-2 font-medium">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Last Updated: {new Date().toLocaleDateString()}
+        </p>
+      </div>
+
+      <div class="space-y-12 text-base text-zinc-600 leading-relaxed">
+        
+        <section>
+          <h2 class="text-2xl font-bold text-zinc-900 tracking-tight mb-4">1. Agreement to Terms</h2>
+          <p>
+            These Terms and Conditions ("Agreement") constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("Client"), and Virtex Labs ("Company", "we", "us", or "our"). By submitting a project inquiry and checking the consent box, you agree that you have read, understood, and are bound by all of these Terms and Conditions.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-zinc-900 tracking-tight mb-4">2. Scope of Work & Proposals</h2>
+          <p>
+            The submission of a project inquiry does not constitute a formal contract for development. Upon reviewing your inquiry, Virtex Labs will provide a detailed Statement of Work (SOW) or formal proposal. All specific deliverables, feature requirements, and technical specifications must be explicitly documented in the final SOW before any engagement begins.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-zinc-900 tracking-tight mb-4">3. Payment & Billing Architecture</h2>
+          <p class="mb-4">
+            Virtex Labs utilizes deliverable-based billing to ensure project momentum and quality. Specific payment terms will be outlined in your SOW, generally adhering to the following structural models:
+          </p>
+          <ul class="list-disc list-outside ml-6 space-y-3 mb-8">
+            <li><strong class="text-zinc-900 font-semibold">Software & Application Development:</strong> Billed via a milestone model (e.g., 30% Project Initiation & Architecture, 30% Feature-Based Deliverables, 40% Final Deployment & UAT). Subsequent phases will not commence until the preceding milestone invoice is cleared.</li>
+            <li><strong class="text-zinc-900 font-semibold">Web Design & Marketing Sites:</strong> Billed via a hybrid structure requiring a 50% upfront commitment deposit and 50% prior to staging approval, followed by an agreed-upon annual maintenance retainer.</li>
+            <li><strong class="text-zinc-900 font-semibold">UI/UX & Brand Design:</strong> Billed via progression models (e.g., 40/40/20 or 50/50 splits) tied directly to creative reviews and final asset handoffs.</li>
+          </ul>
+          
+          <div class="bg-zinc-50 border border-zinc-200 rounded-lg p-5 text-sm">
+            <strong class="text-zinc-900 block mb-1 text-base">Late Payments:</strong>
+            Invoices are strictly due upon receipt unless otherwise stated. Virtex Labs reserves the right to pause all design and development work, withhold final source files, or suspend active hosting if an invoice remains unpaid past its grace period.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-zinc-900 tracking-tight mb-4">4. Client Responsibilities & Project Delays</h2>
+          <p class="mb-4">
+            The successful execution of our services relies on timely collaboration. The Client agrees to:
+          </p>
+          <ul class="list-disc list-outside ml-6 space-y-2 mb-8">
+            <li>Provide necessary brand assets, copywriting, API keys, and server access within agreed-upon timeframes.</li>
+            <li>Review deliverables and provide consolidated feedback within the "Acceptance Window" (typically 5 business days) defined in the SOW.</li>
+          </ul>
+
+          <div class="bg-red-50/50 border border-red-100 rounded-lg p-5 text-sm text-red-800">
+            <strong class="text-red-900 block mb-1 text-base">Project Abandonment:</strong>
+            If the Client fails to communicate or provide necessary feedback for a period exceeding fourteen (14) consecutive days, the project will be placed on hold. Resuming the project may incur a remobilization fee. If the delay exceeds thirty (30) days, Virtex Labs reserves the right to terminate the project, retaining all previously paid funds for work rendered.
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-zinc-900 tracking-tight mb-4">5. Revisions & Scope Creep</h2>
+          <p>
+            Each project phase includes a specific number of revision rounds as defined in your contract. Feedback provided outside of these dedicated rounds, or requests for features not documented in the original SOW, constitute "Scope Creep." Such requests will be evaluated and billed separately either at our standard hourly rate or as a fixed-price addendum.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-zinc-900 tracking-tight mb-4">6. Intellectual Property Rights</h2>
+          <p class="mb-4">
+            Virtex Labs retains all ownership and intellectual property rights to the source code, design files, and final deliverables during the development process. <strong class="text-zinc-900 font-semibold">Full intellectual property rights and licenses are transferred to the Client only upon the complete clearing of all final invoices.</strong> 
+          </p>
+          <p>
+            Virtex Labs retains a non-exclusive, perpetual right to utilize the completed project, including wireframes, code snippets, and visual assets, for portfolio display, marketing, and promotional purposes.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-zinc-900 tracking-tight mb-4">7. Confidentiality & Non-Disclosure</h2>
+          <p>
+            Both parties agree to hold in strict confidence any proprietary business information, trade secrets, algorithms, or client data shared during the inquiry and development process. This confidentiality clause remains in effect during and after the termination of the project.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-zinc-900 tracking-tight mb-4">8. Warranties & Limitation of Liability</h2>
+          <p class="mb-4">
+            Virtex Labs guarantees that the services provided will be performed to a professional standard. However, we do not warrant that software, applications, or websites will be entirely error-free or completely secure against third-party malicious attacks.
+          </p>
+          <p>
+            In no event shall Virtex Labs, its directors, employees, or contractors be liable to you or any third party for any direct, indirect, consequential, exemplary, incidental, special, or punitive damages, including lost profit or lost revenue, arising from your use of our services. Our total liability to you for any cause whatsoever will at all times be limited to the amount paid, if any, by you to us for the specific project in dispute.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-zinc-900 tracking-tight mb-4">9. Termination</h2>
+          <p>
+            Either party may terminate the working relationship with written notice if the other party breaches a material term of this Agreement and fails to cure the breach within seven (7) days. If the Client initiates termination without cause prior to project completion, Virtex Labs shall retain the initial deposit and issue a final invoice for any unbilled hours or milestones completed up to the date of cancellation.
+          </p>
+        </section>
+
+        <section class="border-t border-zinc-200 pt-8 mt-16">
+          <h2 class="text-2xl font-bold text-zinc-900 tracking-tight mb-4">10. Contact Information</h2>
+          <p>
+            For any legal inquiries, questions about these terms, or requests for formal documentation, please contact our administrative team at: <a
+              href="mailto:hello@virtexlabs.com"
+              class="text-primary hover:underline font-semibold">hello@virtexlabs.com</a
+            >.
+          </p>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  body {
+    background-color: #ffffff !important;
+  }
+</style>

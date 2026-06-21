@@ -23,7 +23,7 @@ const {
     <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="web, mobile app, ui, ux, digital, software, webdesign, development, agency, startup, freelance, creative studio, full-stack, design, VirtexLabs, Virtex Labs, Vertex Labs, Virtex, Vertex, Labs, Digital"
+      content="web, mobile app, ui, ux, digital, software, webdesign, development, agency, startup, freelance, creative studio, full-stack, design, VirtexLabs, Virtex Labs, Virtex, Labs, Digital"
     />
     <meta name="author" content="Virtex Labs" />
     <link rel="canonical" href={canonical} />
@@ -50,22 +50,47 @@ const {
 
     <script
       type="application/ld+json"
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: "Virtex Labs",
-        url: canonical,
-        logo: new URL("/wordmark.svg", canonical).toString(),
-        image: new URL(ogImage, canonical).toString(),
-        description: description,
-        sameAs: [
-          "https://twitter.com/virtexlabs",
-          "https://linkedin.com/company/virtexlabs",
-        ],
-      })}
+      set:html={JSON.stringify([
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://virtexlabs.com/#organization",
+          name: "Virtex Labs",
+          url: canonical,
+          logo: new URL("/wordmark.svg", canonical).toString(),
+          image: new URL(ogImage, canonical).toString(),
+          description: description,
+          sameAs: [
+            "https://twitter.com/virtexlabs",
+            "https://linkedin.com/company/virtexlabs",
+            "https://www.instagram.com/virtexlabs"
+          ],
+          contactPoint: {
+            "@type": "ContactPoint",
+            email: "hello@virtexlabs.com",
+            contactType: "customer service"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "Virtex Labs",
+          url: canonical,
+          logo: new URL("/wordmark.svg", canonical).toString(),
+          image: new URL(ogImage, canonical).toString(),
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Matale",
+            addressCountry: "LK"
+          },
+          telephone: "0771732201"
+        }
+      ])}
     />
 
     <meta name="google-site-verification" content="E4w2J-tJG9MQL5kEkcgLQu5LOPvm2-Ybc1eS7CT8rqc" />
+
+    <meta name="google-adsense-account" content="ca-pub-3482245491209978">
 
     <!-- Google Analytics (Uncomment and replace ID when ready) -->
     <!--

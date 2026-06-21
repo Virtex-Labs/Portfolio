@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import InquiryForm from "../components/InquiryForm";
+---
+
+<BaseLayout
+  title="VIRTEX LABS | Start a Project - Design & Development Inquiry"
+  description="Ready to build your digital product? Submit a project inquiry to Virtex Labs for custom web applications, mobile apps, branding, and UI/UX design services."
+  canonical="https://virtexlabs.com/inquiry"
+  forceSolidNav={true}
+>
+  <Fragment slot="head">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Virtex Labs Project Inquiry",
+        "description": "Start a project with Virtex Labs. Get a custom quote for web application development, mobile apps, UI/UX, and brand design.",
+        "url": "https://virtexlabs.com/inquiry",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "Virtex Labs",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "hello@virtexlabs.com"
+          }
+        }
+      }
+    </script>
+  </Fragment>
+
+  <div
+    class="min-h-screen w-full bg-white text-zinc-900 pt-[100px] relative z-10 isolate overflow-hidden flex flex-col"
+  >
+    <InquiryForm client:load />
+  </div>
+</BaseLayout>
+
+<style is:global>
+  body {
+    background-color: #ffffff !important;
+  }
+</style>

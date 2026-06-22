@@ -36,7 +36,7 @@ const brandHref = isHomepage ? "#hero" : "/";
                 class="group relative flex h-full items-center px-4 text-lg font-[450] tracking-wide no-underline overflow-hidden"
               >
                 <span class="relative block h-[1.3em] overflow-hidden">
-                  <span class="block transition-transform duration-300 ease-out group-hover:-translate-y-full text-black">
+                  <span class="block transition-transform duration-300 ease-out group-hover:-translate-y-full text-current">
                     {item.label}
                   </span>
                   <span class="absolute top-full left-0 block transition-transform duration-300 ease-out group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
@@ -80,7 +80,7 @@ const brandHref = isHomepage ? "#hero" : "/";
                   class="group relative flex h-full items-center px-4 text-lg font-[450] tracking-wide no-underline overflow-hidden"
                 >
                   <span class="relative block h-[1.3em] overflow-hidden">
-                    <span class="block transition-transform duration-300 ease-out group-hover:-translate-y-full text-black">
+                    <span class="block transition-transform duration-300 ease-out group-hover:-translate-y-full text-current">
                       {item.label}
                     </span>
                     <span class="absolute top-full left-0 block transition-transform duration-300 ease-out group-hover:-translate-y-full bg-[#e22472] bg-clip-text text-transparent font-semibold">
@@ -103,8 +103,8 @@ const brandHref = isHomepage ? "#hero" : "/";
           class="lg:hidden relative z-50 flex flex-col justify-center items-center w-12 h-12 gap-1.5 focus:outline-none opacity-0"
           aria-label="Toggle Menu"
         >
-          <span class="hamburger-line w-8 h-[2px] bg-black block transition-all duration-300 origin-center" />
-          <span class="hamburger-line w-8 h-[2px] bg-black block transition-all duration-300 origin-center" />
+          <span class="hamburger-line w-8 h-[2px] bg-current block transition-all duration-300 origin-center" />
+          <span class="hamburger-line w-8 h-[2px] bg-current block transition-all duration-300 origin-center" />
         </button>
       )
     }
@@ -142,10 +142,21 @@ const brandHref = isHomepage ? "#hero" : "/";
 }
 
 <style>
-  .nav-brand a:hover #nav-logo-img {
-    filter: drop-shadow(0 0 8px rgb(238, 0, 255))
-      drop-shadow(0 0 24px rgba(255, 255, 255, 0.6))
-      drop-shadow(0 0 48px rgba(255, 255, 255, 0.2)) brightness(1.1);
+  #site-nav {
+    color: black;
+  }
+  #site-nav[data-is-homepage="true"].bg-transparent {
+    color: white;
+  }
+  #site-nav[data-is-homepage="true"].bg-transparent #nav-logo-img {
+    filter: brightness(0) invert(1);
+  }
+  @media (min-width: 1024px) {
+    #site-nav[data-is-homepage="true"].bg-transparent .nav-brand a:hover #nav-logo-img {
+      filter: brightness(0) invert(1) drop-shadow(0 0 8px rgb(238, 0, 255))
+        drop-shadow(0 0 24px rgba(255, 255, 255, 0.6))
+        drop-shadow(0 0 48px rgba(255, 255, 255, 0.2));
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     #site-nav {

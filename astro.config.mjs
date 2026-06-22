@@ -15,6 +15,7 @@ export default defineConfig({
   site: "https://virtexlabs.com",
   output: 'server',
   adapter: isBuild ? cloudflare({
+    imageService: 'passthrough',
     prerenderEnvironment: 'node'
   }) : undefined,
   vite: {

@@ -4,10 +4,10 @@
 >
   <div
     id="moving-gradient"
-    class="absolute inset-0 -z-10 bg-[#360389] opacity-0 overflow-hidden"
+    class="absolute inset-0 -z-10 bg-[#360389] opacity-75 overflow-hidden"
   >
     <div
-      class="aurora-top absolute sm:-top-[20%] left-1/2 w-[120vw] h-[30vh] rounded-full bg-[#e22472] mix-blend-screen filter blur-[160px] opacity-35 will-change-transform"
+      class="aurora-top absolute sm:-top-[20%] left-1/2 w-[120vw] h-[30vh] rounded-full bg-[#e22472] mix-blend-screen filter blur-[160px] opacity-50 will-change-transform"
     >
     </div>
     <div
@@ -269,7 +269,7 @@
             duration: 2.5,
             ease: "power2.inOut",
           },
-          "+=0.5",
+          "-=2",
         );
     }
 

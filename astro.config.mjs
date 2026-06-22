@@ -8,13 +8,15 @@ import sitemap from '@astrojs/sitemap';
 
 import cloudflare from '@astrojs/cloudflare';
 
+const isBuild = process.argv.includes('build');
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://virtexlabs.com",
   output: 'server',
-  adapter: cloudflare({
+  adapter: isBuild ? cloudflare({
     prerenderEnvironment: 'node'
-  }),
+  }) : undefined,
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {

@@ -11,7 +11,6 @@ export function generateInquiryEmailHtml(
     console.error("Failed to parse questionnaire data");
   }
 
-  // Helper to cleanly extract and format answers (handles array formatting for checkboxes)
   const getAns = (key: string) => {
     const val = answers[key];
     if (!val || val === "No answer provided" || val === "None") return '<span style="color: #999;">Not provided</span>';
@@ -182,7 +181,6 @@ export function generateInquiryEmailHtml(
       `;
   }
 
-  // Inject the T&C confirmation at the end of the email
   return htmlContent.replace('</div>', `
           <div style="margin-top: 30px; padding: 12px; background-color: #f9fafb; border-radius: 6px; font-size: 13px; color: #4b5563; border: 1px solid #e5e7eb;">
             <strong>✅ Legal Confirmation:</strong> The client explicitly confirmed they have read and agreed to the Terms and Conditions of Virtex Labs prior to submitting this inquiry.

@@ -1,9 +1,24 @@
 <section
   id="about"
   aria-label="About Virtex Labs"
-  class="relative z-20 flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#FBE5EE] px-6 sm:px-10 md:px-20 lg:px-32 rounded-t-[100vw] -mt-[70px] lg:-mt-[100px]"
-  style="box-shadow: 0px -150px 100px -20px rgba(226, 36, 114, 0.7), 0px -400px 300px -50px rgba(226, 36, 114, 0.28);"
+  class="relative z-20 flex min-h-screen w-full flex-col items-center justify-center overflow-visible bg-[#FBE5EE] px-6 sm:px-10 md:px-20 lg:px-32"
 >
+  <div
+    class="absolute bottom-full left-0 w-full h-[100vh] z-10 pointer-events-none overflow-hidden"
+  >
+    <svg
+      class="absolute bottom-0 left-0 w-full h-[5vh] sm:h-[10vh] overflow-visible"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      style="filter: drop-shadow(0px -10px 40px rgba(226, 36, 114, 0.7)) drop-shadow(0px -20px 100px rgba(226, 36, 114, 0.3));"
+    >
+      <path
+        id="vision-curve"
+        class="fill-[#FBE5EE]"
+        d="M 0 101 L 0 100 Q 50 -100 100 100 L 100 101 Z"></path>
+    </svg>
+  </div>
+
   <div
     id="about-icons"
     class="pointer-events-none absolute inset-0 z-0 mt-10 sm:mt-30"
@@ -481,9 +496,8 @@
       gsap.set(words1, { autoAlpha: 1, yPercent: 110 });
       gsap.set(words2, { autoAlpha: 1, yPercent: 110 });
 
-      gsap.to(about, {
-        borderTopLeftRadius: "0px",
-        borderTopRightRadius: "0px",
+      gsap.to("#vision-curve", {
+        attr: { d: "M 0 101 L 0 100 Q 50 100 100 100 L 100 101 Z" },
         ease: "none",
         scrollTrigger: {
           trigger: about,

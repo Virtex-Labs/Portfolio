@@ -63,10 +63,10 @@ function initCursor() {
     gsap.set(cursorElement, {
       xPercent: -50,
       yPercent: -50,
-      width: 44,
-      height: 44,
+      width: 80,
+      height: 80,
       opacity: 0,
-      scale: 1,
+      scale: 0.55,
     });
 
     const moveX = gsap.quickTo(cursorElement, "x", { duration: 0.18, ease: "power3.out" });
@@ -93,7 +93,7 @@ function initCursor() {
 
       if (target.closest(interactiveSelector)) {
         gsap.to(cursorElement, {
-          scale: 1.6,
+          scale: 0.88,
           duration: 0.2,
           ease: "power2.out",
           overwrite: "auto",
@@ -107,7 +107,7 @@ function initCursor() {
 
       if (target.closest(interactiveSelector)) {
         gsap.to(cursorElement, {
-          scale: 1,
+          scale: 0.55,
           duration: 0.2,
           ease: "power2.out",
           overwrite: "auto",
@@ -121,7 +121,7 @@ function initCursor() {
 
       if (target.matches("input, textarea, select")) {
         gsap.to(cursorElement, {
-          scale: 1.8,
+          scale: 0.99,
           duration: 0.2,
           ease: "power2.out",
           overwrite: "auto",
@@ -135,7 +135,7 @@ function initCursor() {
 
       if (target.matches("input, textarea, select")) {
         gsap.to(cursorElement, {
-          scale: 1,
+          scale: 0.55,
           duration: 0.2,
           ease: "power2.out",
           overwrite: "auto",

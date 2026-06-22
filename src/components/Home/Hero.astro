@@ -1,10 +1,22 @@
 <section
   id="hero"
-  class="relative isolate flex min-h-screen flex-col items-start justify-center overflow-hidden px-10 md:px-20 lg:px-32"
+  class="relative isolate flex min-h-screen h-[105vh] flex-col items-start bg-[#0d0020] justify-center overflow-hidden px-10 md:px-20 lg:px-32"
 >
-  <div class="absolute inset-0 -z-10 bg-white/80 opacity-40">
+  <div
+    id="moving-gradient"
+    class="absolute inset-0 -z-10 bg-[#360389] opacity-0 overflow-hidden"
+  >
     <div
-      class="absolute inset-0 bg-gradient-to-t from-[#e22472] via-[#9f3794] to-[#7e4199] opacity-30"
+      class="aurora-top absolute sm:-top-[20%] left-1/2 w-[120vw] h-[30vh] rounded-full bg-[#e22472] mix-blend-screen filter blur-[160px] opacity-35 will-change-transform"
+    >
+    </div>
+    <div
+      class="aurora-pink absolute -bottom-[20%] -left-[10%] w-[50vw] h-[50vh] rounded-full bg-[#f63887] mix-blend-screen filter blur-[160px] opacity-70 will-change-transform"
+    >
+    </div>
+
+    <div
+      class="aurora-purple absolute -bottom-[20%] -right-[10%] w-[50vw] h-[50vh] rounded-full bg-[#c224d0] mix-blend-screen filter blur-[160px] opacity-70 will-change-transform"
     >
     </div>
   </div>
@@ -33,7 +45,7 @@
   </div>
 
   <h1
-    class="hero-headline m-0 p-0 font-sans text-[10vh] sm:text-[15vh] xl:text-[22.5vh] font-black leading-[1.05] tracking-tight"
+    class="hero-headline p-0 font-sans text-white -mt-20 text-[10vh] sm:text-[15vh] xl:text-[22.5vh] font-black leading-[1.05] tracking-tight"
   >
     <div class="line color-black flex flex-wrap gap-x-[0.3em]">
       <span class="word relative z-[30] overflow-hidden pb-[0.08em]">
@@ -47,13 +59,13 @@
     <div class="line flex flex-wrap gap-x-[0.3em]">
       <span class="word relative z-[10] overflow-hidden pb-[0.08em]">
         <span
-          class="word-inner text-gray-500 inline-block translate-y-full font-normal italic pr-[0.1em]"
+          class="word-inner text-white/75 inline-block translate-y-full font-normal italic pr-[0.1em]"
           >vision</span
         >
       </span>
       <span class="word relative z-[30] overflow-hidden pb-[0.08em]">
         <span
-          class="word-inner inline-block text-[8vh] xl:text-[15vh] translate-y-[150%]"
+          class="word-inner inline-block text-white text-[8vh] xl:text-[15vh] translate-y-[150%]"
           >in</span
         >
       </span>
@@ -106,6 +118,48 @@
 
     animation: hero-svg-draw 6.5s ease-out forwards;
     animation-play-state: paused;
+  }
+
+  @keyframes wave-top {
+    0%,
+    100% {
+      transform: translateX(-50%) scale(1);
+    }
+    50% {
+      transform: translateX(-50%) scale(1.12) translateY(8%);
+    }
+  }
+
+  .aurora-top {
+    animation: wave-top 16s ease-in-out infinite;
+  }
+
+  @keyframes wave-pink {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(15%, -15%) scale(1.1);
+    }
+  }
+
+  @keyframes wave-purple {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-15%, -20%) scale(1.15);
+    }
+  }
+
+  .aurora-pink {
+    animation: wave-pink 14s ease-in-out infinite;
+  }
+
+  .aurora-purple {
+    animation: wave-purple 18s ease-in-out infinite;
   }
 
   @keyframes hero-svg-draw {
@@ -167,7 +221,7 @@
     if (prefersReduced || window.__vlLogoDone === true) {
       gsap.set(wordInners, { y: 0 });
       if (sub) gsap.set(sub, { opacity: 1 });
-      gsap.set(".hero-svg-bg", { opacity: 0.4 });
+      gsap.set(".hero-svg-bg", { opacity: 0.6 });
 
       const paths = document.querySelectorAll(
         ".hero-svg-path",
@@ -197,7 +251,7 @@
         .set(
           ".hero-svg-bg",
           {
-            opacity: 0.4,
+            opacity: 0.6,
           },
           "-=0.5",
         )
@@ -206,7 +260,16 @@
             ".hero-svg-path",
           ) as NodeListOf<SVGElement>;
           paths.forEach((el) => (el.style.animationPlayState = "running"));
-        }, "<");
+        }, "<")
+        .to(
+          "#moving-gradient",
+          {
+            opacity: 0.75,
+            duration: 2.5,
+            ease: "power2.inOut",
+          },
+          "+=0.5",
+        );
     }
 
     const heroEl = document.getElementById("hero");

@@ -8,7 +8,8 @@ export interface Props {
 
 const { forceSolid = false, noHide = false } = Astro.props;
 const allNavItems = [...site.nav_left, ...site.nav_right];
-const isHomepage = Astro.url.pathname === "/" || Astro.url.pathname === "/index.html";
+const isHomepage =
+  Astro.url.pathname === "/" || Astro.url.pathname === "/index.html";
 const brandHref = isHomepage ? "#hero" : "/";
 ---
 
@@ -18,7 +19,7 @@ const brandHref = isHomepage ? "#hero" : "/";
   data-is-homepage={isHomepage.toString()}
   data-force-solid={forceSolid.toString()}
   data-no-hide={noHide.toString()}
-  class={`fixed inset-x-0 top-0 z-[100] transition-colors duration-500 opacity-0 ${forceSolid ? 'bg-white' : 'bg-transparent'}`}
+  class={`fixed inset-x-0 top-0 z-[100] transition-colors duration-500 opacity-0 ${forceSolid ? "bg-white" : "bg-transparent"}`}
 >
   <nav
     class={`mx-auto h-[100px] w-full px-6 lg:px-20 relative z-20 flex lg:grid lg:grid-cols-3 items-center ${
@@ -61,7 +62,7 @@ const brandHref = isHomepage ? "#hero" : "/";
             alt={site.name}
             width="200"
             height="80"
-            class="h-20 lg:h-24 w-auto object-contain transition-transform duration-300 opacity-0"
+            class="h-20 lg:h-24 w-auto object-contain transition-[filter,transform] duration-300 opacity-0"
             id="nav-logo-img"
           />
         </slot>
@@ -141,6 +142,11 @@ const brandHref = isHomepage ? "#hero" : "/";
 }
 
 <style>
+  .nav-brand a:hover #nav-logo-img {
+    filter: drop-shadow(0 0 8px rgb(238, 0, 255))
+      drop-shadow(0 0 24px rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 48px rgba(255, 255, 255, 0.2)) brightness(1.1);
+  }
   @media (prefers-reduced-motion: reduce) {
     #site-nav {
       height: 10vh;
@@ -197,7 +203,9 @@ const brandHref = isHomepage ? "#hero" : "/";
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    const isHomepage = window.location.pathname === "/" || window.location.pathname === "/index.html";
+    const isHomepage =
+      window.location.pathname === "/" ||
+      window.location.pathname === "/index.html";
 
     if (!prefersReduced) {
       gsap.set(header, { opacity: 0 });
@@ -273,7 +281,11 @@ const brandHref = isHomepage ? "#hero" : "/";
 
       menuAnimation = gsap
         .timeline({ paused: true, defaults: { ease: "power2.out" } })
-        .to(mobileOverlay, { yPercent: 0, pointerEvents: "auto", duration: 0.45 })
+        .to(mobileOverlay, {
+          yPercent: 0,
+          pointerEvents: "auto",
+          duration: 0.45,
+        })
         .to(
           mobileLinks,
           { y: 0, duration: 0.4, stagger: 0.04, ease: "power2.out" },
@@ -293,7 +305,9 @@ const brandHref = isHomepage ? "#hero" : "/";
         } else {
           menuToggle.classList.remove("is-open");
           if (window.__lenis) window.__lenis.start();
-          if (window.scrollY < 50 && !forceSolid) {
+          const isHomepage = header.getAttribute("data-is-homepage") === "true";
+          const threshold = isHomepage ? window.innerHeight - 100 : 50;
+          if (window.scrollY < threshold && !forceSolid) {
             header.classList.remove("bg-white");
             header.classList.add("bg-transparent");
           }
@@ -322,8 +336,10 @@ const brandHref = isHomepage ? "#hero" : "/";
         if (isMenuOpen) return;
 
         const currentY = window.scrollY;
+        const isHomepage = header.getAttribute("data-is-homepage") === "true";
+        const threshold = isHomepage ? window.innerHeight - 100 : 50;
 
-        if (currentY > 50 || forceSolid) {
+        if (currentY > threshold || forceSolid) {
           header.classList.add("bg-white");
           header.classList.remove("bg-transparent");
         } else {

@@ -16,7 +16,10 @@ export default defineConfig({
     prerenderEnvironment: 'node'
   }),
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      exclude: ['@astrojs/cloudflare', 'resend']
+    }
   },
   integrations: [react(), sitemap()],
 });

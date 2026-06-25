@@ -8,7 +8,7 @@ import PageTransition from "../providers/PageTransition.astro";
 import PageLayout from "./PageLayout.astro";
 import "../styles/global.css";
 
-const { title, description, canonical, ogImage, forceSolidNav = false, noHideNav = false } = Astro.props;
+const { title, description, canonical, ogImage, forceSolidNav = false, noHideNav = false, hidePopups = false } = Astro.props;
 ---
 
 <PageLayout title={title} description={description} canonical={canonical} ogImage={ogImage}>
@@ -76,13 +76,13 @@ const { title, description, canonical, ogImage, forceSolidNav = false, noHideNav
   </Fragment>
 
   <LandscapeWarning />
-  <Welcome />
+  {!hidePopups && <Welcome />}
   <Navbar forceSolid={forceSolidNav} noHide={noHideNav} />
 
   <main>
     <slot />
   </main>
-  <CookieBanner />
+  {!hidePopups && <CookieBanner />}
   <Toaster />
   <PageTransition />
 

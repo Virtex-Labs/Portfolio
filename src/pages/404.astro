@@ -1,0 +1,251 @@
+---
+import Layout from "../layouts/BaseLayout.astro";
+import V from "../assets/images/V.svg";
+---
+
+<Layout title="404 - Page Not Found" noHideNav={true} hidePopups={true}>
+  <Fragment slot="head">
+    <script is:inline>
+      (function () {
+        const applyTheme = () => {
+          if (
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+          ) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        };
+
+        applyTheme();
+
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const listener = (e) => applyTheme();
+        mediaQuery.addEventListener("change", listener);
+
+        document.addEventListener(
+          "astro:before-swap",
+          () => {
+            mediaQuery.removeEventListener("change", listener);
+            document.documentElement.classList.remove("dark");
+          },
+          { once: true },
+        );
+      })();
+    </script>
+  </Fragment>
+
+  <div
+    id="not-found-container"
+    class="relative min-h-screen flex items-end bg-background text-foreground transition-colors duration-500 px-6 py-6 overflow-hidden"
+  >
+    <div class="absolute inset-0 z-0 pointer-events-none">
+      <div class="grid-base absolute inset-0 transition-colors duration-500">
+      </div>
+      <div class="grid-glow absolute inset-0 transition-colors duration-500">
+      </div>
+    </div>
+    <div class="text-left relative z-10 w-full max-w-3xl">
+      <h1
+        class="text-[20vh] md:text-[22vh] font-black leading-[0.9] tracking-tighter mb-4"
+      >
+        <span class="text-gradient space-x-2">4o4</span>
+      </h1>
+      <h2
+        class="text-2xl md:text-5xl font-black mb-6 tracking-tight text-foreground"
+      >
+        Oops! We lost this page.
+      </h2>
+      <p
+        class="text-muted-foreground text-sm md:text-xl font-medium leading-relaxed max-w-xl"
+      >
+        The page you are looking for might have been removed, had its name
+        changed, or is temporarily unavailable.
+      </p>
+    </div>
+
+    <div
+      class="absolute inset-0 overflow-hidden pointer-events-none z-0 flex justify-end items-end"
+    >
+      <div
+        class="absolute top-[10%] left-[10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-[#e11d74]/5 rounded-full blur-[40px] md:blur-[100px] dark:bg-[#e11d74]/15 transition-colors duration-700 animate-blob-1"
+      >
+      </div>
+      <div
+        class="absolute bottom-[10%] right-[10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-[#8b3faf]/5 rounded-full blur-[40px] md:blur-[100px] dark:bg-[#8b3faf]/15 transition-colors duration-700 animate-blob-2"
+      >
+      </div>
+
+      <img
+        src={V.src}
+        alt="V background logo"
+        class="absolute hidden md:block bottom-0 -right-16 md:h-[80vh] w-auto opacity-10 md:opacity-30 object-contain drop-shadow-2xl"
+      />
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  html.dark #nav-logo-img {
+    filter: brightness(0) invert(1) !important;
+  }
+</style>
+
+<style>
+  @keyframes blob-float-1 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(10vw, -10vh) scale(1.1);
+    }
+    66% {
+      transform: translate(-10vw, 10vh) scale(0.9);
+    }
+  }
+
+  @keyframes blob-float-2 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(-10vw, 10vh) scale(1.15);
+    }
+    66% {
+      transform: translate(10vw, -10vh) scale(0.85);
+    }
+  }
+
+  .animate-blob-1 {
+    animation: blob-float-1 25s ease-in-out infinite;
+  }
+
+  .animate-blob-2 {
+    animation: blob-float-2 30s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blob-1,
+    .animate-blob-2 {
+      animation: none !important;
+    }
+  }
+
+  .grid-base {
+    background-size: 50px 50px;
+    background-image:
+      linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  }
+
+  html.dark .grid-base {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  }
+
+  .grid-glow {
+    background-size: 50px 50px;
+    background-image:
+      linear-gradient(to right, rgba(226, 36, 114, 0.4) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(226, 36, 114, 0.4) 1px, transparent 1px);
+    -webkit-mask-image: radial-gradient(
+      circle 250px at var(--mouse-x, -250px) var(--mouse-y, -250px),
+      black 0%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle 250px at var(--mouse-x, -250px) var(--mouse-y, -250px),
+      black 0%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  #not-found-container.is-interacting .grid-glow {
+    opacity: 1;
+  }
+
+  html.dark .grid-glow {
+    background-image:
+      linear-gradient(to right, rgba(226, 36, 114, 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(226, 36, 114, 0.6) 1px, transparent 1px);
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const container = document.getElementById("not-found-container");
+    if (!container) return;
+
+    let targetX = -250;
+    let targetY = -250;
+    let currentX = -250;
+    let currentY = -250;
+    let hasInteracted = false;
+    let animationFrameId = null;
+
+    const lerp = (start, end, amt) => {
+      return (1 - amt) * start + amt * end;
+    };
+
+    const animate = () => {
+      currentX = lerp(currentX, targetX, 0.15);
+      currentY = lerp(currentY, targetY, 0.15);
+
+      container.style.setProperty("--mouse-x", `${currentX}px`);
+      container.style.setProperty("--mouse-y", `${currentY}px`);
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    const updateMousePos = (e) => {
+      let clientX, clientY;
+      if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+      } else if (e.clientX !== undefined) {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      } else {
+        return;
+      }
+
+      const rect = container.getBoundingClientRect();
+      targetX = clientX - rect.left;
+      targetY = clientY - rect.top;
+
+      if (!hasInteracted) {
+        currentX = targetX;
+        currentY = targetY;
+        hasInteracted = true;
+      }
+
+      container.classList.add("is-interacting");
+    };
+
+    const handleEnd = () => {
+      container.classList.remove("is-interacting");
+    };
+
+    container.addEventListener("mousemove", updateMousePos, { passive: true });
+    container.addEventListener("touchmove", updateMousePos, { passive: true });
+    container.addEventListener("touchstart", updateMousePos, { passive: true });
+    container.addEventListener("touchend", handleEnd, { passive: true });
+    container.addEventListener("mouseleave", handleEnd, { passive: true });
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      },
+      { once: true },
+    );
+  });
+</script>

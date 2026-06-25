@@ -4,7 +4,7 @@
 
 <div
   id="cookie-banner"
-  class="fixed bottom-0 left-0 w-full z-[999] pointer-events-none translate-y-full will-change-transform"
+  class="fixed bottom-0 left-0 w-full z-[999] pointer-events-none translate-y-full will-change-transform transition-transform duration-700 ease-out"
   aria-live="polite"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6 lg:pb-8">
@@ -40,8 +40,6 @@
 </div>
 
 <script>
-  import gsap from "gsap";
-
   function initCookieBanner() {
     const banner = document.getElementById("cookie-banner");
     const acceptBtn = document.getElementById("cookie-accept");
@@ -52,36 +50,39 @@
     const consent = localStorage.getItem("vl-cookie-consent");
 
     if (!consent) {
-      setTimeout(() => {
-        gsap.to(banner, {
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        });
-      }, 2500);
+      const showBanner = () => {
+        setTimeout(() => {
+          banner.classList.remove("translate-y-full");
+          banner.classList.add("translate-y-0");
+        }, 800);
+      };
+
+      if ((window as any).__vlLogoDone) {
+        showBanner();
+      } else {
+        window.addEventListener("vl-logo-complete", showBanner, { once: true });
+      }
     }
 
     const hideBanner = (choice: "accepted" | "declined") => {
       localStorage.setItem("vl-cookie-consent", choice);
-      gsap.to(banner, {
-        y: "120%",
-        duration: 0.5,
-        ease: "power3.in",
-        onComplete: () => {
-          banner.style.display = "none";
-        },
-      });
+      banner.classList.remove("translate-y-0");
+      banner.classList.add("translate-y-full");
+      setTimeout(() => {
+        banner.style.display = "none";
+      }, 700);
     };
 
     acceptBtn.addEventListener("click", () => hideBanner("accepted"));
     declineBtn.addEventListener("click", () => hideBanner("declined"));
   }
 
-  document.addEventListener("astro:page-load", initCookieBanner);
+  const idle = window.requestIdleCallback ?? ((cb) => setTimeout(cb, 1500));
+  document.addEventListener("astro:page-load", () => idle(initCookieBanner));
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initCookieBanner);
+    document.addEventListener("DOMContentLoaded", () => idle(initCookieBanner));
   } else {
-    initCookieBanner();
+    idle(initCookieBanner);
   }
 </script>

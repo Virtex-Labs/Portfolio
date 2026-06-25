@@ -13,6 +13,7 @@ const isBuild = process.argv.includes('build');
 // https://astro.build/config
 export default defineConfig({
   site: "https://virtexlabs.com",
+  build: { inlineStylesheets: 'always' },
   output: 'server',
   adapter: isBuild ? cloudflare({
     imageService: 'passthrough',

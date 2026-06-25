@@ -14,22 +14,27 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
   <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center">
     <div
       id="wu-image-wrapper"
-      class="relative h-full w-0 shrink-0 overflow-hidden z-0"
+      class="relative h-full w-full shrink-0 overflow-hidden z-0"
+      style="clip-path: inset(0 100% 0 0);"
     >
       <Image
         id="wu-image"
         src={collage1}
         alt="A visual collage representing Virtex Labs' high-performance web development and creative design expertise"
         class="h-full w-full object-cover origin-center"
-        loading="eager"
+        loading="lazy"
         decoding="async"
-        fetchpriority="high"
+        widths={[400, 800, 1200, 1920]}
+        sizes="100vw"
       />
-      <div id="wu-overlay" class="absolute inset-0 bg-black/70 opacity-0 z-10">
+      <div
+        id="wu-overlay"
+        class="absolute left-0 inset-0 bg-black/70 opacity-0 z-10"
+      >
       </div>
     </div>
 
-    <div class="shrink-0 pl-12 lg:pl-24 z-10">
+    <div class="absolute left-0 shrink-0 pl-12 lg:pl-24 z-10">
       <h2
         id="wu-title"
         class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-black whitespace-nowrap"
@@ -96,12 +101,15 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
         class="absolute inset-0 z-0 origin-top will-change-transform"
       >
         <Image
+          id="mobile-wu-image"
           src={collage1}
           alt="A visual collage representing Virtex Labs' high-performance web development and creative design expertise"
           class="h-full w-full object-cover object-center"
           loading="eager"
           decoding="async"
           fetchpriority="high"
+          widths={[400, 800, 1200]}
+          sizes="100vw"
         />
         <div class="absolute inset-0 bg-black/65"></div>
         <div
@@ -230,11 +238,15 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
 
         tl.to(
           imageWrapper,
-          { width: "100vw", duration: 300, ease: "power1.inOut" },
+          { clipPath: "inset(0 0% 0 0)", duration: 300, ease: "power1.inOut" },
           0,
         )
           .to(image, { scale: 1.15, duration: 300, ease: "power1.inOut" }, 0)
-          .to(titleWrap, { y: "20vw", duration: 315, ease: "power1.inOut" }, 0)
+          .to(
+            titleWrap,
+            { y: "50vh", x: "105vw", duration: 315, ease: "power1.inOut" },
+            0,
+          )
           .to(overlay, { opacity: 1, duration: 310 }, 10);
 
         tl.to(blurStage, { opacity: 1, duration: 30 }, 200);
@@ -288,15 +300,19 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
 
         tl.to(
           imageWrapper,
-          { width: "50vw", x: "50vw", duration: 250, ease: "power3.inOut" },
+          {
+            clipPath: "inset(0 0% 0 50%)",
+            duration: 250,
+            ease: "power3.inOut",
+          },
           splitStart,
         );
-        tl.to(image, { scale: 1.05, duration: 250 }, splitStart);
+        tl.to(image, { x:"25vw" ,scale: 1.05, duration: 250 }, splitStart);
         tl.to(overlay, { opacity: 0.2, duration: 200 }, splitStart);
 
         tl.to(
           titleWrap,
-          { opacity: 0, x: -100, duration: 150, ease: "power2.inOut" },
+          { opacity: 0, duration: 150, ease: "power2.inOut" },
           splitStart,
         );
 
@@ -340,6 +356,7 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
         const heroContent = document.getElementById("mobile-hero-content");
         const title = document.getElementById("mobile-hero-title");
         const media = document.getElementById("mobile-hero-media");
+        const image = document.getElementById("mobile-wu-image");
         const sheet = document.getElementById("mobile-reasons-sheet");
         const items = gsap.utils.toArray<HTMLElement>(".mobile-reason-item");
 
@@ -366,8 +383,17 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
         });
 
         shrinkTl
-          .to(media, { height: "40vh", ease: "power2.inOut", duration: 1 }, 0)
+          .to(
+            media,
+            {
+              clipPath: "inset(0 0 60vh 0)",
+              ease: "power2.inOut",
+              duration: 1,
+            },
+            0,
+          )
           .to(heroContent, { y: "-20vh", ease: "power2.inOut", duration: 1 }, 0)
+          .to(image, { y: "-30vh", ease: "power2.inOut", duration: 1 }, 0)
           .to(sheet, { yPercent: 0, ease: "power2.inOut", duration: 1 }, 0);
 
         items.forEach((item) => {

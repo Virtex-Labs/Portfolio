@@ -66,7 +66,7 @@ import V from "../assets/images/V.svg";
     </div>
 
     <div
-      class="absolute inset-0 overflow-hidden pointer-events-none z-0 flex justify-end items-end"
+      class="absolute inset-0 overflow-hidden pointer-events-none z-0 flex justify-center items-center"
     >
       <div
         class="absolute top-[10%] left-[10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-[#e11d74]/5 rounded-full blur-[40px] md:blur-[100px] dark:bg-[#e11d74]/15 transition-colors duration-700 animate-blob-1"
@@ -80,7 +80,7 @@ import V from "../assets/images/V.svg";
       <img
         src={V.src}
         alt="V background logo"
-        class="absolute hidden md:block bottom-0 -right-16 md:h-[80vh] w-auto opacity-10 md:opacity-30 object-contain drop-shadow-2xl"
+        class="absolute hidden lg:block bottom-0 -right-16 md:h-[80vh] w-auto opacity-10 md:opacity-30 object-contain drop-shadow-2xl"
       />
     </div>
   </div>
@@ -188,6 +188,7 @@ import V from "../assets/images/V.svg";
     let currentY = -250;
     let hasInteracted = false;
     let animationFrameId = null;
+    let isTouchMode = false;
 
     const lerp = (start, end, amt) => {
       return (1 - amt) * start + amt * end;
@@ -234,9 +235,23 @@ import V from "../assets/images/V.svg";
       container.classList.remove("is-interacting");
     };
 
-    container.addEventListener("mousemove", updateMousePos, { passive: true });
+    container.addEventListener(
+      "mousemove",
+      (e) => {
+        if (isTouchMode) return;
+        updateMousePos(e);
+      },
+      { passive: true },
+    );
     container.addEventListener("touchmove", updateMousePos, { passive: true });
-    container.addEventListener("touchstart", updateMousePos, { passive: true });
+    container.addEventListener(
+      "touchstart",
+      (e) => {
+        isTouchMode = true;
+        updateMousePos(e);
+      },
+      { passive: true },
+    );
     container.addEventListener("touchend", handleEnd, { passive: true });
     container.addEventListener("mouseleave", handleEnd, { passive: true });
 

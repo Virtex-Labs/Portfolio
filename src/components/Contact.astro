@@ -62,7 +62,7 @@
             <p class="text-white/30 text-[1.5vh] uppercase tracking-wider mb-3">
               Digital Presence
             </p>
-            <ul class="space-y-2 text-[2vh] font-medium">
+            <ul class="grid grid-cols-2 gap-x-8 gap-y-2 text-[2vh] font-medium">
               <li>
                 <a
                   href="https://www.linkedin.com/company/virtex-labs/"
@@ -88,6 +88,24 @@
                   rel="noopener noreferrer"
                   class="hover:text-[#9f3794] transition-colors block"
                   >Twitter / X</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/share/1DWZYm24i6/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[#9f3794] transition-colors block"
+                  >Facebook</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.pinterest.com/virtexlabs/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[#9f3794] transition-colors block"
+                  >Pinterest</a
                 >
               </li>
             </ul>
@@ -251,9 +269,14 @@
 
   <div
     id="contact-footer"
-    class="relative z-10 pt-[10vh] sm:pt-[13vh] mt-[13vh] sm:mt-auto border-t border-white/5 w-full flex flex-col sm:flex-row justify-between items-center text-center sm:text-left text-[1.2vh] sm:text-[1.5vh] text-white/30 font-medium tracking-wider uppercase gap-4 opacity-0"
+    class="relative z-10 pt-[5vh] sm:pt-[13vh] mt-[10vh] sm:mt-auto border-t border-white/5 w-full flex flex-col sm:flex-row justify-between items-center text-center sm:text-left text-[1.2vh] sm:text-[1.5vh] text-white/30 font-medium tracking-wider uppercase gap-4 opacity-0"
   >
-    <p>&copy; {new Date().getFullYear()} VIRTEX LABS. ALL RIGHTS RESERVED.</p>
+    <div class="flex flex-row items-center gap-2 sm:gap-8">
+      <p>&copy; {new Date().getFullYear()} VIRTEX LABS. ALL RIGHTS RESERVED.</p>
+      <a href="/terms" class="hover:text-white transition-colors"
+        >Terms of Service</a
+      >
+    </div>
     <p class="tracking-widest">CRAFTING FLUID CODE & SHARP PRODUCTS</p>
   </div>
 </section>

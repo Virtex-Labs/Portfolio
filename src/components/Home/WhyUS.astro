@@ -238,18 +238,18 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
 
         tl.to(
           imageWrapper,
-          { clipPath: "inset(0 0% 0 0)", duration: 300, ease: "power1.inOut" },
+          { clipPath: "inset(0 0% 0 0)", duration: 400, ease: "power1.inOut" },
           0,
         )
-          .to(image, { scale: 1.15, duration: 300, ease: "power1.inOut" }, 0)
+          .to(image, { scale: 1.15, duration: 400, ease: "power1.inOut" }, 0)
           .to(
             titleWrap,
-            { y: "50vh", x: "105vw", duration: 315, ease: "power1.inOut" },
+            { y: "50vh", x: "105vw", duration: 415, ease: "power1.inOut" },
             0,
           )
-          .to(overlay, { opacity: 1, duration: 310 }, 10);
+          .to(overlay, { opacity: 1, duration: 410 }, 10);
 
-        tl.to(blurStage, { opacity: 1, duration: 30 }, 200);
+        tl.to(blurStage, { opacity: 1, duration: 30 }, 230);
 
         const totalLines = blurLines.length;
         const lineGap = 45;
@@ -307,7 +307,7 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
           },
           splitStart,
         );
-        tl.to(image, { x:"25vw" ,scale: 1.1, duration: 250 }, splitStart);
+        tl.to(image, { x: "25vw", scale: 1.1, duration: 400 }, splitStart);
         tl.to(overlay, { opacity: 0.2, duration: 200 }, splitStart);
 
         tl.to(
@@ -365,6 +365,7 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
         gsap.set(title, { opacity: 0, y: 24 });
         gsap.set(sheet, { yPercent: 100 });
         gsap.set(items, { opacity: 0, x: -50 });
+        gsap.set(image, { scale: 1.25 });
         ScrollTrigger.create({
           trigger: hero,
           start: "top 50%",
@@ -393,7 +394,11 @@ const { reasons, blurLines, mobileHeroText } = site.whyUs;
             0,
           )
           .to(heroContent, { y: "-20vh", ease: "power2.inOut", duration: 1 }, 0)
-          .to(image, { y: "-30vh", ease: "power2.inOut", duration: 1 }, 0)
+          .to(
+            image,
+            { y: "-30vh", scale: "1", ease: "power2.inOut", duration: 1 },
+            0,
+          )
           .to(sheet, { yPercent: 0, ease: "power2.inOut", duration: 1 }, 0);
 
         items.forEach((item) => {
